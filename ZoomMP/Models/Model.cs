@@ -18,22 +18,6 @@ namespace ZoomCloserJp.Models
         public ZoomHandler zoomHandler = new ZoomHandler();
         public int MaxNumber { get; private set; } = 0;
         
-        void GetNumber()
-        {
-            var numN = zoomHandler.GetParticipantNumbers();
-            if(numN == null)
-            {
-                return;
-            }
-            int num = (int)numN;
-            if (num > MaxNumber) MaxNumber = num;
-            ExitNumber = (int)(MaxNumber * proportion);
-            CanExit = (MaxNumber > leastMemberCount);
-            if (num < ExitNumber && CanExit)
-            {
-                zoomHandler.CloseZoom();
-            }
-        }
         public Model()
         {
             proportion = RandomRange(0.4, 0.7);
@@ -50,6 +34,23 @@ namespace ZoomCloserJp.Models
              */
         }
 
+        private void GetNumber()
+        {
+            var numN = zoomHandler.GetParticipantNumbers();
+            if(numN == null)
+            {
+                return;
+            }
+            int num = (int)numN;
+            if (num > MaxNumber) MaxNumber = num;
+            ExitNumber = (int)(MaxNumber * proportion);
+            CanExit = (MaxNumber > leastMemberCount);
+            if (num < ExitNumber && CanExit)
+            {
+                zoomHandler.CloseZoom();
+            }
+        }
+
         public void OnElapsed(object sender, ElapsedEventArgs e)
         {
             GetNumber();
@@ -57,18 +58,12 @@ namespace ZoomCloserJp.Models
         }
 
 
-        public double RandomRange(double min, double max)
+        double RandomRange(double min, double max)
         {
             var rand = new Random();
             double randDouble = rand.NextDouble();
             double result = min + (max - min) * randDouble;
             return result;
         }
-
-
-
-
-
-
     }
 }
