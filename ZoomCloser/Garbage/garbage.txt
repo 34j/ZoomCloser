@@ -1,0 +1,61 @@
+﻿            // contentLeftPanelHWnd = FindWindowEx(parentWH, IntPtr.Zero, null, "ContentLeftPanel");
+            // zPControlPanelClassHWnd = FindWindowEx(contentLeftPanelHWnd, IntPtr.Zero, "ZPControlPanelClass", null);
+            // contentRightPanelHWnd = FindWindowEx(parentWH, IntPtr.Zero, null, "ContentRightPanel");
+
+                            //inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.VK_U);
+                //zPlistWndClassWH = FindWindowEx(zRightPanelContainerClassWH, IntPtr.Zero, null, null);
+
+
+
+        /// <summary>
+        /// 失敗
+        /// </summary>
+        /// <param name="keys"></param>
+        /*public static void SendInputKeyPressAndRelease(byte[] keys)
+        {
+            int length = keys.Length;
+            int arraySize = length * 2;
+            INPUT[] inputs = new INPUT[arraySize];
+            for (int i = 0; i < length; i++)
+            {
+                inputs[i].type = INPUTTYPE.INPUT_KEYBOARD;
+                inputs[i].ki.wScan = keys[i];
+            }
+            for (int i = 0; i < length; i++)
+            {
+                var index = i + length;
+                inputs[index].type = INPUTTYPE.INPUT_KEYBOARD;
+                inputs[index].ki.wScan = keys[i];
+                inputs[index].ki.dwFlags = KEYEVENTF.KEYEVENTF_KEYUP;
+            }
+            int size;
+            unsafe
+            {
+                size = sizeof(INPUT);
+            }
+            SendInput((uint)arraySize, inputs, size);
+
+        }*/
+                //HWND contentLeftPanelHWnd;
+        //HWND zPControlPanelClassHWnd;
+        //HWND contentRightPanelHWnd;
+
+        
+            /* zoomが開いていない時→parentWH.isNull→諦め
+             * zoomが最小化されている時→？諦め？
+             * zoomが開いているが参加者ウィンドウが開いていない時→zPlistWndClassWH.IsNull(のみ)true→
+             * 
+             */
+        private async Task<bool> GetWindowHandles()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (GetWindowHandles_()) {
+                    OnEntered?.Invoke(this, new EventArgs());
+                    return true;                
+                }
+                await Task.Delay(10);
+                User32.SetFocus(parentWH);
+            }
+            return false;
+        }

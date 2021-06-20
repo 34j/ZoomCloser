@@ -1,6 +1,11 @@
-﻿using System.Windows;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using System.Windows;
 
-namespace ZoomCloserJp.Views
+namespace ZoomCloser.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -11,6 +16,5 @@ namespace ZoomCloserJp.Views
         {
             InitializeComponent();
         }
-
     }
 }

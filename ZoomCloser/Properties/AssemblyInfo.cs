@@ -1,4 +1,9 @@
-﻿using System.Reflection;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

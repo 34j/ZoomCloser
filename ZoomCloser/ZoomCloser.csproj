@@ -62,6 +62,9 @@
     </DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -92,8 +95,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\MyUser32Extention.cs" />
-    <Compile Include="Models\ZoomHandler.cs" />
+    <Compile Include="Utils\MyUser32Extention.cs" />
+    <Compile Include="Modules\ZoomHandler.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -114,6 +117,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Views\icon.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -123,9 +127,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="LICENSE.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <None Include="ZoomCloser.licenseheader" />
+    <Resource Include="Garbage\garbage.txt" />
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -164,4 +170,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>del "$(TargetDir)*.xml"
+del "$(TargetDir)*.pdb"
+rd /s /q "$(TargetDir)de"
+rd /s /q "$(TargetDir)en"
+rd /s /q "$(TargetDir)es"
+rd /s /q "$(TargetDir)fr"
+rd /s /q "$(TargetDir)hu"
+rd /s /q "$(TargetDir)it"
+rd /s /q "$(TargetDir)ko"
+rd /s /q "$(TargetDir)pt-BR"
+rd /s /q "$(TargetDir)ro"
+rd /s /q "$(TargetDir)ru"
+rd /s /q "$(TargetDir)sv"
+rd /s /q "$(TargetDir)cs-CZ"
+rd /s /q "$(TargetDir)ja-JP"
+rd /s /q "$(TargetDir)zh-Hans"
+rd /s /q "$(TargetDir)zh-Hant"
+mkdir "$(TargetDir)\libs"
+move "$(TargetDir)*.dll" "$(TargetDir)\libs"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

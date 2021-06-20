@@ -1,0 +1,22 @@
+﻿<!--
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+-->
+<Window x:Class="ZoomCloser.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:local="clr-namespace:ZoomCloser.ViewModels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:vm="clr-namespace:ZoomCloser.ViewModels"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="226" Width="373" Background="Black" Foreground="White" BorderBrush="Black" OpacityMask="Black" Icon="icon.png">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
+        <TextBlock Margin="10,10,10,0" TextWrapping="Wrap" Text="{Binding NumberDisplayText}" VerticalAlignment="Top" Height="37"/>
+        <Button Content="退出" HorizontalAlignment="Left" Width="75" Margin="10,52,0,0" Command="{Binding CloseCommand}" Height="20" VerticalAlignment="Top"/>
+        <ListBox Margin="10,77,10,10" ItemsSource="{Binding LogListBoxItemsSource}" Background="Black" Foreground="White"/>
+
+    </Grid>
+</Window>

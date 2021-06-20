@@ -1,0 +1,19 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+extensions: .aspx .ascx
+<%-- 
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+--%>
+extensions:  .xml .xaml .config .xsd
+<!--
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+-->
