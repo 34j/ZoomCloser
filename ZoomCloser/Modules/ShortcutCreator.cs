@@ -15,7 +15,7 @@ namespace ZoomCloser.Modules
         public static void AddThisToStartUp()
         {
             var assembly = Assembly.GetEntryAssembly();
-            string applicationName = assembly.FullName;
+            string applicationName = assembly.GetName().Name;
             string filePath = StartUpFolderPath + @"\" + applicationName + ".url";
             string applicationPath = assembly.Location;
             using (StreamWriter sw = new StreamWriter(filePath))
