@@ -7,8 +7,8 @@
     <ProjectGuid>{19475E44-FA3A-4D8B-B626-E3612DA70DA0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZoomCloserJp</RootNamespace>
-    <AssemblyName>ZoomCloserJp</AssemblyName>
+    <RootNamespace>ZoomCloser</RootNamespace>
+    <AssemblyName>ZoomCloser</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -19,6 +19,7 @@
 </AllowedReferenceRelatedFileExtensions>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -86,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modules\ShortcutCreator.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,14 +98,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\MainWindowModel.cs" />
     <Compile Include="Utils\MyUser32Extention.cs" />
     <Compile Include="Modules\ZoomHandler.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -117,6 +117,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Views\icon2.ico" />
     <Resource Include="Views\icon.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -137,6 +138,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore">
+      <Version>1.0.18</Version>
+    </PackageReference>
+    <PackageReference Include="MetroRadiance.Fork">
+      <Version>3.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.3.3</Version>
@@ -149,6 +156,9 @@
     </PackageReference>
     <PackageReference Include="Vanara.PInvoke.User32">
       <Version>3.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsAPICodePack">
+      <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="WindowsInput">
       <Version>6.3.0</Version>
@@ -168,6 +178,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

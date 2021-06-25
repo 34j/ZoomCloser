@@ -4,6 +4,7 @@ Copyright (c) 2021 34j and contributors
 https://opensource.org/licenses/MIT
 */
 using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,17 +24,18 @@ namespace ZoomCloser.ViewModels
 
         public string Title { get; set; } = "";
         public string NumberDisplayText { get; set; } = "0";
-        public Models.Model model;
+        public Models.MainWindowModel model;
         public ObservableCollection<string> LogListBoxItemsSource { get; set; } = new ObservableCollection<string>();
         public MainWindowViewModel()
         {
-            model = new Models.Model();
+            model = new Models.MainWindowModel();
             model.OnTimed += DisplayValues;
             model.OnEntered += Model_OnEntered;
             model.OnExit += Model_OnExit;
             model.OnParticipantsCountAvailbale += Model_OnParticipantsCountAvailbale;
             model.OnForcedExit += Model_OnForcedExit;
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
+
         }
 
         private void Model_OnForcedExit(object sender, System.EventArgs e)
@@ -67,6 +69,18 @@ namespace ZoomCloser.ViewModels
         private DelegateCommand closeCommand;
         public DelegateCommand CloseCommand =>
             closeCommand ?? (closeCommand = new DelegateCommand(async() => { await Close(); }));
+
+        private DelegateCommand<Window> applicationExitCommand;
+        public DelegateCommand<Window> CloseWindowCommand =>
+            applicationExitCommand ?? (applicationExitCommand = new DelegateCommand<Window>(ExitApplication));
+
+        void ExitApplication(Window window)
+        {
+            window?.Close();
+            Environment.Exit(0);
+        }
+
+
 
         public void DisplayValues()
         {

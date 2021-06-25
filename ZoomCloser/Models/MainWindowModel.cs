@@ -11,7 +11,7 @@ using ZoomCloser.Modules;
 
 namespace ZoomCloser.Models
 {
-    class Model : BindableBase
+    class MainWindowModel : BindableBase
     {
         public delegate void TimedEventHandler();
         public event TimedEventHandler OnTimed;
@@ -46,7 +46,7 @@ namespace ZoomCloser.Models
         private ZoomHandler zoomHandler = new ZoomHandler();
         public int MaxNumber { get; private set; } = 0;
        
-        public Model()
+        public MainWindowModel()
         {
             proportion = RandomRange(0.4, 0.7);
             timer.Interval = 100;

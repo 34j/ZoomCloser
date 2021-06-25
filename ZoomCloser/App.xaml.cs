@@ -7,6 +7,8 @@ using ZoomCloser.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
+using MetroRadiance.UI;
+using MetroRadiance.UI.Controls;
 
 namespace ZoomCloser
 {
@@ -15,9 +17,13 @@ namespace ZoomCloser
     /// </summary>
     public partial class App
     {
+        private MetroWindow metroWindow; 
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            metroWindow = Container.Resolve<MainWindow>();
+            ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
+            Modules.StartUpHandler.AddThisToStartUp();
+            return metroWindow;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

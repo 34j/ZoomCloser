@@ -5,6 +5,7 @@ https://opensource.org/licenses/MIT
 */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace ZoomCloser.Utils
 
         public static string GetWindowTitle(this HWND hWND)
         {
-            int length = GetWindowTextLength(hWND);
+            int length = GetWindowTextLength(hWND) + 1;
             StringBuilder sb = new StringBuilder(length);
             User32.GetWindowText(hWND, sb, length);
             return sb.ToString();
@@ -76,7 +77,7 @@ namespace ZoomCloser.Utils
             HWND childAfter = IntPtr.Zero;
             while (true)
             {
-                if(TryFind(parent, childAfter, out HWND child, className, windowTitle))
+                if (TryFind(parent, childAfter, out HWND child, className, windowTitle))
                 {
                     yield return child;
                     childAfter = child;
@@ -99,6 +100,19 @@ namespace ZoomCloser.Utils
         public static IEnumerable<HWND> FindMany(string className = null, string windowTitle = null)
             => FindMany(IntPtr.Zero, className, windowTitle);
 
+        public static IEnumerable<HWND> FindAll(this HWND parent)
+        {
+            var found = FindMany(parent);
+            foreach (var s in found)
+            {
+                yield return s;
+                foreach(var s2 in FindAll(s))
+                {
+                    yield return s2;
+                }
+            }
+        }
+
     }
 
     public static class LinqExtention
@@ -110,6 +124,13 @@ namespace ZoomCloser.Utils
             {
                 action(item);
             }
+        }
+
+        public static void DebugIEnumerale<T>(this IEnumerable<T> enumeration, Func<T, string> func)
+        {
+            StringBuilder sb = new StringBuilder();
+            enumeration.ForEach(s => { sb.Append(func(s)); sb.Append(", "); });
+            Debug.WriteLine(sb.ToString());
         }
     }
 }

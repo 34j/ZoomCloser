@@ -15,7 +15,6 @@ using ZoomCloser.Utils;
 
 namespace ZoomCloser.Modules
 {
-
     class ZoomHandler
     {
         public enum ZoomMode { E_NotRunning, E_NoMemberList, E_DifferentShortCuts, OK, E_UnableToParse }
@@ -77,6 +76,8 @@ namespace ZoomCloser.Modules
 
         public async Task<bool> GetParticipantCount()
         {
+           // parentWH.FindAll().DebugIEnumerale(s => s.GetWindowTitle());
+
             if (!CheckAndTryGetWindowHandles())
             {
                 return false;
@@ -175,6 +176,7 @@ namespace ZoomCloser.Modules
 
             if (zPlistWndClassWH.IsNull)
             {
+                Simulate2();
                 zoomMode = ZoomMode.E_NoMemberList;
                 return;
             }
@@ -182,6 +184,24 @@ namespace ZoomCloser.Modules
             return;
         }
 
+        int hasSimulated = 0;
+        void Simulate2()
+        {
+            hasSimulated++;
+
+            if (hasSimulated % 50 != 0)
+            {
+                return;
+            }
+            var ZPControlPanelClass = parentWH.Find(windowTitle: "ContentLeftPanel").Find("ZPControlPanelClass");
+            User32.ShowWindow(parentWH, ShowWindowCommand.SW_MAXIMIZE);
+            User32.SetFocus(ZPControlPanelClass);
+            User32.GetWindowRect(ZPControlPanelClass, out RECT rect);
+            int y = (rect.top + rect.bottom) / 2;
+            int x = rect.right - 100;
+            WindowsInput.Simulate.Events().MoveTo(x, y).Wait(100).DoubleClick(ButtonCode.Left).Wait(100).Hold(KeyCode.LAlt).Wait(30).Hold(KeyCode.U).Wait(100).Release(KeyCode.U).Release(KeyCode.LAlt).Invoke();
+            Debug.WriteLine("simulated");
+        }
 
     }
 }
