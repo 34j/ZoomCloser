@@ -141,7 +141,6 @@
     </None>
     <Compile Include="Services\ZoomExitByRatioService.cs" />
     <None Include="ZoomCloser.licenseheader" />
-    <Resource Include="Garbage\garbage.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore">
@@ -190,10 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="LICENSE.txt" />
-    <Resource Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
