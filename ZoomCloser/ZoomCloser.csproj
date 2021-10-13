@@ -86,7 +86,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Modules\ShortcutCreator.cs" />
+    <Compile Include="Services\IZoomExitByRatioService.cs" />
+    <Compile Include="Services\Logics\IJudgingWhetherToExitByRatioService.cs" />
+    <Compile Include="Services\Logics\IJudgingWhetherToExitService.cs" />
+    <Compile Include="Services\IReadOnlyZoomHandlingService.cs" />
+    <Compile Include="Services\IZoomExitService.cs" />
+    <Compile Include="Services\IZoomHandlingService.cs" />
+    <Compile Include="Services\Logics\IZoomValueRecordingService.cs" />
+    <Compile Include="Services\Logics\JudgingWhetherToExitByRatioService.cs" />
+    <Compile Include="Utils\LinqExtention.cs" />
+    <Compile Include="Utils\StartUpHandler.cs" />
+    <Compile Include="Utils\WindowAudioExtention.cs" />
+    <Compile Include="Utils\WindowExtention.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -98,9 +109,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\MainWindowModel.cs" />
-    <Compile Include="Utils\MyUser32Extention.cs" />
-    <Compile Include="Modules\ZoomHandler.cs" />
+    <Compile Include="Services\ZoomExitService.cs" />
+    <Compile Include="Utils\WindowFindExtentiion.cs" />
+    <Compile Include="Services\ZoomHandlingService.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,14 +139,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Services\ZoomExitByRatioService.cs" />
     <None Include="ZoomCloser.licenseheader" />
     <Resource Include="Garbage\garbage.txt" />
-    <Content Include="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="README.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore">
@@ -143,6 +149,9 @@
     </PackageReference>
     <PackageReference Include="MetroRadiance.Fork">
       <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="NAudio">
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
     <PackageReference Include="PropertyChanged.Fody">
@@ -181,6 +190,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LICENSE.txt" />
+    <Resource Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

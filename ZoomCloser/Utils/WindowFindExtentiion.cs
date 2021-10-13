@@ -14,43 +14,6 @@ using static Vanara.PInvoke.User32;
 
 namespace ZoomCloser.Utils
 {
-    public static class MyUser32Extention
-    {
-        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "SendMessage", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        static extern bool SendMessage(IntPtr hWnd, uint Msg, int wParam, StringBuilder lParam);
-
-
-        public static string GetWindowText(this HWND hWND)
-        {
-            var size = User32.SendMessage(hWND, WindowMessage.WM_GETTEXTLENGTH);
-            StringBuilder sb = new StringBuilder((int)size);
-            SendMessage((IntPtr)hWND, (uint)WindowMessage.WM_GETTEXT, (int)size, sb);
-            string text = sb.ToString();
-            return text;
-        }
-
-        public static string GetWindowTitle(this HWND hWND)
-        {
-            int length = GetWindowTextLength(hWND) + 1;
-            StringBuilder sb = new StringBuilder(length);
-            User32.GetWindowText(hWND, sb, length);
-            return sb.ToString();
-        }
-
-
-        public static bool IsWindowAvailable(this HWND hWND)
-        {
-            if (hWND == IntPtr.Zero || !User32.IsWindow(hWND))
-            {
-                return false;
-            }
-            return true;
-        }
-
-
-
-    }
-
     public static class WindowFindExtentiion
     {
         public static HWND Find(this HWND parent, HWND childAfter, string className = null, string windowTitle = null)
@@ -61,15 +24,13 @@ namespace ZoomCloser.Utils
         public static bool TryFind(this HWND parent, out HWND child, string className = null, string windowTitle = null)
         {
             child = parent.Find(className, windowTitle);
-            if (child.IsNull) return false;
-            return true;
+            return !child.IsNull;
         }
 
         public static bool TryFind(this HWND parent, HWND childAfter, out HWND child, string className = null, string windowTitle = null)
         {
             child = parent.Find(childAfter, className, windowTitle);
-            if (child.IsNull) return false;
-            return true;
+            return !child.IsNull;
         }
 
         public static IEnumerable<HWND> FindMany(this HWND parent, string className = null, string windowTitle = null)
@@ -93,8 +54,7 @@ namespace ZoomCloser.Utils
         public static bool TryFind(out HWND child, string className = null, string windowTitle = null)
         {
             child = Find(className, windowTitle);
-            if (child.IsNull) return false;
-            return true;
+            return !child.IsNull;
         }
 
         public static IEnumerable<HWND> FindMany(string className = null, string windowTitle = null)
@@ -106,31 +66,11 @@ namespace ZoomCloser.Utils
             foreach (var s in found)
             {
                 yield return s;
-                foreach(var s2 in FindAll(s))
+                foreach (var s2 in FindAll(s))
                 {
                     yield return s2;
                 }
             }
-        }
-
-    }
-
-    public static class LinqExtention
-    {
-
-        public static void ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
-        {
-            foreach (T item in enumeration)
-            {
-                action(item);
-            }
-        }
-
-        public static void DebugIEnumerale<T>(this IEnumerable<T> enumeration, Func<T, string> func)
-        {
-            StringBuilder sb = new StringBuilder();
-            enumeration.ForEach(s => { sb.Append(func(s)); sb.Append(", "); });
-            Debug.WriteLine(sb.ToString());
         }
     }
 }

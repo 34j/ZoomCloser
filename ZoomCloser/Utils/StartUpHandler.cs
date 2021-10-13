@@ -9,7 +9,7 @@ using System.IO;
 
 namespace ZoomCloser.Modules
 {
-    static class StartUpHandler
+    internal static class StartUpHandler
     {
         public static string StartUpFolderPath => KnownFolders.RoamingAppData.Path + @"\Microsoft\Windows\Start Menu\Programs\Startup";
         public static void AddThisToStartUp()

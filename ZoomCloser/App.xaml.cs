@@ -10,6 +10,8 @@ using System.Windows;
 using MetroRadiance.UI;
 using MetroRadiance.UI.Controls;
 
+using ZoomCloser.Services;
+
 namespace ZoomCloser
 {
     /// <summary>
@@ -17,18 +19,23 @@ namespace ZoomCloser
     /// </summary>
     public partial class App
     {
-        private MetroWindow metroWindow; 
+        private MetroWindow metroWindow;
         protected override Window CreateShell()
         {
             metroWindow = Container.Resolve<MainWindow>();
-            ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
+            ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
             Modules.StartUpHandler.AddThisToStartUp();
             return metroWindow;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.Register<IZoomHandlingService, ZoomHandlingService>()
+                .Register<IReadOnlyZoomHandlingService, ZoomHandlingService>()
+                .Register<IZoomExitService, ZoomExitService>()
+                .Register<IZoomExitByRatioService, ZoomExitByRatioService>()
+                .Register<IJudgingWhetherToExitByRatioService, JudgingWhetherToExitByRatioService>()
+                .Register<IJudgingWhetherToExitService, JudgingWhetherToExitByRatioService>();
         }
     }
 }

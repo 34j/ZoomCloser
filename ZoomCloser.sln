@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCloser", "ZoomCloser\ZoomCloser.csproj", "{19475E44-FA3A-4D8B-B626-E3612DA70DA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCloser.Core", "ZoomCloser.Core\ZoomCloser.Core.csproj", "{3B94C09C-3073-439B-ACBA-9EBE5A5814D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{19475E44-FA3A-4D8B-B626-E3612DA70DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19475E44-FA3A-4D8B-B626-E3612DA70DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19475E44-FA3A-4D8B-B626-E3612DA70DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B94C09C-3073-439B-ACBA-9EBE5A5814D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B94C09C-3073-439B-ACBA-9EBE5A5814D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B94C09C-3073-439B-ACBA-9EBE5A5814D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B94C09C-3073-439B-ACBA-9EBE5A5814D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
