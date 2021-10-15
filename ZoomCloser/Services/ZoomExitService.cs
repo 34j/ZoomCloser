@@ -14,7 +14,7 @@ namespace ZoomCloser.Services
     /// <summary>
     /// decides whether to close zoom
     /// </summary>
-    internal class ZoomExitService : IZoomExitService
+    public class ZoomExitService : IZoomExitService
     {
         private readonly Timer timer;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
-    internal class JudgingWhetherToExitByRatioService : IJudgingWhetherToExitByRatioService
+    public class JudgingWhetherToExitByRatioService : IJudgingWhetherToExitByRatioService
     {
         #region Ratio
         public double MaximumRatioOfCurrentCountToMaxCountToExit { get; } = 0.5f;
@@ -33,10 +33,10 @@ namespace ZoomCloser.Services
 
         public bool Judge(int participantCount)
         {
-            this.CurrentCount = participantCount;
+            CurrentCount = participantCount;
             MaximumCount = Math.Max(participantCount, MaximumCount);
 
-            return IsOverThresholdToActivation && participantCount < MaximumCountToExit;
+            return IsOverThresholdToActivation && participantCount <= MaximumCountToExit;
         }
 
         public void Reset()

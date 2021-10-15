@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
-    internal interface IZoomHandlingService : IReadOnlyZoomHandlingService
+    public interface IZoomHandlingService : IReadOnlyZoomHandlingService
     {
         /// <summary>
         /// Refreshes and gets the number of participants.

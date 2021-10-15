@@ -14,7 +14,7 @@ namespace ZoomCloser.Services
     /// <summary>
     /// decides whether to close zoom
     /// </summary>
-    internal class ZoomExitByRatioService : ZoomExitService, IZoomExitByRatioService
+    public class ZoomExitByRatioService : ZoomExitService, IZoomExitByRatioService
     {
         public IJudgingWhetherToExitByRatioService JudgingWhetherToExitByRatioService { get; }
 
