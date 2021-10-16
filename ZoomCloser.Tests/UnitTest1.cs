@@ -96,34 +96,25 @@ namespace ZoomCloser.Tests
     [TestFixture]
     public class ZoomExitByRatioTest
     {
+
         [Test]
-        public void ExitTest()
+        public void ExitTest([Values(true, false)] bool judgeValue)
         {
-            Assert.Multiple(async () =>
-            {
-                bool flag = false;
+            bool hasExitFunctionCalled = false;
 
-                var handling = new Mock<IZoomHandlingService>();
-                handling.Setup(s => s.Exit()).Callback(() => flag = true);
-                var judger = new Mock<IJudgingWhetherToExitByRatioService>();
-                var closer = new ZoomExitByRatioService(handling.Object, judger.Object, new System.Timers.Timer());
+            var handling = new Mock<IZoomHandlingService>(MockBehavior.Strict);
+            handling.Setup(s => s.RefreshParticipantCount()).ReturnsAsync(true);
+            handling.Setup(s => s.Exit()).ReturnsAsync(true).Callback(() => hasExitFunctionCalled = true);
+            var judger = new Mock<IJudgingWhetherToExitByRatioService>(MockBehavior.Strict);
+            judger.Setup(s => s.Judge(It.IsAny<int>())).Returns(judgeValue);
+            judger.Setup(s => s.Reset());
 
-                //First Act : Check if Exit() is called in false condition.
-                judger.Setup(s => s.Judge(It.IsAny<int>())).Returns(false);
+            var zoomExitByRatioService = new ZoomExitByRatioService(handling.Object, judger.Object, new System.Timers.Timer());
 
-                await Task.Delay(1000).ConfigureAwait(false);
-                //Assert
-                Assert.IsFalse(flag);
-                flag = false;
+            Task.Delay(500).Wait();
 
-                //Second Act : Check if Exit() is called in true condition.
-                judger.Setup(s => s.Judge(It.IsAny<int>())).Returns(true);
-
-                await Task.Delay(1000).ConfigureAwait(false);
-
-                //Assert
-                Assert.IsTrue(flag);
-            });
+            //Assert
+            Assert.AreEqual(judgeValue, hasExitFunctionCalled);
         }
     }
 }

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Vanara.PInvoke;
 using static Vanara.PInvoke.User32;
-using NAudio.CoreAudioApi;
 using static ZoomCloser.Utils.LinqExtention;
+using CoreAudio;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace ZoomCloser.Utils
 {
@@ -20,18 +22,6 @@ namespace ZoomCloser.Utils
             SendMessage(hWND, WindowMessage.WM_APPCOMMAND, hWND, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
 
-        [Obsolete]
-        public static void Debug()
-        {
-            MMDeviceEnumerator mmde = new MMDeviceEnumerator();
-            MMDeviceCollection mmdc = mmde.EnumerateAudioEndPoints(DataFlow.All, DeviceState.All);
-            mmdc?.DebugIEnumerale(s =>
-            {
-                string result = s?.FriendlyName;
-                try { result += s.AudioEndpointVolume; }
-                catch (Exception e) { result += "error"; }
-                return result;
-            });
-        }
+
     }
 }

@@ -13,6 +13,7 @@ using MetroRadiance.UI.Controls;
 using ZoomCloser.Services;
 using Gu.Localization;
 using System.Globalization;
+using ZoomCloser.Services.Audio;
 
 namespace ZoomCloser
 {
@@ -41,12 +42,13 @@ namespace ZoomCloser
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-containerRegistry.Register<IZoomHandlingService, ZoomHandlingService>()
-                .Register<IReadOnlyZoomHandlingService, ZoomHandlingService>()
-                .Register<IZoomExitService, ZoomExitService>()
-                .Register<IZoomExitByRatioService, ZoomExitByRatioService>()
-                .Register<IJudgingWhetherToExitByRatioService, JudgingWhetherToExitByRatioService>()
-                .Register<IJudgingWhetherToExitService, JudgingWhetherToExitByRatioService>();
+            containerRegistry.Register<IZoomHandlingService, ZoomHandlingService>()
+                            .Register<IReadOnlyZoomHandlingService, ZoomHandlingService>()
+                            .Register<IZoomExitService, ZoomExitService>()
+                            .Register<IZoomExitByRatioService, ZoomExitByRatioService>()
+                            .Register<IJudgingWhetherToExitByRatioService, JudgingWhetherToExitByRatioService>()
+                            .Register<IJudgingWhetherToExitService, JudgingWhetherToExitByRatioService>()
+                            .Register<IAudioService, AudioService>();
         }
     }
 }

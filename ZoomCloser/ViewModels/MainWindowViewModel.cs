@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using ZoomCloser.Utils;
 using ZoomCloser.Services;
 using ZoomCloser.Modules;
 using Gu.Localization;
-
+using System.Linq;
+using ZoomCloser.Services.Audio;
 
 namespace ZoomCloser.ViewModels
 {
@@ -27,13 +29,17 @@ namespace ZoomCloser.ViewModels
         #region Fody_Bindings
         public string Title { get; set; } = "";
         public string NumberDisplayText { get; set; } = "0";
-        public ObservableCollection<string> LogListBoxItemsSource { get; set; } = new ObservableCollection<string>();
+
+        public bool IsMuted { get; private set; } = false;
+        public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
 
         public IZoomExitByRatioService zoomExitService;
-        public MainWindowViewModel(IZoomExitByRatioService zoomClosingService)
-        {
+        private readonly IAudioService audioService;
 
+        public MainWindowViewModel(IZoomExitByRatioService zoomClosingService, IAudioService audioService)
+        {
+            this.audioService = audioService;
             zoomExitService = zoomClosingService;
             zoomExitService.OnRefreshed += (_, e) => DisplayValues();
             zoomExitService.ReadOnlyZoomHandlingService.OnEntered += (_, e) => Log("ParticipatedInMeeting");
@@ -43,17 +49,17 @@ namespace ZoomCloser.ViewModels
             zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
         }
-
-        static string Tr(string key)
+        private static ITranslation Trr(string key) => Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key);
+        private static string Tr(string key)
         {
-            var result = Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key).Translated;
+            var result = Trr(key).Translated;
             if (result == null)
             {
                 throw new Exception("key not registered");
             }
             return result;
         }
-        static string Tr(string key, params object[] args)
+        private static string Tr(string key, params object[] args)
         {
             Validate.Format(Tr(key), args);
             return string.Format(Tr(key), args);
@@ -63,7 +69,7 @@ namespace ZoomCloser.ViewModels
         private string NowLongTimeString => System.DateTime.Now.ToLongTimeString();
         private void Log(string key)
         {
-            LogListBoxItemsSource.Add(NowLongTimeString + " " + Tr(key));
+            LogListBoxItemsSource.Translations.Add((Trr(key),s => NowLongTimeString + " " + s));
         }
 
         #endregion ListBox_Functions
@@ -80,6 +86,16 @@ namespace ZoomCloser.ViewModels
         private DelegateCommand<Window> applicationExitCommand;
         public DelegateCommand<Window> CloseWindowCommand =>
             applicationExitCommand ?? (applicationExitCommand = new DelegateCommand<Window>(ExitApplication));
+
+        private DelegateCommand muteCommand;
+        public DelegateCommand MuteCommand =>
+            muteCommand ?? (muteCommand = new DelegateCommand(Mute));
+
+        private void Mute()
+        {
+            IsMuted = !IsMuted;
+            audioService.SetMute(IsMuted);
+        }
 
         private void ExitApplication(Window window)
         {
@@ -105,11 +121,11 @@ namespace ZoomCloser.ViewModels
             }
             else if (zoomMode == ZoomHandlingServiceState.E_UnableToParse)
             {
-                NumberDisplayText = Tr("Bug") + "\r\n";
+                NumberDisplayText = Tr("Bug");
             }
             else
             {
-                NumberDisplayText = Tr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount);
+                NumberDisplayText = Tr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount) + "\r\n";
                 if (exitService.IsOverThresholdToActivation)
                 {
                     NumberDisplayText += Tr("NormalExitCondition", exitService.MaximumCountToExit);

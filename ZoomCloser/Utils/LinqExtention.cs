@@ -17,7 +17,7 @@ namespace ZoomCloser.Utils
             }
         }
 
-        public static void DebugIEnumerale<T>(this IEnumerable<T> enumeration, Func<T, string> func)
+        public static void DebugIEnumerable<T>(this IEnumerable<T> enumeration, Func<T, string> func)
         {
             StringBuilder sb = new StringBuilder();
             enumeration.ForEach(s =>
