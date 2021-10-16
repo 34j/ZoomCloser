@@ -17,31 +17,67 @@ https://opensource.org/licenses/MIT
         xmlns:vm="clr-namespace:ZoomCloser.ViewModels"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:chrome="http://schemes.grabacr.net/winfx/2014/chrome"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:i1="http://schemas.microsoft.com/xaml/behaviors" 
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" 
     Icon="icon.png" 
     ShowInTaskbar="false"
     Visibility="Hidden"
     Height="0"
-    Width="0"
+    Width="0" WindowStyle="None"
     >
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="A">
+            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        </Style>
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        </Style>
+    </Window.Resources>
     <tb:TaskbarIcon IconSource="icon2.ico" PopupActivation="LeftClick" MenuActivation="RightClick">
         <tb:TaskbarIcon.TrayPopup>
-            <Border  Height="226" Width="373" Background="{DynamicResource BackgroundBrushKey}" >
+            <Border  Height="226" Width="373" Background="{DynamicResource MahApps.Brushes.Window.Background}">
                 <Grid>
                     <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
-                    <TextBlock Margin="10,10,10,0" TextWrapping="Wrap" Text="{Binding NumberDisplayText}" VerticalAlignment="Top" Height="37" Foreground="{DynamicResource ForegroundBrushKey}" />
-                    <Button Content="{l:Static p:Resources.ExitMeeting}" HorizontalAlignment="Left" Margin="10,52,0,0" Command="{Binding CloseCommand}" Height="20" VerticalAlignment="Top"/>
-                    <ListBox Margin="10,77,10,10" ItemsSource="{Binding LogListBoxItemsSource}" Background="{x:Null}" Foreground="{DynamicResource ForegroundBrushKey}"/>
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding NumberDisplayText}" VerticalAlignment="Top" Height="37" />
+                        <Button Style="{StaticResource A}" Content="{l:Static p:Resources.ExitMeeting}" HorizontalAlignment="Left" Command="{Binding CloseCommand}" Height="20" VerticalAlignment="Top"/>
+                        <Button Command="{Binding MuteCommand}" Height="20" Width="30" HorizontalAlignment="Left" >
+                            <Button.Style >
+
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource A}">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <iconPacks:BoxIcons Kind="RegularVolumeFull" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMuted}" Value="True">
+                                            <Setter Property="Content">
+                                                <Setter.Value>
+                                                    <iconPacks:BoxIcons Kind="RegularVolumeMute"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <ListBox ItemsSource="{Binding LogListBoxItemsSource}" Background="{x:Null}" Foreground="{DynamicResource ForegroundBrushKey}"/>
+
+                    </StackPanel>
                 </Grid>
             </Border>
         </tb:TaskbarIcon.TrayPopup>
         <tb:TaskbarIcon.ContextMenu>
-            <ContextMenu Background="{DynamicResource BackgroundBrushKey}" Foreground="{DynamicResource ForegroundBrushKey}">
-                <MenuItem>
-                    <l:LanguageSelector AutogenerateLanguages="True" />
-                </MenuItem>
+            <ContextMenu Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                <l:LanguageSelector AutogenerateLanguages="True" />
                 <MenuItem Header="{l:Static p:Resources.Exit}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>

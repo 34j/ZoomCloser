@@ -39,6 +39,10 @@ namespace ZoomCloser.Services
         private HWND zRightPanelContainerClassWH;
         private HWND zPlistWndClassWH;
 
+        public ZoomHandlingService()
+        {
+        }
+
         public async Task<bool> Exit()
         {
             isLastExitWasForcedByThis = true;

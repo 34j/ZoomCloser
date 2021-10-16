@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
+    /// <summary>
+    /// Mainly reliant on whether <see cref="participantCount"/> is less or equals to <see cref="MaximumCountToExit"/>.
+    /// </summary>
     public interface IJudgingWhetherToExitByRatioService : IJudgingWhetherToExitService
     {
         #region Ratio
@@ -38,13 +41,5 @@ namespace ZoomCloser.Services
         /// The current number of participants in the meeting.
         /// </summary>
         int CurrentCount { get; }
-
-        /// <summary>
-        /// Judge whether to exit the meeting. Call <see cref="Reset"></see> when successfully exit the meeting.
-        /// </summary>
-        /// <param name="participantCount">Current number of participants in the meeting.</param>
-        /// <returns>Whether <see cref="participantCount"/> is less or equals to <see cref="MaximumCountToExit"/>.</returns>
-        new bool Judge(int participantCount);
-
     }
 }

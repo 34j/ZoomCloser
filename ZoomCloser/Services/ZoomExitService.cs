@@ -34,7 +34,7 @@ namespace ZoomCloser.Services
             timer.AutoReset = true;
             timer.Elapsed += async (sender, e) => await CheckAndClose().ConfigureAwait(false);
             timer.Elapsed += (_, e) => OnRefreshed?.Invoke(this, EventArgs.Empty);
-            timer.Start();
+            timer.Enabled = true;
         }
 
         public async Task ExitManually() => await zoomHandlingService.Exit().ConfigureAwait(false);
