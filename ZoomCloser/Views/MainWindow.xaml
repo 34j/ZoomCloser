@@ -6,6 +6,8 @@ https://opensource.org/licenses/MIT
 <metro:MetroWindow
         x:Name="ThisWindow"
         x:Class="ZoomCloser.Views.MainWindow"
+        xmlns:l="clr-namespace:Gu.Wpf.Localization;assembly=Gu.Wpf.Localization"
+        xmlns:p="clr-namespace:ZoomCloser.Properties"
         xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -23,8 +25,6 @@ https://opensource.org/licenses/MIT
     Visibility="Hidden"
     Height="0"
     Width="0"
-    Background="{DynamicResource BackgroundBrushKey}"
-    Foreground="{DynamicResource ForegroundBrushKey}"
     >
     <tb:TaskbarIcon IconSource="icon2.ico" PopupActivation="LeftClick" MenuActivation="RightClick">
         <tb:TaskbarIcon.TrayPopup>
@@ -32,14 +32,17 @@ https://opensource.org/licenses/MIT
                 <Grid>
                     <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
                     <TextBlock Margin="10,10,10,0" TextWrapping="Wrap" Text="{Binding NumberDisplayText}" VerticalAlignment="Top" Height="37" Foreground="{DynamicResource ForegroundBrushKey}" />
-                    <Button Content="退出" HorizontalAlignment="Left" Width="75" Margin="10,52,0,0" Command="{Binding CloseCommand}" Height="20" VerticalAlignment="Top"/>
+                    <Button Content="{l:Static p:Resources.ExitMeeting}" HorizontalAlignment="Left" Margin="10,52,0,0" Command="{Binding CloseCommand}" Height="20" VerticalAlignment="Top"/>
                     <ListBox Margin="10,77,10,10" ItemsSource="{Binding LogListBoxItemsSource}" Background="{x:Null}" Foreground="{DynamicResource ForegroundBrushKey}"/>
                 </Grid>
             </Border>
         </tb:TaskbarIcon.TrayPopup>
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu Background="{DynamicResource BackgroundBrushKey}" Foreground="{DynamicResource ForegroundBrushKey}">
-                <MenuItem Header="Exit" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
+                <MenuItem>
+                    <l:LanguageSelector AutogenerateLanguages="True" />
+                </MenuItem>
+                <MenuItem Header="{l:Static p:Resources.Exit}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>
     </tb:TaskbarIcon>

@@ -11,6 +11,8 @@ using MetroRadiance.UI;
 using MetroRadiance.UI.Controls;
 
 using ZoomCloser.Services;
+using Gu.Localization;
+using System.Globalization;
 
 namespace ZoomCloser
 {
@@ -20,17 +22,26 @@ namespace ZoomCloser
     public partial class App
     {
         private MetroWindow metroWindow;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Translator.Cultures.Add(new CultureInfo("en"));
+            Translator.Cultures.Add(new CultureInfo("ja"));
+            ThemeService.Current.EnableUwpResoruces();
+            ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
+
+        }
+
         protected override Window CreateShell()
         {
             metroWindow = Container.Resolve<MainWindow>();
-            ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
             Modules.StartUpHandler.AddThisToStartUp();
             return metroWindow;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IZoomHandlingService, ZoomHandlingService>()
+containerRegistry.Register<IZoomHandlingService, ZoomHandlingService>()
                 .Register<IReadOnlyZoomHandlingService, ZoomHandlingService>()
                 .Register<IZoomExitService, ZoomExitService>()
                 .Register<IZoomExitByRatioService, ZoomExitByRatioService>()

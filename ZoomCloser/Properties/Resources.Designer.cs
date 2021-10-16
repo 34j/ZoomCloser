@@ -59,5 +59,122 @@ namespace ZoomCloser.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Unable to get the number of participants due to a bug. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Bug {
+            get {
+                return ResourceManager.GetString("Bug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The Zoom shortcut is different from the expected (standard), please change it to continue using it: Manage Participants (ALT+T) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DifferentShortcuts {
+            get {
+                return ResourceManager.GetString("DifferentShortcuts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Exit に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Manually leave the meeting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExitMeeting {
+            get {
+                return ResourceManager.GetString("ExitMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Exit when the number of participants drops below {0}. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string NormalExitCondition {
+            get {
+                return ResourceManager.GetString("NormalExitCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open the participants window. You may close it immediately. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OpenParticipantsWindow {
+            get {
+                return ResourceManager.GetString("OpenParticipantsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Participants Current:{0}, Max:{1} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ParticipantCount {
+            get {
+                return ResourceManager.GetString("ParticipantCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Participated in a meeting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ParticipatedInMeeting {
+            get {
+                return ResourceManager.GetString("ParticipatedInMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Started capturing the number of participants に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StartedCapturingTHeNumberOfParticipants {
+            get {
+                return ResourceManager.GetString("StartedCapturingTHeNumberOfParticipants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   This software forced to exit a meeting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ThisSoftwareForcedToExitMeeting {
+            get {
+                return ResourceManager.GetString("ThisSoftwareForcedToExitMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The software will not automatically exit until the maximum number of participants exceeds {0}. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string UnderOrEqualsToThresholdExitCondition {
+            get {
+                return ResourceManager.GetString("UnderOrEqualsToThresholdExitCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   User forced to exit a meeting に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string UserForcedToExitMeeting {
+            get {
+                return ResourceManager.GetString("UserForcedToExitMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Zoom is not running に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ZoomNotRunning {
+            get {
+                return ResourceManager.GetString("ZoomNotRunning", resourceCulture);
+            }
+        }
     }
 }

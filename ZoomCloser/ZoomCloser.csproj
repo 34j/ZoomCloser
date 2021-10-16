@@ -130,6 +130,7 @@
     </Compile>
     <Resource Include="Views\icon2.ico" />
     <Resource Include="Views\icon.png" />
+    <EmbeddedResource Include="Properties\Resources.ja.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -143,6 +144,12 @@
     <None Include="ZoomCloser.licenseheader" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper.SimpleSave">
+      <Version>1.0.187</Version>
+    </PackageReference>
+    <PackageReference Include="Gu.Wpf.Localization">
+      <Version>6.7.0</Version>
+    </PackageReference>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore">
       <Version>1.0.18</Version>
     </PackageReference>
@@ -188,6 +195,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

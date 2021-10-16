@@ -97,7 +97,7 @@ namespace ZoomCloser.Tests
     public class ZoomExitByRatioTest
     {
         [Test]
-        public async Task ExitTest()
+        public void ExitTest()
         {
             Assert.Multiple(async () =>
             {
