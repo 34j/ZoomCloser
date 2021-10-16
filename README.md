@@ -1,4 +1,4 @@
-#ZoomCloser
+# ZoomCloser
 
 A small application that obtains the number of participants in a Zoom meeting and automatically exits the Zoom meeting when the number of participants decreases, thereby preventing accidents caused by forgetting to leave.
 
@@ -23,7 +23,7 @@ Windows 10
 
 
 
-#ZoomCloser
+# ZoomCloser
 
 Zoomミーティングの参加者数を取得し、参加者数が減ったときに自動でZoomミーティングを退出することにより、退出忘れによる事故を防止する小さなアプリケーション。
 
