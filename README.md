@@ -20,7 +20,9 @@ Windows 10
 - Uses CoreAudioApi to mute Zoom's audio. (It's not a microphone.
 - Displays the exit time and other information.
 
+## Note on the license
 
+The code in this repository is MIT licensed, but please note that some of the dependencies do not use the MIT license.
 
 
 # ZoomCloser
@@ -47,4 +49,6 @@ Windows10
 - CoreAudioApiを用いてZoomの音声をミューとします。（マイクではありません。）
 - 退出時刻などを表示します。
 
+## ライセンスの注意事項
 
+このリポジトリ内のコードはMITライセンスですが、一部の依存先はMITライセンスを採用していないことに注意してください。
