@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using ZoomCloser.Services.ZoomHandling;
 
 namespace ZoomCloser.Services
 {
@@ -12,7 +13,7 @@ namespace ZoomCloser.Services
         /// <summary>
         /// Read only.
         /// </summary>
-        IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService { get; }
+        IReadOnlyZoomHandlingService2 ReadOnlyZoomHandlingService { get; }
 
         /// <summary>
         /// Occurs when this service checked whether to exit the meeting.

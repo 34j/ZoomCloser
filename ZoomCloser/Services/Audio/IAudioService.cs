@@ -7,5 +7,7 @@
         /// </summary>
         /// <param name="mute"></param>
         void SetMute(bool mute);
+
+        bool GetMute();
     }
 }

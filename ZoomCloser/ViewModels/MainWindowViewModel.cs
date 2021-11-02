@@ -18,11 +18,14 @@ using ZoomCloser.Modules;
 using Gu.Localization;
 using System.Linq;
 using ZoomCloser.Services.Audio;
+using ZoomCloser.Services.Recording;
+using System.Diagnostics;
+using ZoomCloser.Services.ZoomHandling;
 
 namespace ZoomCloser.ViewModels
 {
     //[AddINotifyPropertyChangedInterface]
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -31,22 +34,31 @@ namespace ZoomCloser.ViewModels
         public string NumberDisplayText { get; set; } = "0";
 
         public bool IsMuted { get; private set; } = false;
+
+        public bool IsRecording { get; private set; } = false;
+
+        public bool IsVisible { get; private set; } = true;
         public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
 
         public IZoomExitByRatioService zoomExitService;
         private readonly IAudioService audioService;
+        private readonly IRecordingService recordingService;
+        private IJudgingWhetherToExitByRatioService judgeService => zoomExitService.JudgingWhetherToExitByRatioService;
 
-        public MainWindowViewModel(IZoomExitByRatioService zoomClosingService, IAudioService audioService)
+        public MainWindowViewModel(IZoomExitByRatioService zoomExitService, IAudioService audioService, IRecordingService recordingService)
         {
             this.audioService = audioService;
-            zoomExitService = zoomClosingService;
-            zoomExitService.OnRefreshed += (_, e) => DisplayValues();
-            zoomExitService.ReadOnlyZoomHandlingService.OnEntered += (_, e) => Log("ParticipatedInMeeting");
-            zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => Log("ExitMeeting");
-            zoomExitService.ReadOnlyZoomHandlingService.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
-            zoomExitService.ReadOnlyZoomHandlingService.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
-            zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+            IsMuted = audioService.GetMute();
+            this.recordingService = recordingService;
+            this.zoomExitService = zoomExitService;
+            this.zoomExitService.OnRefreshed += (_, e) => DisplayValues();
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnEntered += (_, e) => Log("ParticipatedInMeeting");
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => { Log("ExitMeeting"); Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount); };
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => recordingService.StopRecording();
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
         }
         private static ITranslation Trr(string key) => Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key);
@@ -67,59 +79,106 @@ namespace ZoomCloser.ViewModels
 
         #region ListBox_Functions
         private string NowLongTimeString => System.DateTime.Now.ToLongTimeString();
-        private void Log(string key)
+        private void Log(string key, params object[] args)
         {
-            LogListBoxItemsSource.Translations.Add((Trr(key),s => NowLongTimeString + " " + s));
+            LogListBoxItemsSource.Add(Trr(key), s => NowLongTimeString + " " + s, args);
         }
 
         #endregion ListBox_Functions
 
-        private async Task Close()
+
+
+        #region commands
+
+        private DelegateCommand exitMeetingCommand;
+        public DelegateCommand ExitMeetingCommand =>
+            exitMeetingCommand ?? (exitMeetingCommand = new DelegateCommand(ExecuteExitMeetingCommand));
+
+        private async void ExecuteExitMeetingCommand()
         {
             await zoomExitService.ExitManually().ConfigureAwait(false);
         }
 
-        private DelegateCommand closeCommand;
-        public DelegateCommand CloseCommand =>
-            closeCommand ?? (closeCommand = new DelegateCommand(async () => await Close().ConfigureAwait(false)));
-
         private DelegateCommand<Window> applicationExitCommand;
-        public DelegateCommand<Window> CloseWindowCommand =>
-            applicationExitCommand ?? (applicationExitCommand = new DelegateCommand<Window>(ExitApplication));
+        public DelegateCommand<Window> ApplicationExitCommand =>
+            applicationExitCommand ?? (applicationExitCommand = new DelegateCommand<Window>(ExecuteApplicationExitCommand));
+
+        private void ExecuteApplicationExitCommand(Window window)
+        {
+            Task.Run(() =>
+            {
+                window?.Close();
+                Environment.Exit(0);
+            });
+        }
 
         private DelegateCommand muteCommand;
         public DelegateCommand MuteCommand =>
-            muteCommand ?? (muteCommand = new DelegateCommand(Mute));
+            muteCommand ?? (muteCommand = new DelegateCommand(ExecuteMuteCommand));
 
-        private void Mute()
+        private DelegateCommand recordCommand;
+        private void ExecuteMuteCommand()
         {
             IsMuted = !IsMuted;
             audioService.SetMute(IsMuted);
         }
+        public DelegateCommand RecordCommand =>
+   recordCommand ?? (recordCommand = new DelegateCommand(ExecuteRecordCommand));
 
-        private void ExitApplication(Window window)
+        void ExecuteRecordCommand()
         {
-            window?.Close();
-            Environment.Exit(0);
+            IsRecording = !IsRecording;
+            if (IsRecording)
+            {
+                recordingService.StartRecording();
+            }
+            else
+            {
+                recordingService.StopRecording();
+            }
         }
+
+        private DelegateCommand changeVisiblityCommand;
+        public DelegateCommand ChangeVisiblityCommand =>
+            changeVisiblityCommand ?? (changeVisiblityCommand = new DelegateCommand(ExecuteChangeVisiblityCommand));
+
+        void ExecuteChangeVisiblityCommand()
+        {
+            IsVisible = !IsVisible;
+        }
+
+        private DelegateCommand openFolderCommand;
+        public DelegateCommand OpenFolderCommand =>
+            openFolderCommand ?? (openFolderCommand = new DelegateCommand(ExecuteOpenFolderCommand));
+
+        void ExecuteOpenFolderCommand()
+        {
+            Process.Start("explorer.exe", recordingService.FolderPath);
+        }
+
+        private DelegateCommand openSettingsCommand;
+        public DelegateCommand OpenSettingsCommand =>
+            openSettingsCommand ?? (openSettingsCommand = new DelegateCommand(ExecuteOpenSettingsCommand));
+
+        void ExecuteOpenSettingsCommand()
+        {
+            Process.Start("explorer.exe", "/select, \"" + SettingsService.FilePath + "\"");
+        }
+        #endregion commands
+
+
+
 
         public void DisplayValues()
         {
-            var zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomMode;
+            var zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomState;
             var exitService = zoomExitService.JudgingWhetherToExitByRatioService;
-            if (zoomMode == ZoomHandlingServiceState.E_NotRunning)
+            if (zoomMode == ZoomState.NotRunning)
             {
                 NumberDisplayText = Tr("ZoomNotRunning");
             }
-            else if (zoomMode == ZoomHandlingServiceState.E_NoMemberList)
-            {
-                NumberDisplayText = Tr("OpenParticipantsWindow");
-            }
-            else if (zoomMode == ZoomHandlingServiceState.E_DifferentShortCuts)
-            {
-                NumberDisplayText = Tr("DifferentShortcuts");
-            }
-            else if (zoomMode == ZoomHandlingServiceState.E_UnableToParse)
+
+            else if (zoomMode == ZoomState.NotExpectedBehaviour)
             {
                 NumberDisplayText = Tr("Bug");
             }
@@ -137,10 +196,6 @@ namespace ZoomCloser.ViewModels
                 Title = $"{exitService.CurrentCount}/{exitService.MaximumCount}";
             }
 
-            if (zoomMode != ZoomHandlingServiceState.OK)
-            {
-                Title = "";
-            }
         }
     }
 }

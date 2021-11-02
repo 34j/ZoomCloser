@@ -11,7 +11,7 @@ Once it is started, it will be automatically registered in the startup and will 
 
 ## Requirements
 
-NET Framework 4.8
+.NET Framework 4.8
 Windows 10
 
 ## Features

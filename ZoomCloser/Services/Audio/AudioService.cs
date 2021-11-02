@@ -1,11 +1,7 @@
 ﻿using CoreAudio;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ZoomCloser.Utils;
 
 namespace ZoomCloser.Services.Audio
@@ -19,19 +15,26 @@ namespace ZoomCloser.Services.Audio
 
         private readonly MMDeviceEnumerator devEnum;
 
+        private IEnumerable<AudioSessionControl2> GetSessions()
+        {
+            var result = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia).AudioSessionManager2.Sessions/*EnumerateAudioEndPoints(EDataFlow.eAll, DEVICE_STATE.DEVICE_STATEMASK_ALL)
+     .SelectMany(s => s?.AudioSessionManager2?.Sessions)*/
+     .Where(session =>
+     {
+         string processName = Process.GetProcessById((int)session.GetProcessID).ProcessName;
+         return processName.Contains("Zoom");
+     });
+            result.DebugIEnumerable(s => s.DisplayName);
+            return result;
+        }
         public void SetMute(bool mute)
         {
-            MMDevice device = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
-            foreach (var session in device.AudioSessionManager2.Sessions)
-            {
-                Process p = Process.GetProcessById((int)session.GetProcessID);
-                string name = p.ProcessName;
-                if (Regex.IsMatch(name, "Zoom"))
-                {
-                    SimpleAudioVolume vol = session.SimpleAudioVolume;
-                    vol.Mute = mute;
-                }
-            }
+            GetSessions().ForEach(s => s.SimpleAudioVolume.Mute = mute);
+        }
+
+        public bool GetMute()
+        {
+            return GetSessions().Select(s => s.SimpleAudioVolume.Mute).Append(false).Aggregate((s, sum) => s | sum);
         }
     }
 }

@@ -102,7 +102,7 @@ namespace ZoomCloser.Tests
         {
             bool hasExitFunctionCalled = false;
 
-            var handling = new Mock<IZoomHandlingService>(MockBehavior.Strict);
+            var handling = new Mock<IZoomHandlingService2>(MockBehavior.Strict);
             handling.Setup(s => s.RefreshParticipantCount()).ReturnsAsync(true);
             handling.Setup(s => s.Exit()).ReturnsAsync(true).Callback(() => hasExitFunctionCalled = true);
             var judger = new Mock<IJudgingWhetherToExitByRatioService>(MockBehavior.Strict);

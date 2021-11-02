@@ -197,4 +197,5 @@ namespace ZoomCloser.Services
             Debug.WriteLine("simulated");
         }
     }
+
 }

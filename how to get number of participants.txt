@@ -1,0 +1,50 @@
+・最小化時
+取る方法なし
+
+・通常・最大化時
+UI Automation　by inspect.exe
+"30"
+"" ウィンドウ
+	"表示中、参加者パネルを閉じる、30参加者, Alt+U" ボタン
+	"" ウィンドウ
+	"ミーティング ツール" ウィンドウ
+	"ContentLeftPanel" ウィンドウ
+	"Zoom ミーティング" ウィンドウ
+	"デスクトップ 1" ウィンドウ
+
+"表示中、参加者パネルを閉じる、30参加者, Alt+U" ボタン
+"" ウィンドウ
+	"ミーティング ツール" ウィンドウ
+	"ContentLeftPanel" ウィンドウ
+	"Zoom ミーティング" ウィンドウ
+	"デスクトップ 1" ウィンドウ
+	[ No Parent ]
+
+** 開かないと無理
+
+"参加者 (30)"
+"PListContainer" ウィンドウ
+	"ContentRightPanel" ウィンドウ
+	"Zoom ミーティング" ウィンドウ
+	"デスクトップ 1" ウィンドウ
+	[ No Parent ]
+
+"参加者 (30), 展開されています"
+"" ウィンドウ
+	"" ウィンドウ
+	"PListContainer" ウィンドウ
+	"ContentRightPanel" ウィンドウ
+	"Zoom ミーティング" ウィンドウ
+	"デスクトップ 1" ウィンドウ
+	[ No Parent ]
+
+user32.dll
+
+** 開かないと無理
+
+"参加者 (30)"
+"PListContainer" ウィンドウ
+	"ContentRightPanel" ウィンドウ
+	"Zoom ミーティング" ウィンドウ
+	"デスクトップ 1" ウィンドウ
+	[ No Parent ]

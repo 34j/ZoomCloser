@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Utils
 {
+    /// <summary>
+    /// you can use as ReadOnlyObservableCollection<string>
+    /// </summary>
     public class ReadOnlyObservableTranslationCollection : ReadOnlyObservableCollection<string>
     {
         public ReadOnlyObservableTranslationCollection() : base(new ObservableCollection<string>())
@@ -21,11 +24,17 @@ namespace ZoomCloser.Utils
             Items.Clear();
             foreach(var translation in Translations)
             {
-                Items.Add(translation.Item2(translation.Item1.Translate(Translator.CurrentCulture)));
+                Items.Add(translation.Item2(string.Format(translation.Item1.Translate(Translator.CurrentCulture), translation.Item3)));
             }
         }
 
-        public ObservableCollection<(ITranslation, Func<string, string>)> Translations { get; set; } = new ObservableCollection<(ITranslation, Func<string, string>)>();
-        
+        /// <summary>
+        /// internal translation collection
+        /// </summary>
+        public ObservableCollection<(ITranslation, Func<string, string>, object[])> Translations { get; set; } = new ObservableCollection<(ITranslation, Func<string, string>, object[])>();
+        public void Add(ITranslation translation, Func<string, string> translationToDisplayFunc, params object[] translationParams)
+        {
+            Translations.Add((translation, translationToDisplayFunc, translationParams.Select(s => s.ToString()).ToArray()));
+        }
     }
 }

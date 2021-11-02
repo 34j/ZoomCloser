@@ -8,6 +8,7 @@ using System;
 using System.Threading.Tasks;
 using System.Timers;
 using ZoomCloser.Modules;
+using ZoomCloser.Services.ZoomHandling;
 
 namespace ZoomCloser.Services
 {
@@ -20,15 +21,18 @@ namespace ZoomCloser.Services
 
         private readonly IJudgingWhetherToExitService judgingWhetherToExitService;
 
-        private readonly IZoomHandlingService zoomHandlingService;
-        public IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService => zoomHandlingService;
+        private readonly IZoomHandlingService2 zoomHandlingService;
+        public IReadOnlyZoomHandlingService2 ReadOnlyZoomHandlingService => zoomHandlingService;
 
         public event EventHandler OnRefreshed;
 
-        public ZoomExitService(IZoomHandlingService zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
+        public ZoomExitService(IZoomHandlingService2 zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
         {
             this.zoomHandlingService = zoomHandlingService;
             this.judgingWhetherToExitService = judgingWhetherToExitService;
+            zoomHandlingService.OnExit += (_, e) => judgingWhetherToExitService.Reset();
+            zoomHandlingService.OnEntered += (_, e) => judgingWhetherToExitService.Reset();
+
             this.timer = timer;
             timer.Interval = 100;
             timer.AutoReset = true;
@@ -37,15 +41,22 @@ namespace ZoomCloser.Services
             timer.Enabled = true;
         }
 
-        public async Task ExitManually() => await zoomHandlingService.Exit().ConfigureAwait(false);
+        public async Task ExitManually()
+        {
+            await zoomHandlingService.Exit().ConfigureAwait(false);
+        }
+
         private async Task CheckAndClose()
         {
-            bool result = await zoomHandlingService.RefreshParticipantCount().ConfigureAwait(false);
-            if (!result)
+            zoomHandlingService.RefreshParticipantCount();
+
+            int? count = zoomHandlingService.ParticipantCount;
+            if (!count.HasValue)
             {
                 return;
             }
-            bool shouldClose = judgingWhetherToExitService.Judge(zoomHandlingService.ParticipantCount);
+
+            bool shouldClose = judgingWhetherToExitService.Judge(count.Value);
             if (shouldClose)
             {
                 judgingWhetherToExitService.Reset();
