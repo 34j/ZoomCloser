@@ -1,0 +1,36 @@
+name: Translate README
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      - name: Adding README - Chinese Simplified
+        uses: 34j/ZoomCloser@master
+        with:
+          LANG: zh-CN
+      - name: Adding README - Chinese Traditional
+        uses: 34j/ZoomCloser@master
+        with:
+          LANG: zh-TW
+      - name: Adding README - Hindi
+        uses: 34j/ZoomCloser@master
+        with:
+          LANG: hi
+      - name: Adding README - Arabic
+        uses: 34j/ZoomCloser@master
+        with:
+          LANG: ar
+      - name: Adding README - French
+        uses: 34j/ZoomCloser@master
+        with:
+          LANG: fr
