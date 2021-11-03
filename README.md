@@ -1,28 +1,31 @@
 # ZoomCloser
 
-A small application that obtains the number of participants in a Zoom meeting and automatically exits the Zoom meeting when the number of participants decreases, thereby preventing accidents caused by forgetting to leave.
+A Windows software that prevents you from forgetting to leave a Zoom meeting.
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+! [Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
 
-## Installation
+
+## Install.
 
 Download the latest version from [Releases](https://github.com/34j/ZoomCloser/releases).
-Once it is started, it will be automatically registered in the startup and will be launched at startup from the next time. To remove the automatic startup, disable the startup from the Task Manager.
+Once you start it, it will be registered in the startup automatically and will be launched at startup from the next time. To remove the automatic startup, disable the startup from the task manager.
 
 ## Requirements
 
-.NET Framework 4.8
-Windows 10
+NET Framework 4.8
+Windows 10 64bit
 
-## Features
+## Function
 
-- Gets the number of participants from the title of the window using Win32api. Then, when the number of participants in the Zoom meeting is more than 3 and less than (maximum number of participants)*p(random number between 0.4-0.6), it simulates the keyboard input of the standard exit shortcut (Alt+Q→Enter).
-- Uses CoreAudioApi to mute Zoom's audio. (It's not a microphone.
-- Displays the exit time and other information.
+- Get the number of participants in Zoom Meeting. Sends the standard exit shortcut (Alt+Q→Enter) keyboard input when the number of participants falls below (maximum number of participants)*(certain percentage).
+- Mute the audio of the meeting on the Windows side.
+- Record the meeting.
+- Record the time of joining and leaving the meeting.
 
-## Note on the license
+## License Notes
 
-The code in this repository is MIT licensed, but please note that some of the dependencies do not use the MIT license.
+Note that the code in this repository is MIT licensed, but some of the dependencies do not adopt the MIT license.
+
 
 
 # ZoomCloser
