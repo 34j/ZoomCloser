@@ -27,7 +27,7 @@ The code in this repository is MIT licensed, but please note that some of the de
 
 # ZoomCloser
 
-Zoomミーティングの参加者数を取得し、参加者数が減ったときに自動でZoomミーティングを退出することにより、退出忘れによる事故を防止する小さなアプリケーション。
+Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
 
 ![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
 
@@ -40,14 +40,14 @@ Zoomミーティングの参加者数を取得し、参加者数が減ったと�
 ## 必要条件
 
 .NET Framework 4.8
-Windows10
+Windows10 64bit
 
 ## 機能
 
-
-- Win32apiを用いてウィンドウのタイトルから参加者数を取得します。そして、Zoomミーティングの参加者数が3人以上かつ(最大参加者数)*p(0.4-0.6の乱数)以下になったとき標準の退出ショートカット(Alt+Q→Enter)のキーボード入力をシミュレートします。
-- CoreAudioApiを用いてZoomの音声をミューとします。（マイクではありません。）
-- 退出時刻などを表示します。
+- Zoomミーティングの参加者数を取得します。参加者数が(最大参加者数)*(一定の割合)以下になったとき、標準の退出ショートカット(Alt+Q→Enter)のキーボード入力を送信します。
+- ミーティングの音声をWindows側でミュートします。
+- ミーティングを録画します。
+- 参加時刻、退出時刻を記録します。
 
 ## ライセンスの注意事項
 
