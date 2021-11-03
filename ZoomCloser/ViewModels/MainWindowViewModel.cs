@@ -54,11 +54,11 @@ namespace ZoomCloser.ViewModels
             this.zoomExitService = zoomExitService;
             this.zoomExitService.OnRefreshed += (_, e) => DisplayValues();
             this.zoomExitService.ReadOnlyZoomHandlingService.OnEntered += (_, e) => Log("ParticipatedInMeeting");
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => { Log("ExitMeeting"); Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount); };
+            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => { Log("ExitMeeting"); /*Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount);*/ };
             this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => recordingService.StopRecording();
             this.zoomExitService.ReadOnlyZoomHandlingService.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
             this.zoomExitService.ReadOnlyZoomHandlingService.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+            //this.zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
         }
         private static ITranslation Trr(string key) => Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key);
@@ -81,7 +81,8 @@ namespace ZoomCloser.ViewModels
         private string NowLongTimeString => System.DateTime.Now.ToLongTimeString();
         private void Log(string key, params object[] args)
         {
-            LogListBoxItemsSource.Add(Trr(key), s => NowLongTimeString + " " + s, args);
+            string now = NowLongTimeString;
+            LogListBoxItemsSource.Add(Trr(key), s => now + " " + s, args);
         }
 
         #endregion ListBox_Functions

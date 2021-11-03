@@ -90,6 +90,12 @@ namespace ZoomCloser.Services.ZoomHandling
             {
                 if (ZoomWindowDetector.TryGetMainWindow(out IntPtr windowHandle, out bool isMinimized))
                 {
+                    //TryGetMainWindow is heavy so we have to avoid calling OnEntered event etc more than once.
+                    if(mainWindowElement != null)
+                    {
+                        return;
+                    }
+
                     mainWindowElement = AutomationElement.FromHandle(windowHandle);
                     if (isMinimized)
                     {
