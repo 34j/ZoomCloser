@@ -1,3 +1,5 @@
+[English](https://github.com/34j/ZoomCloser/blob/master/README.ar.md)
+
 # ZoomCloser
 
 Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
