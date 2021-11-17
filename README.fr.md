@@ -1,4 +1,4 @@
-[Anglais](https://github.com/34j/ZoomCloser/blob/master/README.ar.md)
+[Anglais](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
 # Zoom Plus
 
