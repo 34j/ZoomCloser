@@ -1,4 +1,4 @@
-[英语](https://github.com/34j/ZoomCloser/blob/master/README.ar.md)
+[英语](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
 # 放大关闭
 
@@ -13,13 +13,13 @@
 
 ## 必要条件
 
--   .NET Framework 4.8
--   Windows10 64位
+-   .NET 框架 4.8
+-   视窗10 64位
 
 ## 机能
 
 -   获取 Zoom 会议的参与者数量。当参会人数小于（最大参会人数）\*（一定百分比）时，发送标准退出快捷键（Alt+Q→Enter）的键盘输入。
--   ミーティングの音声をWindows側でミュートします。
+-   在 Windows 端静音会议音频。
 -   记录会议。
 -   记录进入时间和退出时间。
 
