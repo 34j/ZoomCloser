@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE.txt = LICENSE.txt
 		README.ja.md = README.ja.md
+		.github\workflows\readme.yml = .github\workflows\readme.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCloser.Tests", "ZoomCloser.Tests\ZoomCloser.Tests.csproj", "{B6DD2443-0939-4C88-A83B-AAC7AB61BF2A}"
