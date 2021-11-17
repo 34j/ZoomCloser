@@ -16,7 +16,7 @@ Windows 10 64 bits
 
 ## Fonction
 
--   Obtenez le nombre de participants à Zoom Meeting. Envoie le raccourci de sortie standard (Alt+Q→Entrée) lorsque le nombre de participants est inférieur au (nombre maximum de participants)\* (certain pourcentage).
+-   Obtenez le nombre de participants à Zoom Meeting. Envoie le raccourci de sortie standard (Alt+Q→Entrée) lorsque le nombre de participants tombe en dessous du (nombre maximum de participants)\* (certain pourcentage).
 -   Coupez le son de la réunion du côté Windows.
 -   Enregistrez la réunion.
 -   Enregistrez l'heure de rejoindre et de quitter la réunion.
@@ -27,7 +27,7 @@ Notez que le code de ce référentiel est sous licence MIT, mais certaines dépe
 
 # Zoom Plus
 
-Un logiciel Windows qui vous évite d'oublier de quitter votre réunion Zoom.
+Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 
 ![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
 
@@ -43,11 +43,11 @@ Windows 10 64 bits
 
 ## fonction
 
--   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants tombe en dessous de (nombre maximum de participants) \* (un certain pourcentage), le raccourci de sortie standard (Alt + Q → Entrée) est envoyé au clavier.
+-   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants est inférieur à (nombre maximum de participants) \* (un certain pourcentage), la saisie au clavier du raccourci de sortie standard (Alt + Q → Entrée) est envoyée.
 -   Coupez le son de la réunion du côté Windows.
 -   Enregistrez la réunion.
 -   Enregistrez l'heure d'entrée et l'heure de sortie.
 
 ## Notes de licence
 
-Notez que le code dans ce référentiel est sous licence MIT, mais certaines dépendances ne sont pas sous licence MIT.
+Notez que le code de ce référentiel est sous licence MIT, mais certaines dépendances ne sont pas sous licence MIT.
