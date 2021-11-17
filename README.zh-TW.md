@@ -1,4 +1,4 @@
-[英語](https://github.com/34j/ZoomCloser/blob/master/README.ar.md)
+[英語](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
 # 放大關閉
 
