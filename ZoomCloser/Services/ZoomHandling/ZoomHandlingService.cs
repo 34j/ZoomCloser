@@ -15,9 +15,11 @@ using ZoomCloser.Utils;
 
 namespace ZoomCloser.Services
 {
+    /*
+    [Obsolete]
     public enum ZoomHandlingServiceState { E_UnableToParse = -4, E_DifferentShortCuts = -3, E_NoMemberList = -2, E_NotRunning = -1, OK = 0 }
 
-
+    [Obsolete]
     public class ZoomHandlingService : IZoomHandlingService
     {
         public ZoomHandlingServiceState ZoomMode { get; private set; } = ZoomHandlingServiceState.E_NotRunning;
@@ -197,5 +199,6 @@ namespace ZoomCloser.Services
             Debug.WriteLine("simulated");
         }
     }
+    */
 
 }

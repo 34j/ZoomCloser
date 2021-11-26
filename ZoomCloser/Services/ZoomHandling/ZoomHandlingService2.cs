@@ -14,15 +14,14 @@ using ZoomCloser.Services.ZoomWindow;
 namespace ZoomCloser.Services.ZoomHandling
 {
 
-    public enum ZoomState { NotRunning, Normal, Minimized, NotExpectedBehaviour }
+    public enum ZoomState { NotRunning, Normal, Minimized, WindowTooSmall, NotExpectedBehaviour }
     public enum ZoomParticipantsState { }
 
     public class ZoomHandlingService2 : IZoomHandlingService2
     {
         public ZoomState ZoomState { get; private set; }
 
-
-
+        public bool? IsBreakoutRoom { get; private set; }
         public int? ParticipantCount { get; private set; }
 
         public event EventHandler OnEntered;
@@ -31,14 +30,48 @@ namespace ZoomCloser.Services.ZoomHandling
         public event EventHandler OnThisForcedExit;
         public event EventHandler OnNotThisForcedExit;
 
+        private bool thisForcedExit = false;
+
+        private AutomationElement mainWindowElement;
+        private AutomationElement participantsElement;
+
+        public ZoomHandlingService2()
+        {
+            //set IsBreakoutRoom.
+            this.OnEntered += (_, e) => {
+                var title = mainWindowElement.Current.Name;
+                IsBreakoutRoom = Regex.IsMatch(title, @"\d+");
+            };
+            this.OnExit += (_, e) => {
+                IsBreakoutRoom = null;
+            };
+
+            //set OnNotThisForcedExit.
+            this.OnThisForcedExit += (_, e) =>
+            {
+                thisForcedExit = true;
+            };
+
+            this.OnExit += (_, e) =>
+            {
+                if (thisForcedExit)
+                {
+                    thisForcedExit = false;
+                }
+                else
+                {
+                    OnNotThisForcedExit?.Invoke(this, EventArgs.Empty);
+                }
+            };
+        }
+
         public async Task<bool> Exit()
         {
             FindWindowElement();
-            var handle = new IntPtr(mainWindowElement.Current.NativeWindowHandle);
+            IntPtr handle = new IntPtr(mainWindowElement.Current.NativeWindowHandle);
             User32.SetForegroundWindow(handle);
             User32.SetFocus(handle);
             await Simulate.Events().ClickChord(KeyCode.Menu, KeyCode.Q).Wait(200).ClickChord(KeyCode.Return).Invoke().ConfigureAwait(false);
-            //User32.DestroyWindow(parentWH);
             OnThisForcedExit?.Invoke(this, EventArgs.Empty);
             if (mainWindowElement.IsAlive())
             {
@@ -47,13 +80,22 @@ namespace ZoomCloser.Services.ZoomHandling
             return true;
         }
 
-
+        /// <summary>
+        /// Get the number of participants from the element(s) and refresh ParticipantCount.
+        /// </summary>
         public void RefreshParticipantCount()
         {
             if (!participantsElement.IsAlive())
             {
                 FindParticipantsCountElement();
-                return;
+                if (participantsElement.IsAlive())
+                {
+                    OnParticipantCountAvailable?.Invoke(this, EventArgs.Empty);
+                }
+                else
+                {
+                    return;
+                }
             }
             string name = "";
             try
@@ -69,14 +111,14 @@ namespace ZoomCloser.Services.ZoomHandling
             {
                 ParticipantCount = count;
             }
-
         }
 
-        private AutomationElement mainWindowElement;
-        private AutomationElement participantsElement;
 
 
-        void FindWindowElement()
+        /// <summary>
+        /// Find the main window of the zoom.
+        /// </summary>
+        private void FindWindowElement()
         {
             //check if it is still alive
             if (mainWindowElement != null && !mainWindowElement.IsAlive())
@@ -91,7 +133,7 @@ namespace ZoomCloser.Services.ZoomHandling
                 if (ZoomWindowDetector.TryGetMainWindow(out IntPtr windowHandle, out bool isMinimized))
                 {
                     //TryGetMainWindow is heavy so we have to avoid calling OnEntered event etc more than once.
-                    if(mainWindowElement != null)
+                    if (mainWindowElement != null)
                     {
                         return;
                     }
@@ -105,61 +147,74 @@ namespace ZoomCloser.Services.ZoomHandling
                     {
                         ZoomState = ZoomState.Normal;
                     }
-                    OnEntered?.Invoke(this, new EventArgs());
+                    OnEntered?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
                     ZoomState = ZoomState.NotRunning;
-                    return;
                 }
             }
         }
 
-        void FindParticipantsCountElement()
+        /// <summary>
+        /// Find the element from which the number of participants can be gotten.
+        /// </summary>
+        private void FindParticipantsCountElement()
         {
             FindWindowElement();
-            if (ZoomState == ZoomState.NotRunning || ZoomState == ZoomState.Minimized)
+
+            if(!GetState())
             {
                 ParticipantCount = null;
-                return;
             }
 
-            //get button
-            var controlPanelElement = mainWindowElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ClassNameProperty, "ZPControlPanelClass"));
-            if (controlPanelElement == null)
+            bool GetState()
             {
-                //not expected
-                ParticipantCount = null;
-                ZoomState = ZoomState.NotExpectedBehaviour;
-                //throw new NotImplementedException($"{nameof(controlPanelElement)} not found.");
-                return;
+                if (ZoomState == ZoomState.NotRunning || ZoomState == ZoomState.Minimized)
+                {
+                    //zoom is not ready!
+                    return false;
+                }
+
+                //1. get participants from the text near the button
+                var controlPanelElement = mainWindowElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ClassNameProperty, "ZPControlPanelClass"));
+                if (controlPanelElement == null)
+                {
+                    //not expected
+                    ZoomState = ZoomState.NotExpectedBehaviour;
+                    //throw new NotImplementedException($"{nameof(controlPanelElement)} not found.");
+                    return false;
+                }
+
+                var controlPanelChildElement = controlPanelElement.FindFirst(TreeScope.Children, Condition.TrueCondition);
+                if (controlPanelChildElement == null)
+                {
+                    //not expected
+                    ZoomState = ZoomState.NotExpectedBehaviour;
+                    //throw new NotImplementedException($"{nameof(controlPanelChildElement)} not found.");
+                    return false;
+                }
+
+                var controlPanelButtonElements = controlPanelElement.FindAll(TreeScope.Descendants, Condition.TrueCondition);
+                var buttonElement = controlPanelButtonElements.Cast<AutomationElement>().Where(s => Regex.IsMatch(s.Current.Name, @"\d"));
+                if (buttonElement.Any())
+                {
+                    //window was big enough so that we could find the desired button.
+                    ZoomState = ZoomState.Normal;
+                    participantsElement = buttonElement.First();
+                    return true;
+                }
+                else
+                {
+                    //window was too small so the button is not displayed.
+                    ZoomState = ZoomState.WindowTooSmall;
+                    return false;
+                }
             }
 
-            var controlPanelChildElement = controlPanelElement.FindFirst(TreeScope.Children, Condition.TrueCondition);
-            if (controlPanelChildElement == null)
-            {
-                //not expected
-                ParticipantCount = null;
-                ZoomState = ZoomState.NotExpectedBehaviour;
-                //throw new NotImplementedException($"{nameof(controlPanelChildElement)} not found.");
-                return;
-            }
-
-            var controlPanelButtonElements = controlPanelElement.FindAll(TreeScope.Descendants, Condition.TrueCondition);
-            var buttonElement = controlPanelButtonElements.Cast<AutomationElement>().Where(s => Regex.IsMatch(s.Current.Name, @"\d"));
-            if (buttonElement.Any())
-            {
-                ZoomState = ZoomState.Normal;
-                participantsElement = buttonElement.First();
-                return;
-            }
-            else
-            {
-            }
-
-
-
-
+            // this makes the program too complex so it is removed.
+            /*
+            //2. get participants from the text in the participants' list
             var listContainer = mainWindowElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "PListContainer"));
             if (listContainer == null)
             {
@@ -180,7 +235,7 @@ namespace ZoomCloser.Services.ZoomHandling
                 //throw new NotImplementedException($"{nameof(listContainerChild)} not found.");
                 return;
             }
-
+            */
         }
     }
 }

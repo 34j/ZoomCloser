@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
+    /*
+    [Obsolete]
     public interface IZoomHandlingService : IReadOnlyZoomHandlingService
     {
         /// <summary>
@@ -25,4 +27,5 @@ namespace ZoomCloser.Services
         /// <returns>Whether it was successful.</returns>
         Task<bool> Exit();
     }
+    */
 }
