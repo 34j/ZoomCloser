@@ -53,12 +53,14 @@ namespace ZoomCloser.ViewModels
             this.recordingService = recordingService;
             this.zoomExitService = zoomExitService;
             this.zoomExitService.OnRefreshed += (_, e) => DisplayValues();
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnEntered += (_, e) => Log("ParticipatedInMeeting");
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => { Log("ExitMeeting"); /*Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount);*/ };
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnExit += (_, e) => recordingService.StopRecording();
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
-            this.zoomExitService.ReadOnlyZoomHandlingService.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
-            //this.zoomExitService.ReadOnlyZoomHandlingService.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+            var zs = this.zoomExitService.ReadOnlyZoomHandlingService;
+            zs.OnEntered += (_, e) => Log("ParticipatedInMeeting");
+            zs.OnExit += (_, e) => { Log("ExitMeeting"); /*Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount);*/ };
+            zs.OnExit += (_, e) => recordingService.StopRecording();
+            zs.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
+            zs.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
+            zs.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+            //below is for the logging list.
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
         }
         private static ITranslation Trr(string key) => Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key);
@@ -174,16 +176,15 @@ namespace ZoomCloser.ViewModels
         {
             var zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomState;
             var exitService = zoomExitService.JudgingWhetherToExitByRatioService;
-            if (zoomMode == ZoomState.NotRunning)
+            if (zoomMode == ZoomErrorState.NotRunning)
             {
                 NumberDisplayText = Tr("ZoomNotRunning");
             }
-
-            else if (zoomMode == ZoomState.NotExpectedBehaviour)
+            else if (zoomMode == ZoomErrorState.NotExpectedBehaviour)
             {
                 NumberDisplayText = Tr("Bug");
             }
-            else
+            else if (zoomMode == ZoomErrorState.NoError)
             {
                 NumberDisplayText = Tr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount) + "\r\n";
                 if (exitService.IsOverThresholdToActivation)
@@ -195,6 +196,14 @@ namespace ZoomCloser.ViewModels
                     NumberDisplayText += Tr("UnderOrEqualsToThresholdExitCondition", exitService.ThresholdToActivation);
                 }
                 Title = $"{exitService.CurrentCount}/{exitService.MaximumCount}";
+            }
+            else if (zoomMode == ZoomErrorState.Minimized)
+            {
+                NumberDisplayText = Tr("Minimized");
+            }
+            else
+            {
+                NumberDisplayText = zoomMode.ToString();
             }
 
         }

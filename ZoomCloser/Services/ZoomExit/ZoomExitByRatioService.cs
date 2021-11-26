@@ -19,7 +19,7 @@ namespace ZoomCloser.Services
     {
         public IJudgingWhetherToExitByRatioService JudgingWhetherToExitByRatioService { get; }
 
-        public ZoomExitByRatioService(IZoomHandlingService2 zoomHandlingService, IJudgingWhetherToExitByRatioService judgingWhetherToExitByRatioService, Timer timer) : base(zoomHandlingService, judgingWhetherToExitByRatioService, timer)
+        public ZoomExitByRatioService(ZoomOperatingService zoomHandlingService, IJudgingWhetherToExitByRatioService judgingWhetherToExitByRatioService, Timer timer) : base(zoomHandlingService, judgingWhetherToExitByRatioService, timer)
         {
             this.JudgingWhetherToExitByRatioService = judgingWhetherToExitByRatioService;
         }

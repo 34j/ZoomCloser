@@ -121,7 +121,7 @@
     <value>Participated in a meeting</value>
   </data>
   <data name="ExitMeeting" xml:space="preserve">
-    <value>Manually leave the meeting</value>
+    <value>Left the meeting</value>
   </data>
   <data name="StartedCapturingTHeNumberOfParticipants" xml:space="preserve">
     <value>Started capturing the number of participants</value>
@@ -153,5 +153,8 @@
   </data>
   <data name="UnderOrEqualsToThresholdExitCondition" xml:space="preserve">
     <value>The software will not automatically exit until the maximum number of participants exceeds {0}.</value>
+  </data>
+  <data name="Minimized" xml:space="preserve">
+    <value>Zoom is minimized.</value>
   </data>
 </root>

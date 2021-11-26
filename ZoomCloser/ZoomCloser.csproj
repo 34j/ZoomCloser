@@ -131,6 +131,7 @@
     <Compile Include="Services\Settings\SettingService.cs" />
     <Compile Include="Services\ZoomHandling\IZoomHandlingService2.cs" />
     <Compile Include="Services\ZoomHandling\ZoomHandlingService2.cs" />
+    <Compile Include="Services\ZoomHandling\ZoomOperatingService.cs" />
     <Compile Include="Utils\InternalTest.cs" />
     <Compile Include="Utils\LinqExtention.cs" />
     <Compile Include="Utils\ObservableTranslationCollection.cs" />

@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Exit" xml:space="preserve">
-    <value>終了</value>
+    <value>アプリケーションを終了</value>
   </data>
   <data name="ParticipatedInMeeting" xml:space="preserve">
     <value>ミーティングに参加</value>
   </data>
   <data name="ExitMeeting" xml:space="preserve">
-    <value>手動でミーティングを退出</value>
+    <value>ミーティングを退出</value>
   </data>
   <data name="StartedCapturingTHeNumberOfParticipants" xml:space="preserve">
     <value>参加者数の取得を開始</value>
@@ -155,5 +155,8 @@
   </data>
   <data name="UnderOrEqualsToThresholdExitCondition" xml:space="preserve">
     <value>参加者数の過去最大値が{0}人を超えるまでは自動で退出しません。</value>
+  </data>
+  <data name="Minimized" xml:space="preserve">
+    <value>Zoomが最小化されているので参加者数を取得できません。</value>
   </data>
 </root>
