@@ -18,7 +18,7 @@ Une fois démarré, il sera automatiquement enregistré dans le démarrage et d�
 
 ## fonction
 
--   Zoomミーティングの参加者数を取得します。参加者数が(最大参加者数)\*(一定の割合)以下になったとき、標準の退出ショートカット(Alt+Q→Enter)のキーボード入力を送信します。
+-   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants est inférieur ou égal à (nombre maximum de participants) \* (pourcentage constant), la saisie clavier standard du raccourci de sortie (Alt + Q → Entrée) est envoyée.
 -   Coupez le son de la réunion du côté Windows.
 -   Enregistrez la réunion.
 -   Enregistrez l'heure d'entrée et l'heure de sortie.
