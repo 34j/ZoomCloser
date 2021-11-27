@@ -26,6 +26,8 @@ namespace ZoomCloser.Services
 
         public event EventHandler OnRefreshed;
 
+        public bool IsActivated { get; set; } = true;
+
         public ZoomExitService(IZoomHandlingService2 zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
         {
             this.zoomHandlingService = zoomHandlingService;
@@ -59,6 +61,10 @@ namespace ZoomCloser.Services
             bool shouldClose = judgingWhetherToExitService.Judge(count.Value);
             if (shouldClose)
             {
+                if (!IsActivated)
+                {
+                    return;
+                }
                 judgingWhetherToExitService.Reset();
                 await zoomHandlingService.Exit().ConfigureAwait(false);
             }

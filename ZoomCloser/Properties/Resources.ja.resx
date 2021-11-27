@@ -159,4 +159,19 @@
   <data name="Minimized" xml:space="preserve">
     <value>Zoomが最小化されているので参加者数を取得できません。</value>
   </data>
+  <data name="Activation" xml:space="preserve">
+    <value>自動的に退出する</value>
+  </data>
+  <data name="Mute" xml:space="preserve">
+    <value>スピーカーをWindows側でミュートする</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>録画する</value>
+  </data>
+  <data name="OpenMovieFolder" xml:space="preserve">
+    <value>動画フォルダを開く</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
 </root>

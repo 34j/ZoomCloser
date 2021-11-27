@@ -15,6 +15,7 @@ using System.Globalization;
 using Unity;
 using Unity.RegistrationByConvention;
 using System.Diagnostics;
+using ZoomCloser.Utils;
 
 namespace ZoomCloser
 {
@@ -27,16 +28,9 @@ namespace ZoomCloser
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Translator.Cultures.Add(new CultureInfo("en"));
-            Translator.Cultures.Add(new CultureInfo("ja"));
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
-            Translator.Culture = new CultureInfo(SettingsService.Instance.Culture);
-            Translator.CurrentCultureChanged += (sender, ce) =>
-            {
-                SettingsService.Instance.Culture = ce.Culture.Name;
-                SettingsService.Save();
-            };
+            CultureUtils.InitTranslator();
         }
 
         protected override Window CreateShell()
@@ -64,5 +58,7 @@ namespace ZoomCloser
                 Debug.WriteLine(type.Name);
             }
         }
+
+
     }
 }

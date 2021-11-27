@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,67 +112,57 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>Quitter l'application</value>
   </data>
   <data name="ParticipatedInMeeting" xml:space="preserve">
-    <value>Participated in a meeting</value>
+    <value>Participer à une réunion</value>
   </data>
   <data name="ExitMeeting" xml:space="preserve">
-    <value>Left the meeting</value>
+    <value>Quitter la réunion</value>
   </data>
   <data name="StartedCapturingTHeNumberOfParticipants" xml:space="preserve">
-    <value>Started capturing the number of participants</value>
-    
+    <value>Début de l'acquisition du nombre de participants</value>
   </data>
   <data name="ThisSoftwareForcedToExitMeeting" xml:space="preserve">
-    <value>This software forced to exit a meeting</value>
+    <value>Ce logiciel quitte la réunion</value>
   </data>
   <data name="UserForcedToExitMeeting" xml:space="preserve">
-    <value>User forced to exit a meeting</value>
+    <value>L'utilisateur quitte la réunion</value>
   </data>
   <data name="ZoomNotRunning" xml:space="preserve">
-    <value>Zoom is not running</value>
+    <value>Le zoom ne fonctionne pas</value>
   </data>
   <data name="ParticipantCount" xml:space="preserve">
-    <value>Participants Current:{0}, Max:{1}</value>
+    <value>Nombre de participants Valeur actuelle : {0} personnes, enregistrer la valeur maximale : {1} personnes</value>
   </data>
   <data name="OpenParticipantsWindow" xml:space="preserve">
-    <value>Open the participants window. You may close it immediately.</value>
+    <value>Veuillez ouvrir la fenêtre des participants. Vous pouvez le fermer.</value>
   </data>
   <data name="DifferentShortcuts" xml:space="preserve">
-    <value>The Zoom shortcut is different from the expected (standard), please change it to continue using it: Manage Participants (ALT+T)</value>
+    <value>Les raccourcis de zoom sont différents de ceux attendus (standard), veuillez les modifier pour continuer à utiliser : Gérer les participants (ALT + T)</value>
   </data>
   <data name="Bug" xml:space="preserve">
-    <value>Unable to get the number of participants due to a bug.</value>
+    <value>Le nombre de participants ne peut pas être obtenu en raison d'un bug.</value>
   </data>
   <data name="NormalExitCondition" xml:space="preserve">
-    <value>Exit when the number of participants drops below {0}.</value>
+    <value>Je partirai lorsque le nombre de participants sera inférieur à {0}.</value>
   </data>
   <data name="UnderOrEqualsToThresholdExitCondition" xml:space="preserve">
-    <value>The software will not automatically exit until the maximum number of participants exceeds {0}.</value>
+    <value>Il ne partira pas automatiquement tant que le nombre record de participants ne dépassera pas {0}.</value>
   </data>
   <data name="Minimized" xml:space="preserve">
-    <value>Zoom is minimized.</value>
+    <value>Je n'arrive pas à obtenir le nombre de participants car Zoom est minimisé.</value>
   </data>
   <data name="Activation" xml:space="preserve">
-    <value></value>
+    <value>Quitter automatiquement</value>
   </data>
   <data name="Mute" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="Record" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="OpenMovieFolder" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value></value>
+    <value>Couper le haut-parleur côté Windows</value>
   </data>
 </root>

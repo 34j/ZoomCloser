@@ -19,9 +19,9 @@ https://opensource.org/licenses/MIT
                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                    xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
-                   xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                    xmlns:views="clr-namespace:ZoomCloser.Views"
                    prism:ViewModelLocator.AutoWireViewModel="True"
+                   xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                    Title="{Binding Title}"
                    ShowInTaskbar="false"
                    WindowStyle="None"
@@ -43,12 +43,6 @@ https://opensource.org/licenses/MIT
     </Window.Style>
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Control-styles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Blue.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <Style TargetType="Border"
                    x:Key="background">
                 <Setter Property="Background"
@@ -69,49 +63,66 @@ https://opensource.org/licenses/MIT
                         MenuActivation="RightClick">
             <tb:TaskbarIcon.Resources></tb:TaskbarIcon.Resources>
             <tb:TaskbarIcon.TrayPopup>
-                <Border Height="400"
-                        Width="250"
-                        Style="{StaticResource background}">
-                    <Grid>
-                        <StackPanel Margin="10,15,10,10">
-                            <TextBlock TextWrapping="Wrap"
-                                       Text="{Binding NumberDisplayText}"
-                                       VerticalAlignment="Top"
-                                       MinHeight="60"
-                                       Style="{StaticResource text}" />
-                            <Button Content="{l:Static p:Resources.ExitMeeting}"
-                                    HorizontalAlignment="Left"
-                                    Command="{Binding ExitMeetingCommand}"
-                                    Height="20"
-                                    VerticalAlignment="Top" />
-                            <views:TwoIconButton Command="{Binding MuteCommand}"
-                                                 Value="{Binding IsMuted}"
-                                                 TrueKind="RegularVolumeMute"
-                                                 FalseKind="RegularVolumeFull" />
-                            <views:TwoIconButton Command="{Binding RecordCommand}"
-                                                 Value="{Binding IsRecording}"
-                                                 TrueKind="RegularVideoRecording"
-                                                 FalseKind="RegularVideoOff" />
-                            <Button Command="{Binding OpenFolderCommand}"
-                                    Height="20"
-                                    Width="40"
-                                    HorizontalAlignment="Left">
-                                <iconPacks:BoxIcons Kind="RegularMoviePlay" />
-                            </Button>
-                            <Button Command="{Binding OpenSettingsCommand}"
-                                    Height="20"
-                                    Width="40"
-                                    HorizontalAlignment="Left">
-                                <iconPacks:BoxIcons Kind="RegularCog" />
-                            </Button>
-                            <ListBox ItemsSource="{Binding LogListBoxItemsSource}"
-                                     Background="{x:Null}"
-                                     Foreground="{DynamicResource ForegroundBrushKey}"
-                                     Margin="0,0,0,10"
-                                     Padding="0,0,0,10" />
-                        </StackPanel>
-                    </Grid>
-                </Border>
+                <StackPanel>
+                    <Border Height="400"
+                            Width="250"
+                            Style="{StaticResource background}">
+                        <Grid>
+                            <StackPanel Margin="10,15,10,10">
+                                <TextBlock TextWrapping="Wrap"
+                                           Text="{Binding NumberDisplayText}"
+                                           VerticalAlignment="Top"
+                                           MinHeight="60"
+                                           Style="{StaticResource text}" />
+                                <Button Content="{l:Static p:Resources.ExitMeeting}"
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding ExitMeetingCommand}"
+                                        Height="20"
+                                        VerticalAlignment="Top" />
+                                <Controls:ToggleSwitch Command="{Binding ActivateCommand}"
+                                                       IsOn="{Binding IsActivated}"
+                                                       Header="{l:Static p:Resources.Activation}" />
+                                <views:IconToggleSwitch Command="{Binding MuteCommand}"
+                                                        Value="{Binding IsMuted}"
+                                                        OnKind="RegularVolumeMute"
+                                                        OffKind="RegularVolumeMute"
+                                                        Header="{l:Static p:Resources.Mute}" />
+                                <views:IconToggleSwitch Command="{Binding RecordCommand}"
+                                                        Value="{Binding IsRecording}"
+                                                        OnKind="RegularVideoRecording"
+                                                        OffKind="RegularVideoOff"
+                                                        Header="{l:Static p:Resources.Record}"/>
+                                <!--  <views:TwoIconButton Command="{Binding MuteCommand}"
+                                                     Value="{Binding IsMuted}"
+                                                     TrueKind="RegularVolumeMute"
+                                                     FalseKind="RegularVolumeFull" />
+                                <views:TwoIconButton Command="{Binding RecordCommand}"
+                                                     Value="{Binding IsRecording}"
+                                                     TrueKind="RegularVideoRecording"
+                                                     FalseKind="RegularVideoOff" />-->
+                                <Button Command="{Binding OpenFolderCommand}"
+                                        HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconBoxIcons Kind="RegularMoviePlay" />
+                                        <Label Content="{l:Static p:Resources.OpenMovieFolder}" />
+                                    </StackPanel>
+                                </Button>
+                                <Button Command="{Binding OpenSettingsCommand}"
+                                        HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconBoxIcons Kind="RegularCog" />
+                                        <Label Content="{l:Static p:Resources.Settings}" />
+                                    </StackPanel>
+                                </Button>
+                                <ListBox ItemsSource="{Binding LogListBoxItemsSource}"
+                                         Background="{x:Null}"
+                                         Foreground="{DynamicResource ForegroundBrushKey}"
+                                         Margin="0,0,0,10"
+                                         Padding="0,0,0,10" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
             </tb:TaskbarIcon.TrayPopup>
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>

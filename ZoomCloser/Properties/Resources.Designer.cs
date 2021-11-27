@@ -61,6 +61,15 @@ namespace ZoomCloser.Properties {
         }
         
         /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Activation {
+            get {
+                return ResourceManager.GetString("Activation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Unable to get the number of participants due to a bug. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Bug {
@@ -88,11 +97,29 @@ namespace ZoomCloser.Properties {
         }
         
         /// <summary>
-        ///   Manually leave the meeting に類似しているローカライズされた文字列を検索します。
+        ///   Left the meeting に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ExitMeeting {
             get {
                 return ResourceManager.GetString("ExitMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Zoom is minimized. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Minimized {
+            get {
+                return ResourceManager.GetString("Minimized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Mute {
+            get {
+                return ResourceManager.GetString("Mute", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace ZoomCloser.Properties {
         internal static string NormalExitCondition {
             get {
                 return ResourceManager.GetString("NormalExitCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OpenMovieFolder {
+            get {
+                return ResourceManager.GetString("OpenMovieFolder", resourceCulture);
             }
         }
         
@@ -129,6 +165,24 @@ namespace ZoomCloser.Properties {
         internal static string ParticipatedInMeeting {
             get {
                 return ResourceManager.GetString("ParticipatedInMeeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Record {
+            get {
+                return ResourceManager.GetString("Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

@@ -24,5 +24,9 @@ namespace ZoomCloser.Services
         /// Manually exit the meeting.
         /// </summary>
         Task ExitManually();
+        /// <summary>
+        /// Whether this service can force to exit the meeting.
+        /// </summary>
+        bool IsActivated { get; set; }
     }
 }

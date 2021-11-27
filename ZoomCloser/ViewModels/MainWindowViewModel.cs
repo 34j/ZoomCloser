@@ -32,10 +32,10 @@ namespace ZoomCloser.ViewModels
         #region Fody_Bindings
         public string Title { get; set; } = "";
         public string NumberDisplayText { get; set; } = "0";
-        public bool IsActivated { get; private set; } = true;
-        public bool IsMuted { get; private set; } = false;
-        public bool IsRecording { get; private set; } = false;
-        public bool IsVisible { get; private set; } = true;
+        public bool IsActivated { get; set; } = true;
+        public bool IsMuted { get; set; } = false;
+        public bool IsRecording { get; set; } = false;
+        public bool IsVisible { get; set; } = true;
         public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
 
@@ -59,6 +59,8 @@ namespace ZoomCloser.ViewModels
             zs.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
             zs.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
             zs.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+
+            IsActivated = zoomExitService.IsActivated;
 
             //below is for the logging list.
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
@@ -96,7 +98,14 @@ namespace ZoomCloser.ViewModels
 
 
         #region commands
+        private DelegateCommand activateCommand;
+        public DelegateCommand ActivateCommand =>
+            activateCommand ?? (activateCommand = new DelegateCommand(ExecuteActivateCommand));
 
+        void ExecuteActivateCommand()
+        {
+            zoomExitService.IsActivated = IsActivated;
+        }
         private DelegateCommand exitMeetingCommand;
         public DelegateCommand ExitMeetingCommand =>
             exitMeetingCommand ?? (exitMeetingCommand = new DelegateCommand(ExecuteExitMeetingCommand));
@@ -125,7 +134,6 @@ namespace ZoomCloser.ViewModels
 
         private void ExecuteMuteCommand()
         {
-            IsMuted = !IsMuted;
             audioService.SetMute(IsMuted);
         }
 
@@ -136,7 +144,6 @@ namespace ZoomCloser.ViewModels
 
         void ExecuteRecordCommand()
         {
-            IsRecording = !IsRecording;
             if (IsRecording)
             {
                 recordingService.StartRecording();
