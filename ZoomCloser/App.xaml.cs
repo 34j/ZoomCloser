@@ -31,10 +31,10 @@ namespace ZoomCloser
             Translator.Cultures.Add(new CultureInfo("ja"));
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
-            Translator.Culture = new CultureInfo(SettingsService.V.Culture);
+            Translator.Culture = new CultureInfo(SettingsService.Instance.Culture);
             Translator.CurrentCultureChanged += (sender, ce) =>
             {
-                SettingsService.V.Culture = ce.Culture.Name;
+                SettingsService.Instance.Culture = ce.Culture.Name;
                 SettingsService.Save();
             };
         }

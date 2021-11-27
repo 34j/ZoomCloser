@@ -118,6 +118,7 @@
     <Compile Include="Services\Audio\AudioService.cs" />
     <Compile Include="Services\Audio\IAudioService.cs" />
     <Compile Include="Services\AutomationElementExtension.cs" />
+    <Compile Include="Services\Settings\Settings.cs" />
     <Compile Include="Services\ZoomExit\IZoomExitByRatioService.cs" />
     <Compile Include="Services\Logics\IJudgingWhetherToExitByRatioService.cs" />
     <Compile Include="Services\Logics\IJudgingWhetherToExitService.cs" />
@@ -141,6 +142,12 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainWindowContent.xaml.cs">
+      <DependentUpon>MainWindowContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TwoIconButton.xaml.cs">
+      <DependentUpon>TwoIconButton.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,6 +160,14 @@
     <Compile Include="Utils\WindowFindExtentiion.cs" />
     <Compile Include="Services\ZoomHandling\ZoomHandlingService.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="Views\MainWindowContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TwoIconButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -184,9 +199,13 @@
     <Compile Include="Services\ZoomExit\ZoomExitByRatioService.cs" />
     <Compile Include="Services\ZoomWindow\ZoomWindowDetector.cs" />
     <Compile Include="Services\ZoomHandling\IReadOnlyZoomHandlingService2.cs" />
+    <Compile Include="Views\InverseBooleanToVisibilityConverter.cs" />
     <None Include="ZoomCloser.licenseheader" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Bindables.Fody">
+      <Version>6.3.0</Version>
+    </PackageReference>
     <PackageReference Include="CoreAudio">
       <Version>1.10.0</Version>
     </PackageReference>
@@ -200,7 +219,7 @@
       <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="ILMerge">
-      <Version>3.0.41</Version>
+      <Version>3.0.40</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.4.9</Version>
@@ -219,7 +238,7 @@
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
     <PackageReference Include="PropertyChanged.Fody">
-      <Version>3.3.3</Version>
+      <Version>3.4.0</Version>
     </PackageReference>
     <PackageReference Include="ScreenRecorderLib">
       <Version>3.1.2</Version>

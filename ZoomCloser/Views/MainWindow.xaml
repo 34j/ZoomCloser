@@ -20,6 +20,7 @@ https://opensource.org/licenses/MIT
                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                    xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
                    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                   xmlns:views="clr-namespace:ZoomCloser.Views"
                    prism:ViewModelLocator.AutoWireViewModel="True"
                    Title="{Binding Title}"
                    ShowInTaskbar="false"
@@ -83,61 +84,19 @@ https://opensource.org/licenses/MIT
                                     Command="{Binding ExitMeetingCommand}"
                                     Height="20"
                                     VerticalAlignment="Top" />
-                            <Button Command="{Binding MuteCommand}"
-                                    Height="20"
-                                    Width="40"
-                                    HorizontalAlignment="Left">
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}"
-                                           BasedOn="{StaticResource MetroRadianceButtonStyleKey}">
-                                        <Setter Property="Content">
-                                            <Setter.Value>
-                                                <iconPacks:BoxIcons Kind="RegularVolumeFull" />
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMuted}"
-                                                         Value="True">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <iconPacks:BoxIcons Kind="RegularVolumeMute" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                            <Button Command="{Binding RecordCommand}"
-                                    Height="20"
-                                    Width="40"
-                                    HorizontalAlignment="Left">
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}"
-                                           BasedOn="{StaticResource MetroRadianceButtonStyleKey}">
-                                        <Setter Property="Content">
-                                            <Setter.Value>
-                                                <iconPacks:BoxIcons Kind="RegularCameraOff" />
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsRecording}"
-                                                         Value="True">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <iconPacks:BoxIcons Kind="RegularCamera" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
+                            <views:TwoIconButton Command="{Binding MuteCommand}"
+                                                 Value="{Binding IsMuted}"
+                                                 TrueKind="RegularVolumeMute"
+                                                 FalseKind="RegularVolumeFull" />
+                            <views:TwoIconButton Command="{Binding RecordCommand}"
+                                                 Value="{Binding IsRecording}"
+                                                 TrueKind="RegularVideoRecording"
+                                                 FalseKind="RegularVideoOff" />
                             <Button Command="{Binding OpenFolderCommand}"
                                     Height="20"
                                     Width="40"
                                     HorizontalAlignment="Left">
-                                <iconPacks:BoxIcons Kind="RegularMovie" />
+                                <iconPacks:BoxIcons Kind="RegularMoviePlay" />
                             </Button>
                             <Button Command="{Binding OpenSettingsCommand}"
                                     Height="20"

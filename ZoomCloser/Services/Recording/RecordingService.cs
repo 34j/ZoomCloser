@@ -35,7 +35,7 @@ namespace ZoomCloser.Services.Recording
                 },
                 VideoOptions = new VideoOptions()
                 {
-                    Bitrate = SettingsService.V.BitRate,
+                    Bitrate = SettingsService.Instance.BitRate,
                 },
                 MouseOptions = new MouseOptions()
                 {

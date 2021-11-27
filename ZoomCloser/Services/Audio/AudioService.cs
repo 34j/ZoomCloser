@@ -34,7 +34,7 @@ namespace ZoomCloser.Services.Audio
 
         public bool GetMute()
         {
-            return GetSessions().Select(s => s.SimpleAudioVolume.Mute).Append(false).Aggregate((s, sum) => s | sum);
+            return GetSessions().Select(s => s.SimpleAudioVolume.Mute).Append(false).Aggregate((s, sum) => s || sum);
         }
     }
 }

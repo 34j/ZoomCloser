@@ -13,22 +13,35 @@ namespace ZoomCloser.Services
     public static class SettingsService
     {
         public static string DirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetEntryAssembly().GetName().Name);
-       public static string FilePath => Path.Combine(DirectoryPath,  "settings.json");
+        public static string FilePath => Path.Combine(DirectoryPath, "settings.json");
 
-        static Settings settings = null;
-        public static Settings V
+        private static Settings settings;
+        public static Settings Instance => settings ?? (settings = Read());
+
+        private static bool autoSave = false;
+        public static bool AutoSave
         {
-            get
+            set
             {
-                if (settings == null)
+                if (value && !autoSave)
                 {
-                    settings = Read();
+                    Instance.PropertyChanged += Instance_PropertyChanged;
                 }
-                return settings;
+                else if (!value && autoSave)
+                {
+                    Instance.PropertyChanged -= Instance_PropertyChanged;
+                }
+                autoSave = value;
             }
+            get => autoSave;
         }
 
-        static Settings Read()
+        private static void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Save();
+        }
+
+        private static Settings Read()
         {
             if (File.Exists(FilePath))
             {
@@ -44,18 +57,10 @@ namespace ZoomCloser.Services
         {
             var text = JsonSerializer.Serialize(settings);
             Directory.CreateDirectory(DirectoryPath);
-            using (var sw = File.CreateText(FilePath))
+            using (StreamWriter sw = File.CreateText(FilePath))
             {
                 sw.Write(text);
             }
         }
-
-    }
-
-    public class Settings
-    {
-        public int BitRate { get; set; } = 3000 * 1000;
-        public double Ratio { get; set; } = 0.7;
-        public string Culture { get; set; } = "en";
     }
 }

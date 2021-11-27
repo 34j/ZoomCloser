@@ -32,11 +32,9 @@ namespace ZoomCloser.ViewModels
         #region Fody_Bindings
         public string Title { get; set; } = "";
         public string NumberDisplayText { get; set; } = "0";
-
+        public bool IsActivated { get; private set; } = true;
         public bool IsMuted { get; private set; } = false;
-
         public bool IsRecording { get; private set; } = false;
-
         public bool IsVisible { get; private set; } = true;
         public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
@@ -44,7 +42,7 @@ namespace ZoomCloser.ViewModels
         public IZoomExitByRatioService zoomExitService;
         private readonly IAudioService audioService;
         private readonly IRecordingService recordingService;
-        private IJudgingWhetherToExitByRatioService judgeService => zoomExitService.JudgingWhetherToExitByRatioService;
+        private IJudgingWhetherToExitByRatioService JudgeService => zoomExitService.JudgingWhetherToExitByRatioService;
 
         public MainWindowViewModel(IZoomExitByRatioService zoomExitService, IAudioService audioService, IRecordingService recordingService)
         {
@@ -53,38 +51,44 @@ namespace ZoomCloser.ViewModels
             this.recordingService = recordingService;
             this.zoomExitService = zoomExitService;
             this.zoomExitService.OnRefreshed += (_, e) => DisplayValues();
-            var zs = this.zoomExitService.ReadOnlyZoomHandlingService;
+
+            IReadOnlyZoomHandlingService2 zs = this.zoomExitService.ReadOnlyZoomHandlingService;
             zs.OnEntered += (_, e) => Log("ParticipatedInMeeting");
-            zs.OnExit += (_, e) => { Log("ExitMeeting"); /*Log("ParticipantCount", judgeService.CurrentCount, judgeService.MaximumCount);*/ };
+            zs.OnExit += (_, e) => { Log("ExitMeeting"); Log("ParticipantCount", JudgeService.CurrentCount, JudgeService.MaximumCount); };
             zs.OnExit += (_, e) => recordingService.StopRecording();
             zs.OnParticipantCountAvailable += (_, e) => Log("StartedCapturingTHeNumberOfParticipants");
             zs.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
             zs.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
+
             //below is for the logging list.
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
         }
-        private static ITranslation Trr(string key) => Translation.GetOrCreate(ZoomCloser.Properties.Resources.ResourceManager, key);
-        private static string Tr(string key)
+        private static ITranslation GetITranslation(string key)
         {
-            var result = Trr(key).Translated;
+            return Translation.GetOrCreate(Properties.Resources.ResourceManager, key);
+        }
+
+        private static string GetTranslationStr(string key)
+        {
+            string result = GetITranslation(key).Translated;
             if (result == null)
             {
                 throw new Exception("key not registered");
             }
             return result;
         }
-        private static string Tr(string key, params object[] args)
+        private static string GetTranslationStr(string key, params object[] args)
         {
-            Validate.Format(Tr(key), args);
-            return string.Format(Tr(key), args);
+            Validate.Format(GetTranslationStr(key), args);
+            return string.Format(GetTranslationStr(key), args);
         }
 
         #region ListBox_Functions
-        private string NowLongTimeString => System.DateTime.Now.ToLongTimeString();
+        private string NowLongTimeString => DateTime.Now.ToLongTimeString();
         private void Log(string key, params object[] args)
         {
             string now = NowLongTimeString;
-            LogListBoxItemsSource.Add(Trr(key), s => now + " " + s, args);
+            LogListBoxItemsSource.Add(GetITranslation(key), s => now + " " + s, args);
         }
 
         #endregion ListBox_Functions
@@ -108,23 +112,25 @@ namespace ZoomCloser.ViewModels
 
         private void ExecuteApplicationExitCommand(Window window)
         {
-            Task.Run(() =>
-            {
-                window?.Close();
-                Environment.Exit(0);
-            });
+            _ = Task.Run(() =>
+              {
+                  window?.Close();
+                  Environment.Exit(0);
+              });
         }
 
         private DelegateCommand muteCommand;
         public DelegateCommand MuteCommand =>
             muteCommand ?? (muteCommand = new DelegateCommand(ExecuteMuteCommand));
 
-        private DelegateCommand recordCommand;
         private void ExecuteMuteCommand()
         {
             IsMuted = !IsMuted;
             audioService.SetMute(IsMuted);
         }
+
+        private DelegateCommand recordCommand;
+
         public DelegateCommand RecordCommand =>
    recordCommand ?? (recordCommand = new DelegateCommand(ExecuteRecordCommand));
 
@@ -163,9 +169,9 @@ namespace ZoomCloser.ViewModels
         public DelegateCommand OpenSettingsCommand =>
             openSettingsCommand ?? (openSettingsCommand = new DelegateCommand(ExecuteOpenSettingsCommand));
 
-        void ExecuteOpenSettingsCommand()
+        private void ExecuteOpenSettingsCommand()
         {
-            Process.Start("explorer.exe", "/select, \"" + SettingsService.FilePath + "\"");
+            _ = Process.Start("explorer.exe", "/select, \"" + SettingsService.FilePath + "\"");
         }
         #endregion commands
 
@@ -174,38 +180,37 @@ namespace ZoomCloser.ViewModels
 
         public void DisplayValues()
         {
-            var zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomState;
-            var exitService = zoomExitService.JudgingWhetherToExitByRatioService;
+            ZoomErrorState zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomState;
+            IJudgingWhetherToExitByRatioService exitService = zoomExitService.JudgingWhetherToExitByRatioService;
             if (zoomMode == ZoomErrorState.NotRunning)
             {
-                NumberDisplayText = Tr("ZoomNotRunning");
+                NumberDisplayText = GetTranslationStr("ZoomNotRunning");
             }
             else if (zoomMode == ZoomErrorState.NotExpectedBehaviour)
             {
-                NumberDisplayText = Tr("Bug");
+                NumberDisplayText = GetTranslationStr("Bug");
             }
             else if (zoomMode == ZoomErrorState.NoError)
             {
-                NumberDisplayText = Tr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount) + "\r\n";
+                NumberDisplayText = GetTranslationStr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount) + "\r\n";
                 if (exitService.IsOverThresholdToActivation)
                 {
-                    NumberDisplayText += Tr("NormalExitCondition", exitService.MaximumCountToExit);
+                    NumberDisplayText += GetTranslationStr("NormalExitCondition", exitService.MaximumCountToExit);
                 }
                 else
                 {
-                    NumberDisplayText += Tr("UnderOrEqualsToThresholdExitCondition", exitService.ThresholdToActivation);
+                    NumberDisplayText += GetTranslationStr("UnderOrEqualsToThresholdExitCondition", exitService.ThresholdToActivation);
                 }
                 Title = $"{exitService.CurrentCount}/{exitService.MaximumCount}";
             }
             else if (zoomMode == ZoomErrorState.Minimized)
             {
-                NumberDisplayText = Tr("Minimized");
+                NumberDisplayText = GetTranslationStr("Minimized");
             }
             else
             {
                 NumberDisplayText = zoomMode.ToString();
             }
-
         }
     }
 }
