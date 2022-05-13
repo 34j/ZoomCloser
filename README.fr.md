@@ -1,6 +1,6 @@
 [Anglais](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
-# Zoom Plus
+# ZoomPlus
 
 Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 
@@ -8,20 +8,20 @@ Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 
 ## installer
 
-[Versions](https://github.com/34j/ZoomCloser/releases)Téléchargez le dernier depuis.
-Une fois démarré, il sera automatiquement enregistré dans le démarrage et démarrera à partir de la prochaine fois. Pour annuler le démarrage automatique, désactivez le démarrage depuis le gestionnaire de tâches.
+[Communiqués](https://github.com/34j/ZoomCloser/releases)Téléchargez le dernier depuis.
+Une fois lancé, il sera automatiquement enregistré au démarrage et démarrera dès la prochaine fois. Pour annuler le démarrage automatique, désactivez le démarrage depuis le gestionnaire de tâches.
 
-## Conditions
+## conditions nécessaires
 
 -   .NET Framework 4.8
--   Windows10 64 bits
+-   Windows 10 64 bits
 
-## fonction
+## une fonction
 
--   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants est inférieur ou égal à (nombre maximum de participants) \* (pourcentage constant), la saisie clavier standard du raccourci de sortie (Alt + Q → Entrée) est envoyée.
--   Coupez le son de la réunion du côté Windows.
+-   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants est inférieur ou égal à (nombre maximum de participants) \* (pourcentage constant), le raccourci clavier de sortie standard (Alt + Q → Entrée) est envoyé.
+-   Coupez le son de la réunion côté Windows.
 -   Enregistrez la réunion.
--   Enregistrez l'heure d'entrée et l'heure de sortie.
+-   Notez l'heure d'entrée et l'heure de sortie.
 
 ## Notes de licence
 
