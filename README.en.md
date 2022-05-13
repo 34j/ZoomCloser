@@ -18,7 +18,7 @@ Once started, it will be automatically registered in the startup and will start 
 
 ## function
 
--   Get the number of participants in the Zoom meeting. When the number of participants is less than or equal to (maximum number of participants) \* (constant percentage), the standard exit shortcut (Alt + Q → Enter) keyboard input is sent.
+-   Get the number of participants in the Zoom meeting. When the number of participants is less than (maximum number of participants) \* (a certain percentage), the keyboard input of the standard exit shortcut (Alt + Q → Enter) is sent.
 -   Mute the meeting audio on the Windows side.
 -   Record the meeting.
 -   Record the entry time and exit time.

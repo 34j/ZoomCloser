@@ -1,6 +1,6 @@
 [英語](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
-# 放大關閉
+# ZoomCloser
 
 防止您忘記離開 Zoom 會議的 Windows 軟件。
 
@@ -18,7 +18,7 @@
 
 ## 機能
 
--   獲取 Zoom 會議的參與者數量。當參會人數小於（最大參會人數）\*（一定百分比）時，發送標準退出快捷鍵（Alt+Q→Enter）的鍵盤輸入。
+-   獲取 Zoom 會議的參與者數量。當參會人數小於等於（最大參會人數）\*（常數百分比）時，發送標準退出快捷鍵（Alt+Q→Enter）鍵盤輸入。
 -   在 Windows 端靜音會議音頻。
 -   記錄會議。
 -   記錄進入時間和退出時間。
