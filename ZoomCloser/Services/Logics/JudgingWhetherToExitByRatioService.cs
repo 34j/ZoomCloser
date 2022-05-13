@@ -22,7 +22,7 @@ namespace ZoomCloser.Services
 
         public JudgingWhetherToExitByRatioService(double maximumRatioOfCurrentCountToMaxCountToExitInit = 0.5f)
         {
-            maximumRatioOfCurrentCountToMaxCountToExitInit = SettingsService.Instance.Ratio;
+            maximumRatioOfCurrentCountToMaxCountToExitInit = BasicSettings.Instance.Ratio;
             const double error = 0.1;
             const double min = 0.1;
             const double max = 0.9;

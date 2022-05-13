@@ -49,19 +49,17 @@ namespace ZoomCloser.Utils
                 _ = Translator.Cultures.Add(culture);
             }
 
-            var settingCulture = new CultureInfo(SettingsService.Instance.Culture);
+            var settingCulture = new CultureInfo(BasicSettings.Instance.Culture);
             if (!Translator.Cultures.Contains(settingCulture))
             {
                 settingCulture = Translator.Cultures.First();
-                SettingsService.Instance.Culture = settingCulture.Name;
-                SettingsService.Save();
+                BasicSettings.Instance.Culture = settingCulture.Name;
             }
             Translator.Culture = settingCulture;
 
             Translator.CurrentCultureChanged += (sender, e) =>
             {
-                SettingsService.Instance.Culture = e.Culture.Name;
-                SettingsService.Save();
+                BasicSettings.Instance.Culture = e.Culture.Name;
             };
         }
     }

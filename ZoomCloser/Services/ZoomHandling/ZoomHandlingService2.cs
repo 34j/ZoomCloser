@@ -112,11 +112,11 @@ namespace ZoomCloser.Services.ZoomHandling
 
         public async Task<bool> Exit()
         {
-            if (!MainWindowElement.IsAlive())
+            FindWindowElement();
+            if(ZoomState == ZoomErrorState.NotRunning)
             {
                 return true;
             }
-            FindWindowElement();
             IntPtr handle = new IntPtr(MainWindowElement.Current.NativeWindowHandle);
             User32.SetForegroundWindow(handle);
             User32.SetFocus(handle);

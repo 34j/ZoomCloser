@@ -152,6 +152,7 @@ namespace ZoomCloser.ViewModels
             {
                 recordingService.StopRecording();
             }
+            IsRecording = recordingService.IsRecording;
         }
 
         private DelegateCommand changeVisiblityCommand;
@@ -178,7 +179,7 @@ namespace ZoomCloser.ViewModels
 
         private void ExecuteOpenSettingsCommand()
         {
-            _ = Process.Start("explorer.exe", "/select, \"" + SettingsService.FilePath + "\"");
+            _ = Process.Start("explorer.exe", "/select, \"" + BasicSettings.FilePath + "\"");
         }
         #endregion commands
 

@@ -17,7 +17,8 @@ namespace ZoomCloser.Services.Audio
 
         private IEnumerable<AudioSessionControl2> GetSessions()
         {
-            var result = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia).AudioSessionManager2.Sessions/*EnumerateAudioEndPoints(EDataFlow.eAll, DEVICE_STATE.DEVICE_STATEMASK_ALL)
+            var result = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia)
+                .AudioSessionManager2.Sessions/*EnumerateAudioEndPoints(EDataFlow.eAll, DEVICE_STATE.DEVICE_STATEMASK_ALL)
      .SelectMany(s => s?.AudioSessionManager2?.Sessions)*/
      .Where(session =>
      {
