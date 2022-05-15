@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using ZoomCloser.Services.ZoomWindow;
+using System.Collections.Generic;
 
 namespace ZoomCloser.Services.Recording
 {
@@ -27,13 +28,19 @@ namespace ZoomCloser.Services.Recording
             }
 
             IsRecording = true;
+            var source = new WindowRecordingSource(windowHandle);
+            if (source.RecorderApi != RecorderApi.WindowsGraphicsCapture)
+            {
+                throw new NotSupportedException("Only Windows Graphics Capture is supported");
+            }
+            
             var options = new RecorderOptions()
             {
                 AudioOptions = new AudioOptions()
                 {
                     IsAudioEnabled = true,
                 },
-                VideoOptions = new VideoOptions()
+                VideoEncoderOptions = new VideoEncoderOptions()
                 {
                     Bitrate = BasicSettings.Instance.BitRate,
                 },
@@ -42,11 +49,13 @@ namespace ZoomCloser.Services.Recording
                     IsMousePointerEnabled = false,
                 }
                 ,
-                DisplayOptions = new DisplayOptions()
+                SourceOptions = new SourceOptions()
                 {
-                    WindowHandle = windowHandle,
-                },
-                RecorderApi = RecorderApi.WindowsGraphicsCapture,
+                    RecordingSources = new List<RecordingSourceBase>()
+                    {
+                        source
+                    }
+                }
             };
             _rec = Recorder.CreateRecorder(options);
             string path = Path.Combine(FolderPath, DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".mp4");

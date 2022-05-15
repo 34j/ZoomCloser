@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
-using System.Text.Json;
-using System.Globalization;
+using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace ZoomCloser.Services
 {
@@ -18,48 +14,77 @@ namespace ZoomCloser.Services
     /// <typeparam name="T">Settings type.</typeparam>
     public abstract class SettingsBase<T> : INotifyPropertyChanged where T : SettingsBase<T>, new()
     {
-        public static string DirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetEntryAssembly().GetName().Name);
-        public static string FilePath => Path.Combine(DirectoryPath, "settings.json");
-
+        #region Paths
+        public string DirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetEntryAssembly().GetName().Name);
+        public string FileName { get; protected set; } = "settings.json";
+        public string FilePath => Path.Combine(DirectoryPath, FileName);
+        #endregion Paths
+        
         public event PropertyChangedEventHandler PropertyChanged;
-        protected SettingsBase()
+        public SettingsBase()
         {
-            this.PropertyChanged += OnPropertyChanged;
+            //this.PropertyChanged += OnPropertyChanged;
         }
 
         public bool AutoSave { get; set; } = true;
 
-        public static T Instance => Read();
+        private static T instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new T().Read();
+                }
+                return instance;
+            }
+        }
 
         protected static void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var settingsBase = (T)sender;
+            if (settingsBase.isDeserializing)
+            {
+                return;
+            }
             if (settingsBase.AutoSave)
             {
-                Save(settingsBase);
+                settingsBase.Save(settingsBase);
             }
         }
 
-        private static T Read()
+        private T Read()
         {
             if (File.Exists(FilePath))
             {
                 var text = File.ReadAllText(FilePath);
-                return JsonSerializer.Deserialize<T>(text);
+                return JsonConvert.DeserializeObject<T>(text);
             }
             var settings = new T();
             Save(settings);
             return settings;
         }
-
-        private static void Save(T settings)
+        
+        private void Save(T settings)
         {
-            var text = JsonSerializer.Serialize(settings);
+            var text = JsonConvert.SerializeObject(settings);
             Directory.CreateDirectory(DirectoryPath);
             using (StreamWriter sw = File.CreateText(FilePath))
             {
                 sw.Write(text);
             }
+        }
+        private bool isDeserializing = false;
+        [OnDeserializing]        
+        internal void OnThisDeserializing(StreamingContext context)
+        {
+            isDeserializing = true;
+        }
+        [OnDeserialized]
+        internal void OnThisDeserialized(StreamingContext context)
+        {
+            isDeserializing = false;
         }
     }
 }
