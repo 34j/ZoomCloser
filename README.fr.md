@@ -11,7 +11,7 @@ Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 [Communiqués](https://github.com/34j/ZoomCloser/releases)Téléchargez la dernière sur.
 Une fois lancé, il sera automatiquement enregistré au démarrage et démarrera dès la prochaine fois. Pour annuler le démarrage automatique, désactivez le démarrage depuis le gestionnaire de tâches.
 
-## conditions nécessaires
+## 必要条件
 
 -   .NET Framework 4.8
 -   Windows 10 64 bits
