@@ -18,11 +18,11 @@ Windows software that prevents you from forgetting to leave the Zoom meeting.
 
 ## function
 
--   Get the number of participants in the Zoom meeting. When the number of participants is less than or equal to (maximum number of participants) \* (constant percentage), the standard exit shortcut (Alt + Q → Enter) keyboard input is sent.
+-   Get the number of participants in the Zoom meeting. When the number of participants is less than (maximum number of participants) \* (a certain percentage), the keyboard input of the standard exit shortcut (Alt + Q → Enter) is sent.
 -   Mute the meeting audio on the Windows side.
--   Record the meeting.
--   Record the entry time and exit time.
+-   ミーティングを録画します。
+-   参加時刻、退出時刻を記録します。
 
 ## License notes
 
-Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
+このリポジトリ内のコードはMITライセンスですが、一部の依存先はMITライセンスを採用していないことに注意してください。
