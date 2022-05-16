@@ -86,7 +86,7 @@ namespace ZoomCloser.ViewModels
         }
 
         #region ListBox_Functions
-        private string NowLongTimeString => DateTime.Now.ToLongTimeString();
+        private static string NowLongTimeString => DateTime.Now.ToLongTimeString();
         private void Log(string key, params object[] args)
         {
             string now = NowLongTimeString;
@@ -100,7 +100,7 @@ namespace ZoomCloser.ViewModels
         #region commands
         private DelegateCommand activateCommand;
         public DelegateCommand ActivateCommand =>
-            activateCommand ?? (activateCommand = new DelegateCommand(ExecuteActivateCommand));
+activateCommand ??= new DelegateCommand(ExecuteActivateCommand);
 
         void ExecuteActivateCommand()
         {
@@ -108,7 +108,7 @@ namespace ZoomCloser.ViewModels
         }
         private DelegateCommand exitMeetingCommand;
         public DelegateCommand ExitMeetingCommand =>
-            exitMeetingCommand ?? (exitMeetingCommand = new DelegateCommand(ExecuteExitMeetingCommand));
+exitMeetingCommand ??= new DelegateCommand(ExecuteExitMeetingCommand);
 
         private async void ExecuteExitMeetingCommand()
         {
@@ -117,7 +117,7 @@ namespace ZoomCloser.ViewModels
 
         private DelegateCommand<Window> applicationExitCommand;
         public DelegateCommand<Window> ApplicationExitCommand =>
-            applicationExitCommand ?? (applicationExitCommand = new DelegateCommand<Window>(ExecuteApplicationExitCommand));
+applicationExitCommand ??= new DelegateCommand<Window>(ExecuteApplicationExitCommand);
 
         private void ExecuteApplicationExitCommand(Window window)
         {
@@ -130,7 +130,7 @@ namespace ZoomCloser.ViewModels
 
         private DelegateCommand muteCommand;
         public DelegateCommand MuteCommand =>
-            muteCommand ?? (muteCommand = new DelegateCommand(ExecuteMuteCommand));
+muteCommand ??= new DelegateCommand(ExecuteMuteCommand);
 
         private void ExecuteMuteCommand()
         {

@@ -82,13 +82,13 @@ https://opensource.org/licenses/MIT
                                 <Controls:ToggleSwitch Command="{Binding ActivateCommand}"
                                                        IsOn="{Binding IsActivated}"
                                                        Header="{l:Static p:Resources.Activation}" />
-                                <views:IconToggleSwitch Command="{Binding MuteCommand}"
+                                <views:IconToggleSwitch Command="{Binding MuteCommand, Mode=OneWay}"
                                                         IsOn="{Binding IsMuted}"
                                                         OnKind="RegularVolumeMute"
                                                         OffKind="RegularVolumeFull"
                                                         Header="{l:Static p:Resources.Mute}"
                                                         />
-                                <views:IconToggleSwitch Command="{Binding RecordCommand}"
+                                <views:IconToggleSwitch Command="{Binding RecordCommand, Mode=OneWay}"
                                                         IsOn="{Binding IsRecording}"
                                                         OnKind="RegularVideoRecording"
                                                         OffKind="RegularVideoOff"

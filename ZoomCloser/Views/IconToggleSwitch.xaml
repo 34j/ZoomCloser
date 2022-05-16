@@ -7,7 +7,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d">
-    <Controls:ToggleSwitch Command="{Binding Command, Mode=TwoWay}"
+    <Controls:ToggleSwitch Command="{Binding Command}"
                            IsOn="{Binding IsOn}"
                            Header="{Binding Header}"
                            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, 
