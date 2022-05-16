@@ -14,7 +14,6 @@ namespace ZoomCloser.Services.ZoomHandling
     {
         public ZoomOperatingService()
         {
-            Debug.WriteLine("hello");
             this.PropertyChanged += async (_, e) =>
             {
                 if (e.PropertyName == nameof(ZoomState))

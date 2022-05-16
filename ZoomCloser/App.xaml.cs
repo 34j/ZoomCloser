@@ -52,10 +52,10 @@ namespace ZoomCloser
                 foreach (Type interFace in WithMappings.FromAllInterfaces(type))
                 {
                     containerRegistry.Register(interFace, type, WithName.Default(type));
-                    Debug.WriteLine(type.Name + interFace.Name);
+                    //Debug.WriteLine(type.Name + interFace.Name);
                 }
                 containerRegistry.Register(type);
-                Debug.WriteLine(type.Name);
+                //Debug.WriteLine(type.Name);
             }
         }
 

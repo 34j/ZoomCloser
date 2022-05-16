@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.Diagnostics;
+using PropertyChanged;
 
 namespace ZoomCloser.Services
 {
@@ -12,79 +15,91 @@ namespace ZoomCloser.Services
     /// Inherit from this class to create a service that can read and write settings.
     /// </summary>
     /// <typeparam name="T">Settings type.</typeparam>
-    public abstract class SettingsBase<T> : INotifyPropertyChanged where T : SettingsBase<T>, new()
+    public abstract class SettingsBase<T> : DeserializableNotifyPropertyChangedBase where T : SettingsBase<T>, new()
     {
         #region Paths
-        public string DirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetEntryAssembly().GetName().Name);
-        public string FileName { get; protected set; } = "settings.json";
-        public string FilePath => Path.Combine(DirectoryPath, FileName);
+
+        /// <summary>
+        /// The name of the file that contains the settings.
+        /// </summary>
+        /// This class uses a lot of static properties. It is frequently said that this is a bad practice, but it is inavoidable because of the way the class is designed. 
+        /// In other words, this class is a singleton. If there were more than one path to the settings file, this would be a problem.
+        public static string FileName { get; protected set; } = $"{typeof(T)}.json";
+        /// <summary>
+        /// The path of the directory where the settings file is stored.
+        /// </summary>
+        public static string DirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetEntryAssembly().GetName().Name);
+        /// <summary>
+        /// The full path to the file that contains the settings.
+        /// </summary>
+        public static string FilePath => Path.Combine(DirectoryPath, FileName);
         #endregion Paths
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-        public SettingsBase()
-        {
-            //this.PropertyChanged += OnPropertyChanged;
-        }
 
-        public bool AutoSave { get; set; } = true;
-
+        #region Singleton
         private static T instance;
+        /// <summary>
+        /// The instance of the settings.
+        /// </summary>
         public static T Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new T().Read();
+                    instance = Read();
                 }
                 return instance;
             }
         }
-
-        protected static void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        #endregion Singleton
+        public SettingsBase()
         {
-            var settingsBase = (T)sender;
-            if (settingsBase.isDeserializing)
-            {
-                return;
-            }
-            if (settingsBase.AutoSave)
-            {
-                settingsBase.Save(settingsBase);
-            }
+            this.PropertyChanged += OnThisPropertyChanged;
         }
 
-        private T Read()
+
+
+        #region AutoSave
+
+        /// <summary>
+        /// Whether to automatically save the settings when <see cref="DeserializableNotifyPropertyChangedBase.OnPropertyChanged"/> is called.
+        /// </summary>
+        [DoNotNotify]
+        public bool AutoSave { get; set; } = true;
+
+        private static void OnThisPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            var settingsBase = (T)sender;
+            if (settingsBase.AutoSave)
+            {
+                Save(settingsBase);
+            }
+        }
+        #endregion AutoSave
+
+        #region I/O
+
+        private static T Read()
         {
             if (File.Exists(FilePath))
             {
                 var text = File.ReadAllText(FilePath);
-                return JsonConvert.DeserializeObject<T>(text);
+                return JsonSerializer.Deserialize<T>(text);
             }
             var settings = new T();
             Save(settings);
             return settings;
         }
-        
-        private void Save(T settings)
+
+        private static void Save(T settings)
         {
-            var text = JsonConvert.SerializeObject(settings);
+            var text = JsonSerializer.Serialize(settings);
             Directory.CreateDirectory(DirectoryPath);
             using (StreamWriter sw = File.CreateText(FilePath))
             {
                 sw.Write(text);
             }
         }
-        private bool isDeserializing = false;
-        [OnDeserializing]        
-        internal void OnThisDeserializing(StreamingContext context)
-        {
-            isDeserializing = true;
-        }
-        [OnDeserialized]
-        internal void OnThisDeserialized(StreamingContext context)
-        {
-            isDeserializing = false;
-        }
+        #endregion I/O
     }
 }

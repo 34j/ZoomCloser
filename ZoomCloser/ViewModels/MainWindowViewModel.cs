@@ -179,7 +179,7 @@ namespace ZoomCloser.ViewModels
 
         private void ExecuteOpenSettingsCommand()
         {
-            _ = Process.Start("explorer.exe", "/select, \"" + BasicSettings.Instance.FilePath + "\"");
+            _ = Process.Start("explorer.exe", "/select, \"" + BasicSettings.FilePath + "\"");
         }
         #endregion commands
 

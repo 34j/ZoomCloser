@@ -104,9 +104,6 @@
     <PackageReference Include="NAudio">
       <Version>2.1.0-beta.1</Version>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
-    </PackageReference>
     <PackageReference Include="NUnit">
       <Version>3.13.3</Version>
     </PackageReference>
@@ -173,11 +170,6 @@
     <Resource Include="Views\icon_n.ico" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-del "$(TargetDir)*.xml"
-del "$(TargetDir)*.pdb"
-mkdir "$(TargetDir)\libs"
-move "$(TargetDir)*.dll" "$(TargetDir)\libs"</PostBuildEvent>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 </Project>
