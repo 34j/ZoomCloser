@@ -1,10 +1,10 @@
-[अंग्रेज़ी](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
+[English](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
 
 # ज़ूम क्लोजर
 
-विंडोज सॉफ्टवेयर जो आपको जूम मीटिंग छोड़ना भूलने से रोकता है।
+Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
 ## इंस्टॉल
 
