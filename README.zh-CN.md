@@ -4,7 +4,7 @@
 
 防止您忘记离开 Zoom 会议的 Windows 软件。
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
 ## 安装
 
@@ -15,7 +15,7 @@
 -   .NET 6.0
 -   Windows10.0.17763.0
 
-## 機能
+## 机能
 
 -   获取 Zoom 会议的参与者数量。当参会人数小于等于（最大参会人数）\*（恒定百分比）时，模拟默认的“离开会议”快捷键（Alt + Q → Enter）的键盘输入。
 -   使用 Windows 功能而不是缩放功能将会议音频静音。
