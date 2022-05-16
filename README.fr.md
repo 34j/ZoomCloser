@@ -8,21 +8,20 @@ Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 
 ## installer
 
-[Communiqués](https://github.com/34j/ZoomCloser/releases)Téléchargez la dernière sur.
-Une fois lancé, il sera automatiquement enregistré au démarrage et démarrera dès la prochaine fois. Pour annuler le démarrage automatique, désactivez le démarrage depuis le gestionnaire de tâches.
+Téléchargez les dernières versions de Releases.[Communiqués](https://github.com/34j/ZoomCloser/releases)Une fois le programme démarré, il sera automatiquement enregistré au démarrage et démarrera automatiquement au prochain démarrage de l'ordinateur. Pour annuler le démarrage automatique, désactivez le démarrage depuis le gestionnaire de tâches.
 
-## 必要条件
+## conditions nécessaires
 
--   .NET Framework 4.8
--   Windows 10 64 bits
+-   .NET 6.0
+-   Windows10.0.17763.0
 
 ## une fonction
 
--   Obtenez le nombre de participants à la réunion Zoom. Lorsque le nombre de participants est inférieur à (nombre maximum de participants) \* (un certain pourcentage), la saisie au clavier du raccourci de sortie standard (Alt + Q → Entrée) est envoyée.
--   Coupez le son de la réunion côté Windows.
+-   Obtenez le nombre de participants à la réunion Zoom. Simule la saisie au clavier de la touche de raccourci par défaut "Quitter la réunion" (Alt + Q → Entrée) lorsque le nombre de participants est inférieur ou égal à (nombre maximum de participants) \* (pourcentage constant).
+-   Coupez le son de la réunion avec une fonctionnalité Windows au lieu d'une fonctionnalité Zoom.
 -   Enregistrez la réunion.
--   Notez l'heure d'entrée et l'heure de sortie.
+-   Enregistrez l'heure à laquelle vous avez rejoint la réunion et l'heure à laquelle vous avez quitté la réunion.
 
-## ライセンスの注意事項
+## Notes de licence
 
 Notez que le code de ce référentiel est sous licence MIT, mais certaines dépendances ne sont pas sous licence MIT.
