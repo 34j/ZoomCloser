@@ -4,7 +4,7 @@
 
 Logiciel Windows qui vous évite d'oublier de quitter la réunion Zoom.
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
 ## installer
 
