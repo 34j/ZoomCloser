@@ -7,8 +7,7 @@ Windows software that prevents you from forgetting to leave the Zoom meeting.
 ## install
 
 [Releases](https://github.com/34j/ZoomCloser/releases)  
-Download the latest from Releases.  
-一度プログラム起動すると、自動でスタートアップに登録され、次回からコンピュータの起動時に自動的に起動します。自動的な起動を解除するにはタスクマネージャからスタートアップを無効化してください。  
+Download the latest from Releases.
 
 ## necessary conditions
 
