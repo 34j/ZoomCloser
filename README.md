@@ -1,26 +1,27 @@
 # ZoomCloser
 
-Windows software that prevents you from forgetting to leave the Zoom meeting.
+Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
 
 ![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
-## install
+
+## インストール
 
 [Releases](https://github.com/34j/ZoomCloser/releases)  
-Download the latest from Releases.
+Releasesから最新のものをダウンロードしてください。  
 
-## necessary conditions
+## 必要条件
 
--   .NET 6.0
--   Windows10.0.17763.0
+- .NET 6.0
+- Windows10.0.17763.0
 
-## function
+## 機能
 
--   Get the number of participants in the Zoom meeting. Simulates the keyboard input of the default "Leave Meeting" shortcut key "Alt + Q → Enter" when the number of participants falls below "Maximum number of participants \* a certain percentage".
--   Mute the meeting audio with a Windows feature instead of a Zoom feature.
--   Record the meeting.
--   Record the time you joined the meeting and the time you left the meeting.
+- Zoomミーティングの参加者数を取得します。参加者数が"最大参加者数*一定の割合"以下になったとき、デフォルトの「ミーティングを退出する」のショートカットキー "Alt+Q→Enter" のキーボード入力をシミュレートします。
+- ミーティングの音声をZoomの機能ではなくWindowsの機能でミュートします。
+- ミーティングを録画します。
+- ミーティングに参加した時刻、ミーティングから退出した時刻を記録します。
 
-## License notes
+## ライセンスの注意事項
 
-Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
+このリポジトリ内のコードはMITライセンスですが、一部の依存先はMITライセンスを採用していないことに注意してください。
