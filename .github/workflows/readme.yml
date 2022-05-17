@@ -17,13 +17,23 @@ jobs:
           node-version: 12.x
       # Translate
       # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages
-      - name: Renaming README.ja.md to README.md
+      - name: Copying README.ja.md to README.md
         run: |
-          mv -f README.ja.md README.md
+          cp -f README.ja.md README.md
       - name: Adding README - English
         uses: dephraiim/translate-readme@main
         with:
           LANG: en
-      - name: Renaming README.en.md to README.md
+      - name: Copying README.en.md to README.md
         run: |
-          mv -f README.en.md README.md
+          cp -f README.en.md README.md
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Renamed README.en.md to README.md"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
