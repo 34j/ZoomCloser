@@ -1,6 +1,4 @@
-[英語](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
-
-# 變焦更近
+# ZoomCloser
 
 防止您忘記離開 Zoom 會議的 Windows 軟件。
 
