@@ -1,6 +1,6 @@
 # ZoomCloser
 
-Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
+Windows software that prevents you from forgetting to leave the Zoom meeting.
 
 ![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
