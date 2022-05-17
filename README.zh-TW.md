@@ -4,7 +4,7 @@
 
 防止您忘記離開 Zoom 會議的 Windows 軟件。
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
 ## 安裝
 

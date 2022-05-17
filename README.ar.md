@@ -4,7 +4,7 @@
 
 برنامج Windows الذي يمنعك من نسيان مغادرة اجتماع Zoom.
 
-![Sample Gif](https://github.com/34j/ZoomCloser/blob/master/ExampleFast.gif)
+![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png)
 
 ## التثبت
 
