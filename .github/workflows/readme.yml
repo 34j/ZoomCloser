@@ -19,7 +19,7 @@ jobs:
       # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages
       - name: Renaming README.ja.md to README.md
         run: |
-          mv README.ja.md README.md
+          mv -f README.ja.md README.md
       - name: Adding README - English
         uses: dephraiim/translate-readme@main
         with:
@@ -38,4 +38,4 @@ jobs:
           LANG: es
       - name: Renaming README.en.md to README.md
         run: |
-          mv README.en.md README.md
+          mv -f README.en.md README.md
