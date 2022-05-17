@@ -140,7 +140,7 @@ muteCommand ??= new DelegateCommand(ExecuteMuteCommand);
         private DelegateCommand recordCommand;
 
         public DelegateCommand RecordCommand =>
-   recordCommand ?? (recordCommand = new DelegateCommand(ExecuteRecordCommand));
+recordCommand ??= new DelegateCommand(ExecuteRecordCommand);
 
         void ExecuteRecordCommand()
         {
@@ -157,7 +157,7 @@ muteCommand ??= new DelegateCommand(ExecuteMuteCommand);
 
         private DelegateCommand changeVisiblityCommand;
         public DelegateCommand ChangeVisiblityCommand =>
-            changeVisiblityCommand ?? (changeVisiblityCommand = new DelegateCommand(ExecuteChangeVisiblityCommand));
+changeVisiblityCommand ??= new DelegateCommand(ExecuteChangeVisiblityCommand);
 
         void ExecuteChangeVisiblityCommand()
         {
@@ -166,7 +166,7 @@ muteCommand ??= new DelegateCommand(ExecuteMuteCommand);
 
         private DelegateCommand openFolderCommand;
         public DelegateCommand OpenFolderCommand =>
-            openFolderCommand ?? (openFolderCommand = new DelegateCommand(ExecuteOpenFolderCommand));
+openFolderCommand ??= new DelegateCommand(ExecuteOpenFolderCommand);
 
         void ExecuteOpenFolderCommand()
         {
@@ -175,7 +175,7 @@ muteCommand ??= new DelegateCommand(ExecuteMuteCommand);
 
         private DelegateCommand openSettingsCommand;
         public DelegateCommand OpenSettingsCommand =>
-            openSettingsCommand ?? (openSettingsCommand = new DelegateCommand(ExecuteOpenSettingsCommand));
+openSettingsCommand ??= new DelegateCommand(ExecuteOpenSettingsCommand);
 
         private void ExecuteOpenSettingsCommand()
         {
