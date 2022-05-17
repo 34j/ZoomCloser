@@ -15,7 +15,7 @@ Téléchargez les dernières versions de Releases.[Communiqués](https://github.
 -   .NET 6.0
 -   Windows10.0.17763.0
 
-## une fonction
+## 機能
 
 -   Obtenez le nombre de participants à la réunion Zoom. Simule la saisie au clavier de la touche de raccourci par défaut "Quitter la réunion" (Alt + Q → Entrée) lorsque le nombre de participants est inférieur ou égal à (nombre maximum de participants) \* (pourcentage constant).
 -   Coupez le son de la réunion avec une fonctionnalité Windows au lieu d'une fonctionnalité Zoom.
