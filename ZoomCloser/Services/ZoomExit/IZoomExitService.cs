@@ -13,7 +13,7 @@ namespace ZoomCloser.Services
         /// <summary>
         /// Read only.
         /// </summary>
-        IReadOnlyZoomHandlingService2 ReadOnlyZoomHandlingService { get; }
+        IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService { get; }
 
         /// <summary>
         /// Occurs when this service checked whether to exit the meeting.

@@ -52,7 +52,7 @@ namespace ZoomCloser.ViewModels
             this.zoomExitService = zoomExitService;
             this.zoomExitService.OnRefreshed += (_, e) => DisplayValues();
 
-            IReadOnlyZoomHandlingService2 zs = this.zoomExitService.ReadOnlyZoomHandlingService;
+            IReadOnlyZoomHandlingService zs = this.zoomExitService.ReadOnlyZoomHandlingService;
             zs.OnEntered += (_, e) => Log("ParticipatedInMeeting");
             zs.OnExit += (_, e) => { Log("ExitMeeting"); Log("ParticipantCount", JudgeService.CurrentCount, JudgeService.MaximumCount); };
             zs.OnExit += (_, e) => recordingService.StopRecording();

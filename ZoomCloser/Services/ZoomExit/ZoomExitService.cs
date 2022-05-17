@@ -21,14 +21,14 @@ namespace ZoomCloser.Services
 
         private readonly IJudgingWhetherToExitService judgingWhetherToExitService;
 
-        private readonly IZoomHandlingService2 zoomHandlingService;
-        public IReadOnlyZoomHandlingService2 ReadOnlyZoomHandlingService => zoomHandlingService;
+        private readonly IZoomHandlingService zoomHandlingService;
+        public IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService => zoomHandlingService;
 
         public event EventHandler OnRefreshed;
 
         public bool IsActivated { get; set; } = true;
 
-        public ZoomExitService(IZoomHandlingService2 zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
+        public ZoomExitService(IZoomHandlingService zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
         {
             this.zoomHandlingService = zoomHandlingService;
             this.judgingWhetherToExitService = judgingWhetherToExitService;

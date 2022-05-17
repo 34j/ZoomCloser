@@ -10,7 +10,7 @@ using WindowsInput.Events;
 
 namespace ZoomCloser.Services.ZoomHandling
 {
-    public class ZoomOperatingService : ZoomHandlingService2
+    public class ZoomOperatingService : ZoomHandlingService
     {
         public ZoomOperatingService()
         {
@@ -26,7 +26,7 @@ namespace ZoomCloser.Services.ZoomHandling
                             await SimulateKeys(KeyCode.Alt);
                             break;
                         case ZoomErrorState.WindowTooSmall:
-                            User32.ShowWindow(handle, ShowWindowCommand.SW_SHOWMAXIMIZED);
+                            User32.ShowWindow(Handle, ShowWindowCommand.SW_SHOWMAXIMIZED);
                             break;
                     }
                 }
@@ -35,10 +35,10 @@ namespace ZoomCloser.Services.ZoomHandling
 
         private async Task SimulateKeys(params KeyCode[] keys)
         {
-            User32.SetFocus(handle);
+            User32.SetFocus(Handle);
             await Simulate.Events().ClickChord(keys).Invoke();
         }
 
-        private IntPtr handle => new IntPtr(MainWindowElement.Current.NativeWindowHandle);
+        private IntPtr Handle => new IntPtr(MainWindowElement.Current.NativeWindowHandle);
     }
 }
