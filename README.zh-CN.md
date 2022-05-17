@@ -1,5 +1,3 @@
-[英语](https://github.com/34j/ZoomCloser/blob/master/README.en.md)
-
 # 变焦更近
 
 防止您忘记离开 Zoom 会议的 Windows 软件。
