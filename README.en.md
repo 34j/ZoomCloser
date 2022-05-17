@@ -9,7 +9,7 @@ Windows software that prevents you from forgetting to leave the Zoom meeting.
 [Releases](https://github.com/34j/ZoomCloser/releases)  
 Download the latest from Releases.
 
-## necessary conditions
+## 必要条件
 
 -   .NET 6.0
 -   Windows10.0.17763.0
