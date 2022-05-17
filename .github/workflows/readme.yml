@@ -9,12 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Setup
       - uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      # Translate
+      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages
+      - name: Renaming README.ja.md to README.md
+        run: |
+          mv README.ja.md README.md
       - name: Adding README - English
         uses: dephraiim/translate-readme@main
         with:
@@ -27,15 +32,10 @@ jobs:
         uses: dephraiim/translate-readme@main
         with:
           LANG: zh-TW
-      - name: Adding README - Hindi
+      - name: Adding README - Spanish
         uses: dephraiim/translate-readme@main
         with:
-          LANG: hi
-      - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
-        with:
-          LANG: ar
-      - name: Adding README - French
-        uses: dephraiim/translate-readme@main
-        with:
-          LANG: fr
+          LANG: es
+      - name: Renaming README.en.md to README.md
+        run: |
+          mv README.en.md README.md
