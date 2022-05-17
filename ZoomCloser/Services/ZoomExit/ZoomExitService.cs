@@ -15,26 +15,26 @@ namespace ZoomCloser.Services
     /// <summary>
     /// A service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitService"/> using <see cref="Timer"/>.
     /// </summary>
-    public class ZoomExitService : IZoomExitService
+    public class ZoomExitService<T> : IZoomExitService<T> where T : IJudgingWhetherToExitService
     {
         /// <summary>
         /// The <see cref="Timer"/> that will be used to judge whether to exit the Zoom Meeting.
         /// </summary>
         protected Timer CheckTimer { get; }
 
-        private readonly IJudgingWhetherToExitService judgingWhetherToExitService;
-
         private readonly IZoomHandlingService zoomHandlingService;
         public IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService => zoomHandlingService;
 
         public event EventHandler OnRefreshed;
-
+        
         public bool IsActivated { get; set; } = true;
 
-        public ZoomExitService(IZoomHandlingService zoomHandlingService, IJudgingWhetherToExitService judgingWhetherToExitService, Timer timer)
+        public T JudgingWhetherToExitService { get; }
+
+        public ZoomExitService(IZoomHandlingService zoomHandlingService, T judgingWhetherToExitService, Timer timer)
         {
             this.zoomHandlingService = zoomHandlingService;
-            this.judgingWhetherToExitService = judgingWhetherToExitService;
+            this.JudgingWhetherToExitService = judgingWhetherToExitService;
             zoomHandlingService.OnExit += (_, e) => judgingWhetherToExitService.Reset();
             zoomHandlingService.OnEntered += (_, e) => judgingWhetherToExitService.Reset();
 
@@ -61,14 +61,14 @@ namespace ZoomCloser.Services
                 return;
             }
 
-            bool shouldClose = judgingWhetherToExitService.Judge(count.Value);
+            bool shouldClose = JudgingWhetherToExitService.Judge(count.Value);
             if (shouldClose)
             {
                 if (!IsActivated)
                 {
                     return;
                 }
-                judgingWhetherToExitService.Reset();
+                JudgingWhetherToExitService.Reset();
                 await zoomHandlingService.Exit().ConfigureAwait(false);
             }
         }

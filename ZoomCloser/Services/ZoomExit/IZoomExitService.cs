@@ -11,10 +11,14 @@ namespace ZoomCloser.Services
     /// <summary>
     /// Represents a service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitService"/>. (using timer)
     /// </summary>
-    public interface IZoomExitService
+    public interface IZoomExitService<T> where T : IJudgingWhetherToExitService
     {
         /// <summary>
-        /// Read only.
+        /// 
+        /// </summary>
+        T JudgingWhetherToExitService { get; }
+        /// <summary>
+        /// Readonly <see cref="IReadOnlyZoomHandlingService"></see>
         /// </summary>
         IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService { get; }
 

@@ -39,12 +39,12 @@ namespace ZoomCloser.ViewModels
         public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
 
-        public IZoomExitByRatioService zoomExitService;
+        public IZoomExitService<IJudgingWhetherToExitByRatioService> zoomExitService;
         private readonly IAudioService audioService;
         private readonly IRecordingService recordingService;
-        private IJudgingWhetherToExitByRatioService JudgeService => zoomExitService.JudgingWhetherToExitByRatioService;
+        private IJudgingWhetherToExitByRatioService JudgeService => zoomExitService.JudgingWhetherToExitService;
 
-        public MainWindowViewModel(IZoomExitByRatioService zoomExitService, IAudioService audioService, IRecordingService recordingService)
+        public MainWindowViewModel(IZoomExitService<IJudgingWhetherToExitByRatioService> zoomExitService, IAudioService audioService, IRecordingService recordingService)
         {
             this.audioService = audioService;
             IsMuted = audioService.GetMute();
@@ -189,7 +189,6 @@ openSettingsCommand ??= new DelegateCommand(ExecuteOpenSettingsCommand);
         public void DisplayValues()
         {
             ZoomErrorState zoomMode = zoomExitService.ReadOnlyZoomHandlingService.ZoomState;
-            IJudgingWhetherToExitByRatioService exitService = zoomExitService.JudgingWhetherToExitByRatioService;
             if (zoomMode == ZoomErrorState.NotRunning)
             {
                 NumberDisplayText = GetTranslationStr("ZoomNotRunning");
@@ -200,16 +199,16 @@ openSettingsCommand ??= new DelegateCommand(ExecuteOpenSettingsCommand);
             }
             else if (zoomMode == ZoomErrorState.NoError)
             {
-                NumberDisplayText = GetTranslationStr("ParticipantCount", exitService.CurrentCount, exitService.MaximumCount) + "\r\n";
-                if (exitService.IsOverThresholdToActivation)
+                NumberDisplayText = GetTranslationStr("ParticipantCount", JudgeService.CurrentCount, JudgeService.MaximumCount) + "\r\n";
+                if (JudgeService.IsOverThresholdToActivation)
                 {
-                    NumberDisplayText += GetTranslationStr("NormalExitCondition", exitService.MaximumCountToExit);
+                    NumberDisplayText += GetTranslationStr("NormalExitCondition", JudgeService.MaximumCountToExit);
                 }
                 else
                 {
-                    NumberDisplayText += GetTranslationStr("UnderOrEqualsToThresholdExitCondition", exitService.ThresholdToActivation);
+                    NumberDisplayText += GetTranslationStr("UnderOrEqualsToThresholdExitCondition", JudgeService.ThresholdToActivation);
                 }
-                Title = $"{exitService.CurrentCount}/{exitService.MaximumCount}";
+                Title = $"{JudgeService.CurrentCount}/{JudgeService.MaximumCount}";
             }
             else if (zoomMode == ZoomErrorState.Minimized)
             {
