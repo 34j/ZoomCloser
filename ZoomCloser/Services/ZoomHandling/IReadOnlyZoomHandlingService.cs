@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services.ZoomHandling
 {
+    /// <summary>
+    /// Represents a read-only service that handles the window of Zoom Meeting.  No operations can / will be performed on Zoom Meeting.
+    /// </summary>
     public interface IReadOnlyZoomHandlingService
     {
         ZoomErrorState ZoomState { get; }

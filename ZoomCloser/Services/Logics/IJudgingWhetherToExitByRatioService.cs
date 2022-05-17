@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace ZoomCloser.Services
 {
     /// <summary>
-    /// Mainly reliant on whether <see cref="participantCount"/> is less or equals to <see cref="MaximumCountToExit"/>.
+    /// Represents a service that judges whether to exit a Zoom Meeting according to the following values;
+    /// <para><see cref="CurrentCount"/></para>
+    /// <para><see cref="MaximumCountToExit"/></para>
+    /// <para><see cref="MaximumRatioOfCurrentCountToMaxCountToExit"/>.</para>
     /// </summary>
     public interface IJudgingWhetherToExitByRatioService : IJudgingWhetherToExitService
     {

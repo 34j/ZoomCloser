@@ -16,7 +16,9 @@ namespace ZoomCloser.Services.ZoomHandling
 {
 
     public enum ZoomErrorState { NoError, NotRunning, Minimized, WindowTooSmall, MeetingControlNotAlwaysDisplayed, NotExpectedBehaviour }
-
+    /// <summary>
+    /// A service that handles the window of Zoom Meeting.  No operations will automatically be performed on Zoom Meeting.
+    /// </summary>
     public class ZoomHandlingService : IZoomHandlingService, INotifyPropertyChanged
     {
         /// <summary>

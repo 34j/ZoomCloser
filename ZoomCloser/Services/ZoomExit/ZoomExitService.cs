@@ -13,11 +13,14 @@ using ZoomCloser.Services.ZoomHandling;
 namespace ZoomCloser.Services
 {
     /// <summary>
-    /// decides whether to close zoom
+    /// A service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitService"/> using <see cref="Timer"/>.
     /// </summary>
     public class ZoomExitService : IZoomExitService
     {
-        private readonly Timer timer;
+        /// <summary>
+        /// The <see cref="Timer"/> that will be used to judge whether to exit the Zoom Meeting.
+        /// </summary>
+        protected Timer CheckTimer { get; }
 
         private readonly IJudgingWhetherToExitService judgingWhetherToExitService;
 
@@ -35,7 +38,7 @@ namespace ZoomCloser.Services
             zoomHandlingService.OnExit += (_, e) => judgingWhetherToExitService.Reset();
             zoomHandlingService.OnEntered += (_, e) => judgingWhetherToExitService.Reset();
 
-            this.timer = timer;
+            this.CheckTimer = timer;
             timer.Interval = 100;
             timer.AutoReset = true;
             timer.Elapsed += async (sender, e) => await CheckAndClose().ConfigureAwait(false);

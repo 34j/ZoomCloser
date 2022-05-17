@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
+    /// <summary>
+    /// Represents a service that judges whether to exit a Zoom Meeting according to the number of participants.
+    /// </summary>
     public interface IJudgingWhetherToExitService
     {
         /// <summary>

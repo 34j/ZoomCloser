@@ -8,6 +8,9 @@ using ZoomCloser.Services.ZoomHandling;
 
 namespace ZoomCloser.Services
 {
+    /// <summary>
+    /// Represents a service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitService"/>. (using timer)
+    /// </summary>
     public interface IZoomExitService
     {
         /// <summary>

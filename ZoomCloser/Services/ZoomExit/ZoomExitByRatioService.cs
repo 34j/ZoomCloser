@@ -13,7 +13,7 @@ using ZoomCloser.Services.ZoomHandling;
 namespace ZoomCloser.Services
 {
     /// <summary>
-    /// decides whether to close zoom
+    /// A service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitByRatioService"/> using <see cref="Timer"/>.
     /// </summary>
     public class ZoomExitByRatioService : ZoomExitService, IZoomExitByRatioService
     {

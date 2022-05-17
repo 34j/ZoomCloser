@@ -10,6 +10,11 @@ using WindowsInput.Events;
 
 namespace ZoomCloser.Services.ZoomHandling
 {
+    /// <summary>
+    /// A service that handles the window of Zoom Meeting.  
+    /// This service will automatically operate the window of Zoom Meeting so that 
+    /// the number of participants can be always taken when <see cref="ZoomHandlingService.ZoomState"/> getter is called.
+    /// </summary>
     public class ZoomOperatingService : ZoomHandlingService
     {
         public ZoomOperatingService()

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
+    /// <summary>
+    /// Represents a service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitByRatioService"/>. (using timer)
+    /// </summary>
     public interface IZoomExitByRatioService : IZoomExitService
     {
         /// <summary>

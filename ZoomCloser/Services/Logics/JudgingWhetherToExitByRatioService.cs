@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZoomCloser.Services
 {
+    /// <summary>
+    /// Judges whether whether to exit a Zoom Meeting.
+    /// </summary>
     public class JudgingWhetherToExitByRatioService : IJudgingWhetherToExitByRatioService
     {
         #region Ratio

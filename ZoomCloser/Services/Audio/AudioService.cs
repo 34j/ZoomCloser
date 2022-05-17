@@ -6,8 +6,13 @@ using ZoomCloser.Utils;
 
 namespace ZoomCloser.Services.Audio
 {
+    /// <summary>
+    /// Mutes and unmutes the window of Zoom Meeting using CoreAudioApi.
+    /// </summary>
     public class AudioService : IAudioService
     {
+
+        /// <param name="devEnum">Default <see cref="MMDeviceEnumerator"/>. (Direct Injection)</param>
         public AudioService(MMDeviceEnumerator devEnum)
         {
             this.devEnum = devEnum;
