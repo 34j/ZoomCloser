@@ -16,9 +16,9 @@ Download the latest from Releases.
 
 ## function
 
--   Zoomミーティングの参加者数を取得します。参加者数が"最大参加者数\*一定の割合"以下になったとき、デフォルトの「ミーティングを退出する」のショートカットキー "Alt+Q→Enter" のキーボード入力をシミュレートします。
+-   Get the number of participants in the Zoom meeting. Simulates the keyboard input of the default "Leave Meeting" shortcut key "Alt + Q → Enter" when the number of participants falls below "Maximum number of participants \* a certain percentage".
 -   Mute the meeting audio with a Windows feature instead of a Zoom feature.
--   ミーティングを録画します。
+-   Record the meeting.
 -   Record the time you joined the meeting and the time you left the meeting.
 
 ## License notes
