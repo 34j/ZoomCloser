@@ -3,9 +3,7 @@ MIT License
 Copyright (c) 2021 34j and contributors
 https://opensource.org/licenses/MIT
 */
-using MetroRadiance.UI;
 using MetroRadiance.UI.Controls;
-using System.Windows;
 
 namespace ZoomCloser.Views
 {

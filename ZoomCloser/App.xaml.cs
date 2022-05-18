@@ -9,12 +9,8 @@ using System.Windows;
 using MetroRadiance.UI;
 using MetroRadiance.UI.Controls;
 using System;
-using ZoomCloser.Services;
-using Gu.Localization;
-using System.Globalization;
 using Unity;
 using Unity.RegistrationByConvention;
-using System.Diagnostics;
 using ZoomCloser.Utils;
 
 namespace ZoomCloser

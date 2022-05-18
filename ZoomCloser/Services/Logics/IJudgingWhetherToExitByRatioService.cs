@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZoomCloser.Services
+﻿namespace ZoomCloser.Services
 {
     /// <summary>
     /// Represents a service that judges whether to exit a Zoom Meeting according to the following values;

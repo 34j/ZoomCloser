@@ -5,29 +5,28 @@ https://opensource.org/licenses/MIT
 */
 using Prism.Commands;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
 using ZoomCloser.Utils;
 using ZoomCloser.Services;
-using ZoomCloser.Modules;
 using Gu.Localization;
-using System.Linq;
 using ZoomCloser.Services.Audio;
 using ZoomCloser.Services.Recording;
 using System.Diagnostics;
 using ZoomCloser.Services.ZoomHandling;
+using ZoomCloser.Services.ZoomMonitoring;
+using ZoomCloser.Services.Settings;
 
 namespace ZoomCloser.ViewModels
 {
     //[AddINotifyPropertyChangedInterface]
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+#pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
         #region Fody_Bindings
         public string Title { get; set; } = "";
@@ -60,7 +59,7 @@ namespace ZoomCloser.ViewModels
             zs.OnThisForcedExit += (_, e) => Log("ThisSoftwareForcedToExitMeeting");
             zs.OnNotThisForcedExit += (_, e) => Log("UserForcedToExitMeeting");
 
-            IsActivated = zoomExitService.IsActivated;
+            IsActivated = zoomExitService.AutoExit;
 
             //below is for the logging list.
             BindingOperations.EnableCollectionSynchronization(LogListBoxItemsSource, new object());
@@ -104,7 +103,7 @@ activateCommand ??= new DelegateCommand(ExecuteActivateCommand);
 
         void ExecuteActivateCommand()
         {
-            zoomExitService.IsActivated = IsActivated;
+            zoomExitService.AutoExit = IsActivated;
         }
         private DelegateCommand exitMeetingCommand;
         public DelegateCommand ExitMeetingCommand =>

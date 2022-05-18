@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 using ZoomCloser.Properties;
-using ZoomCloser.Services;
+using ZoomCloser.Services.Settings;
 
 namespace ZoomCloser.Utils
 {

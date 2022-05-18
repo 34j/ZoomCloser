@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Vanara.PInvoke;
 using WindowsInput;
@@ -32,6 +29,7 @@ namespace ZoomCloser.Services.ZoomHandling
                             break;
                         case ZoomErrorState.WindowTooSmall:
                             User32.ShowWindow(Handle, ShowWindowCommand.SW_SHOWMAXIMIZED);
+                            Debug.WriteLine("Window too small, maximize it.");
                             break;
                     }
                 }

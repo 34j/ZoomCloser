@@ -3,12 +3,9 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Diagnostics;
 using PropertyChanged;
 
-namespace ZoomCloser.Services
+namespace ZoomCloser.Services.Settings
 {
     /// <summary>
     /// An abstract class that provides a base implementation for a service that can be used to read and write data.
@@ -67,7 +64,7 @@ namespace ZoomCloser.Services
         [DoNotNotify]
         [JsonIgnore]
         public bool AutoSave { get; set; } = true;
-
+        [SuppressPropertyChangedWarnings]
         private static void OnThisPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var settingsBase = (T)sender;

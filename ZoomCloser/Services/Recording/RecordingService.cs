@@ -1,14 +1,14 @@
 ﻿using ScreenRecorderLib;
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using ZoomCloser.Services.ZoomWindow;
 using System.Collections.Generic;
+using ZoomCloser.Services.Settings;
 
 namespace ZoomCloser.Services.Recording
 {
-    
+
     public class RecordingService : IRecordingService
     {
         public string FolderPath => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);

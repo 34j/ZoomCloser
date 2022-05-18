@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace ZoomCloser.Services
+﻿namespace ZoomCloser.Services.Settings
 {
     public class BasicSettings : SettingsBase<BasicSettings>
     {

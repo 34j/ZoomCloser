@@ -1,14 +1,9 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using System.Diagnostics;
 using PropertyChanged;
 
-namespace ZoomCloser.Services
+namespace ZoomCloser.Services.Settings
 {
     /// <summary>
     /// Base class for deserializable class implementing <see cref="INotifyPropertyChanged"/>.

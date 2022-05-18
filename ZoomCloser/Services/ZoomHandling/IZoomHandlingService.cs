@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ZoomCloser.Services.ZoomHandling
 {
@@ -14,11 +10,12 @@ namespace ZoomCloser.Services.ZoomHandling
         /// <summary>
         /// Exits the Zoom Meeting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Whether successufully exit the meeting.</returns>
         Task<bool> Exit();
         /// <summary>
         /// Refreshes <see cref="IReadOnlyZoomHandlingService.ParticipantCount"/>.
         /// </summary>
-        void RefreshParticipantCount();
+        /// <param name="refreshWindowIfWindowNotAvailable">Whether to refresh the window if the window is not available.</param>
+        void RefreshParticipantCount(bool refreshWindowIfWindowNotAvailable = true);
     }
 }
