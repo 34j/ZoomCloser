@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Exit" xml:space="preserve">
+    <value>애플리케이션 종료</value>
+  </data>
+  <data name="ParticipatedInMeeting" xml:space="preserve">
+    <value>회의에 참가</value>
+  </data>
+  <data name="ExitMeeting" xml:space="preserve">
+    <value>미팅을 퇴출</value>
+  </data>
+  <data name="StartedCapturingTHeNumberOfParticipants" xml:space="preserve">
+    <value>참가자 수의 취득을 개시</value>
+  </data>
+  <data name="ThisSoftwareForcedToExitMeeting" xml:space="preserve">
+    <value>이 소프트웨어가 회의를 떠나</value>
+  </data>
+  <data name="UserForcedToExitMeeting" xml:space="preserve">
+    <value>사용자가 미팅을 퇴장</value>
+  </data>
+  <data name="ZoomNotRunning" xml:space="preserve">
+    <value>Zoom은 실행 중이 아닙니다.</value>
+  </data>
+  <data name="ParticipantCount" xml:space="preserve">
+    <value>참가자 수 현재값: {0}명, 과거 최대치: {1}명</value>
+  </data>
+  <data name="OpenParticipantsWindow" xml:space="preserve">
+    <value>참가자 창을 내십시오. 닫을 수 있습니다.</value>
+  </data>
+  <data name="DifferentShortcuts" xml:space="preserve">
+    <value>Zoom 바로 가기가 예상(표준)과 다르므로 사용을 계속하려면 변경하십시오: 참가자 관리(ALT+T)</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>버그로 인해 참가자 수를 얻을 수 없습니다.</value>
+  </data>
+  <data name="NormalExitCondition" xml:space="preserve">
+    <value>참가자가 {0}명 이하가 되면 퇴장합니다.</value>
+  </data>
+  <data name="UnderOrEqualsToThresholdExitCondition" xml:space="preserve">
+    <value>참가자 수의 과거 최대값이 {0}명을 초과할 때까지 자동으로 퇴장하지 않습니다.</value>
+  </data>
+  <data name="Minimized" xml:space="preserve">
+    <value>Zoom이 최소화되어 참가자 수를 얻을 수 없습니다.</value>
+  </data>
+  <data name="Activation" xml:space="preserve">
+    <value>자동으로 퇴출</value>
+  </data>
+  <data name="Mute" xml:space="preserve">
+    <value>스피커를 Windows 측에서 음소거</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>녹화하기</value>
+  </data>
+  <data name="OpenMovieFolder" xml:space="preserve">
+    <value>동영상 폴더 열기</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>설정</value>
+  </data>
+</root>
