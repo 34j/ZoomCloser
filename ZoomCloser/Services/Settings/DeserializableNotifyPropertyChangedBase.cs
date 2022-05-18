@@ -18,6 +18,8 @@ namespace ZoomCloser.Services
         /// <summary>
         /// Whether the class is currently being deserialized.
         /// </summary>
+        [JsonIgnore]
+        [DoNotNotify]
         public bool IsDeserializing { get; set; }
         public void OnDeserializing()
         {

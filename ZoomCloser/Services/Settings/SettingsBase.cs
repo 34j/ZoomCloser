@@ -65,6 +65,7 @@ namespace ZoomCloser.Services
         /// Whether to automatically save the settings when <see cref="DeserializableNotifyPropertyChangedBase.OnPropertyChanged"/> is called.
         /// </summary>
         [DoNotNotify]
+        [JsonIgnore]
         public bool AutoSave { get; set; } = true;
 
         private static void OnThisPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
