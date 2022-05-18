@@ -1,7 +1,8 @@
+ |ZoomCloser | MIT | https://github.com/34j/ZoomCloser/blob/master/LICENSE.txt
  | Reference                                                      | Version                 | License Type | License                                                               | 
  | -------------------------------------------------------------- | ----------------------- | ------------ | --------------------------------------------------------------------- | 
  | Bindables.Fody                                                 | 6.3.0                   | MIT          | https://licenses.nuget.org/MIT                                        | 
- | CoreAudio                                                      | 1.12.0                  |              |                                                                       | 
+ | CoreAudio                                                      | 1.12.0                  |              | https://github.com/morphx666/CoreAudio/blob/master/LICENSE                                                                      | 
  | Gu.Wpf.Localization                                            | 6.7.0                   | MIT          | https://licenses.nuget.org/MIT                                        | 
  | H.NotifyIcon.Wpf                                               | 2.0.48                  | MIT          | https://licenses.nuget.org/MIT                                        | 
  | Hardcodet.NotifyIcon.Wpf                                       | 1.1.0                   | LICENSE      | https://www.nuget.org/packages/Hardcodet.NotifyIcon.Wpf/1.1.0/License | 
