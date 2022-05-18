@@ -12,8 +12,6 @@
  | Microsoft.CSharp                                               | 4.7.0                   | MIT          | https://licenses.nuget.org/MIT                                        | 
  | Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers | 0.3.326103              | MIT          | https://licenses.nuget.org/MIT                                        | 
  | Microsoft.Windows.Compatibility                                | 6.0.0                   | MIT          | https://licenses.nuget.org/MIT                                        | 
- | NAudio                                                         | 2.1.0-beta.1            | license.txt  | https://www.nuget.org/packages/NAudio/2.1.0-beta.1/License            | 
- | NUnit                                                          | 3.13.3                  | LICENSE.txt  | https://www.nuget.org/packages/NUnit/3.13.3/License                   | 
  | Prism.Unity                                                    | 8.1.97                  | LICENSE      | https://www.nuget.org/packages/Prism.Unity/8.1.97/License             | 
  | PropertyChanged.Fody                                           | 3.4.0                   | MIT          | https://licenses.nuget.org/MIT                                        | 
  | ScreenRecorderLib                                              | 5.1.1                   |              | https://github.com/sskodje/ScreenRecorderLib/blob/master/LICENSE      | 
