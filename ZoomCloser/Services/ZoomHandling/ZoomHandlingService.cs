@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Automation;
@@ -38,13 +34,26 @@ namespace ZoomCloser.Services.ZoomHandling
         public event EventHandler OnExit;
         public event EventHandler OnThisForcedExit;
         public event EventHandler OnNotThisForcedExit;
+        #pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
+        #pragma warning restore CS0067
 
         private bool thisForcedExit = false;
 
-        protected AutomationElement MainWindowElement { get; private set; }
-        protected AutomationElement ParticipantsElement { get; private set; }
-        public int 
+        protected AutomationElement MainWindowElement { 
+            get => mainWindowElement;
+            set
+            {
+                if (value == null)
+                {
+                    ParticipantsElement = null;
+                }
+                mainWindowElement = value;
+            }
+        }
+        private AutomationElement mainWindowElement;
+        protected AutomationElement ParticipantsElement { get; set; }        
+
 
         public ZoomHandlingService()
         {
@@ -136,17 +145,20 @@ namespace ZoomCloser.Services.ZoomHandling
         /// <summary>
         /// Get the number of participants from the element(s) and refresh ParticipantCount.
         /// </summary>
-        public void RefreshParticipantCount()
+        public void RefreshParticipantCount(bool refreshWindowIfWindowNotAvailable = true)
         {
             //Check if the window is still alive.
-            if (!ParticipantsElement.IsAlive())
+            if (ParticipantsElement.IsAlive())
             {
-                FindParticipantsCountElement();
+                ;
+            }
+            else
+            {
+                if (refreshWindowIfWindowNotAvailable)
+                {
+                    FindParticipantsCountElement();
+                }
                 return;
-                // if (!ParticipantsElement.IsAlive())
-                // {
-                //     return;
-                // }
             }
 
             //Get the text of the element.
@@ -157,7 +169,8 @@ namespace ZoomCloser.Services.ZoomHandling
             }
             catch
             {
-                throw new WarningException("Failed to get name of participants element.");
+                //throw new WarningException("Failed to get name of participants element.");
+                ParticipantsElement = null;
                 return;
             }
 
@@ -180,6 +193,7 @@ namespace ZoomCloser.Services.ZoomHandling
             if (MainWindowElement != null && !MainWindowElement.IsAlive())
             {
                 MainWindowElement = null;
+                ParticipantsElement = null;//This is very important!!!
                 //OnExit?.Invoke(this, EventArgs.Empty);
             }
 
