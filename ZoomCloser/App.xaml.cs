@@ -27,10 +27,10 @@ namespace ZoomCloser
         private MetroWindow metroWindow;
         protected override void OnStartup(StartupEventArgs e)
         {
+            CultureUtils.InitTranslator();
             base.OnStartup(e);
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
-            CultureUtils.InitTranslator();
         }
 
         protected override Window CreateShell()
@@ -40,6 +40,7 @@ namespace ZoomCloser
    AllClasses.FromLoadedAssemblies(),
    WithMappings.FromMatchingInterface,
    WithName.Default);*/
+
             metroWindow = Container.Resolve<MainWindow>();
             Modules.StartUpHandler.AddThisToStartUp();
             return metroWindow;
