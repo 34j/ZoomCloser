@@ -39,12 +39,12 @@ namespace ZoomCloser.ViewModels
         public ReadOnlyObservableTranslationCollection LogListBoxItemsSource { get; } = new ReadOnlyObservableTranslationCollection();
         #endregion Fody_Bindings
 
-        public IZoomExitService<IJudgingWhetherToExitByRatioService> zoomExitService;
+        public IZoomMonitoringService<IJudgingWhetherToExitByRatioService> zoomExitService;
         private readonly IAudioService audioService;
         private readonly IRecordingService recordingService;
         private IJudgingWhetherToExitByRatioService JudgeService => zoomExitService.JudgingWhetherToExitService;
 
-        public MainWindowViewModel(IZoomExitService<IJudgingWhetherToExitByRatioService> zoomExitService, IAudioService audioService, IRecordingService recordingService)
+        public MainWindowViewModel(IZoomMonitoringService<IJudgingWhetherToExitByRatioService> zoomExitService, IAudioService audioService, IRecordingService recordingService)
         {
             this.audioService = audioService;
             IsMuted = audioService.GetMute();

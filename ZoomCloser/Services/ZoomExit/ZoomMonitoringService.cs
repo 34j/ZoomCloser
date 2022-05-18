@@ -15,12 +15,13 @@ namespace ZoomCloser.Services
     /// <summary>
     /// A service that automatically exit the Zoom Meeting according to <see cref="IReadOnlyZoomHandlingService"/> and <see cref="IJudgingWhetherToExitService"/> using <see cref="Timer"/>.
     /// </summary>
-    public class ZoomExitService<T> : IZoomExitService<T> where T : IJudgingWhetherToExitService
+    public class ZoomMonitoringService<T> : IZoomMonitoringService<T> where T : IJudgingWhetherToExitService
     {
         /// <summary>
         /// The <see cref="Timer"/> that will be used to judge whether to exit the Zoom Meeting.
         /// </summary>
         protected Timer CheckTimer { get; }
+        protected int TimeInterval { get; init; } = 100;
 
         private readonly IZoomHandlingService zoomHandlingService;
         public IReadOnlyZoomHandlingService ReadOnlyZoomHandlingService => zoomHandlingService;
@@ -31,7 +32,7 @@ namespace ZoomCloser.Services
 
         public T JudgingWhetherToExitService { get; }
 
-        public ZoomExitService(IZoomHandlingService zoomHandlingService, T judgingWhetherToExitService, Timer timer)
+        public ZoomMonitoringService(IZoomHandlingService zoomHandlingService, T judgingWhetherToExitService, Timer timer)
         {
             this.zoomHandlingService = zoomHandlingService;
             this.JudgingWhetherToExitService = judgingWhetherToExitService;
@@ -39,7 +40,7 @@ namespace ZoomCloser.Services
             zoomHandlingService.OnEntered += (_, e) => judgingWhetherToExitService.Reset();
 
             this.CheckTimer = timer;
-            timer.Interval = 100;
+            timer.Interval = TimeInterval;
             timer.AutoReset = true;
             timer.Elapsed += async (sender, e) => await CheckAndClose().ConfigureAwait(false);
             timer.Elapsed += (_, e) => OnRefreshed?.Invoke(this, EventArgs.Empty);

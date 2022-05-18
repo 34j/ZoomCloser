@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -43,6 +44,7 @@ namespace ZoomCloser.Services.ZoomHandling
 
         protected AutomationElement MainWindowElement { get; private set; }
         protected AutomationElement ParticipantsElement { get; private set; }
+        public int 
 
         public ZoomHandlingService()
         {
@@ -136,17 +138,18 @@ namespace ZoomCloser.Services.ZoomHandling
         /// </summary>
         public void RefreshParticipantCount()
         {
+            //Check if the window is still alive.
             if (!ParticipantsElement.IsAlive())
             {
                 FindParticipantsCountElement();
-                if (ParticipantsElement.IsAlive())
-                {
-                }
-                else
-                {
-                    return;
-                }
+                return;
+                // if (!ParticipantsElement.IsAlive())
+                // {
+                //     return;
+                // }
             }
+
+            //Get the text of the element.
             string name;
             try
             {
@@ -154,8 +157,11 @@ namespace ZoomCloser.Services.ZoomHandling
             }
             catch
             {
+                throw new WarningException("Failed to get name of participants element.");
                 return;
             }
+
+            //Get the number of participants.
             var match = Regex.Match(name, @"\d+");
             if (match != null && int.TryParse(match.Value, out int count))
             {
@@ -207,18 +213,19 @@ namespace ZoomCloser.Services.ZoomHandling
         }
 
         /// <summary>
-        /// Find the element from which the number of participants can be gotten.
+        /// Find the element from which the number of participants can be gotten.         
+        /// Extremely heavy operation.
         /// </summary>
         private void FindParticipantsCountElement()
         {
             FindWindowElement();
 
-            if (!GetState())
+            if (!GetZoomState())
             {
                 ParticipantCount = null;
             }
 
-            bool GetState()
+            bool GetZoomState()
             {
                 if (ZoomState == ZoomErrorState.NotRunning || ZoomState == ZoomErrorState.Minimized)
                 {

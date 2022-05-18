@@ -15,9 +15,9 @@ namespace ZoomCloser.Services.ZoomHandling
     /// This service will automatically operate the window of Zoom Meeting so that 
     /// the number of participants can be always taken when <see cref="ZoomHandlingService.ZoomState"/> getter is called.
     /// </summary>
-    public class ZoomOperatingService : ZoomHandlingService
+    public class ZoomActivatingHandlingService : ZoomHandlingService
     {
-        public ZoomOperatingService()
+        public ZoomActivatingHandlingService()
         {
             this.PropertyChanged += async (_, e) =>
             {
