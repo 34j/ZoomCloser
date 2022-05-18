@@ -75,7 +75,7 @@ namespace ZoomCloser.ViewModels
             string result = GetITranslation(key).Translated;
             if (result == null)
             {
-                throw new Exception("key not registered");
+                throw new Exception($"Translation is not registered. Key: {key}");
             }
             return result;
         }

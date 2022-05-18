@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vanara.PInvoke;
 using static Vanara.PInvoke.User32;
-using static ZoomCloser.Utils.LinqExtention;
-using CoreAudio;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace ZoomCloser.Utils
 {
@@ -21,7 +13,6 @@ namespace ZoomCloser.Utils
         {
             SendMessage(hWND, WindowMessage.WM_APPCOMMAND, hWND, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
-
 
     }
 }
