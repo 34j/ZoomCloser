@@ -9,9 +9,9 @@ using System.Windows;
 using MetroRadiance.UI;
 using MetroRadiance.UI.Controls;
 using System;
-using Unity;
-using Unity.RegistrationByConvention;
 using ZoomCloser.Utils;
+using Autofac;
+using System.Reflection;
 
 namespace ZoomCloser
 {
@@ -20,42 +20,33 @@ namespace ZoomCloser
     /// </summary>
     public partial class App
     {
-        private MetroWindow metroWindow;
+        protected UIElement MainElement { get; private set; }
+        protected IContainer Container { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             CultureUtils.InitTranslator();
-            base.OnStartup(e);
             ThemeService.Current.EnableUwpResoruces();
-            ThemeService.Current.Register(this, Theme.Dark, Accent.Windows);
-        }
+            ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
 
-        protected override Window CreateShell()
-        {
-            /*   var container = new UnityContainer();
-               container.RegisterTypes(
-   AllClasses.FromLoadedAssemblies(),
-   WithMappings.FromMatchingInterface,
-   WithName.Default);*/
-
-            metroWindow = Container.Resolve<MainWindow>();
             Modules.StartUpHandler.AddThisToStartUp();
-            return metroWindow;
+            
+            CreateContainer();
+            this.MainElement = Container.Resolve<MainWindow>();
+
+            base.OnStartup(e);
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        /// <summary>
+        /// Create Container.
+        /// </summary>
+        private void CreateContainer()
         {
-            foreach (var type in AllClasses.FromLoadedAssemblies())
-            {
-                foreach (Type interFace in WithMappings.FromAllInterfaces(type))
-                {
-                    containerRegistry.Register(interFace, type, WithName.Default(type));
-                    //Debug.WriteLine(type.Name + interFace.Name);
-                }
-                containerRegistry.Register(type);
-                //Debug.WriteLine(type.Name);
-            }
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyTypes(executingAssembly)
+                   .Where(t => t.Name.EndsWith("Repository"))
+                   .AsImplementedInterfaces();
+            this.Container = builder.Build();
         }
-
-
     }
 }
