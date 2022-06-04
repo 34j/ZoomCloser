@@ -2,7 +2,7 @@
 
 Zoomミーティングの退出忘れを防いでくれるWindowsソフトウェアです。
 
-![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.png) ![Sample](https://github.com/34j/ZoomCloser/blob/master/Example.ja.png)
+![Sample](https://github.com/34j/ZoomCloser/blob/main/Example.png) ![Sample](https://github.com/34j/ZoomCloser/blob/main/Example.ja.png)
 
 
 ## インストール方法
