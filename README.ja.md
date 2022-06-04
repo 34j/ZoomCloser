@@ -27,3 +27,8 @@ Releasesから最新のリリースをダウンロードしてください。 �
 ## ライセンスの注意事項
 
 このリポジトリ内のコードはMITライセンスですが、一部の依存先はMITライセンスを採用していないことに注意してください。
+
+## プロジェクトへの貢献
+貢献は大歓迎です。お気軽にどうぞ。
+[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
+
