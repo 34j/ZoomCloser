@@ -29,4 +29,5 @@ Note that the code in this repository is MIT licensed, but some dependencies are
 
 ## Contribution to the project
 
-Contributions are welcome. Feel free to help yourself.[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
+貢献は大歓迎です。お気軽にどうぞ。 
+[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
