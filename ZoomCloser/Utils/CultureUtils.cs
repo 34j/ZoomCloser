@@ -57,10 +57,8 @@ namespace ZoomCloser.Utils
             Translator.Cultures.Clear();
             foreach (CultureInfo culture in GetAllAvailableCultures())
             {
-                Debug.WriteLine($"Adding {culture.Name}");
                 _ = Translator.Cultures.Add(culture);
             }
-            Debug.WriteLine(Translator.Cultures.ToString());
 
 
             CultureInfo settingCulture = null;

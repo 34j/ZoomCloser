@@ -52,7 +52,7 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<ApplicationIcon>icon_n.ico</ApplicationIcon>
-		<PlatformTarget>x86</PlatformTarget>
+		<PlatformTarget>anycpu</PlatformTarget>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Update="Properties\Settings.settings">

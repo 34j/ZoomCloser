@@ -24,13 +24,11 @@ namespace ZoomCloser.Services.Settings
         public void OnDeserializing()
         {
             IsDeserializing = true;
-            Debug.WriteLine(IsDeserializing);
         }
 
         public void OnDeserialized()
         {
             IsDeserializing = false;
-            Debug.WriteLine(IsDeserializing);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
