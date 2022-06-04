@@ -16,7 +16,6 @@ https://opensource.org/licenses/MIT
                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                    xmlns:views="clr-namespace:ZoomCloser.Views"
                    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                   d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    mc:Ignorable="d"
                    Title="{Binding Title}"
@@ -52,7 +51,7 @@ https://opensource.org/licenses/MIT
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid DataContext="{Binding MainWindowViewModel}">
         <tb:TaskbarIcon IconSource="icon_n.ico"
                         NoLeftClickDelay="True"
                         LeftClickCommand="{Binding ChangeVisiblityCommand}"
