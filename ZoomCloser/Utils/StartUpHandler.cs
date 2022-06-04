@@ -6,6 +6,7 @@ https://opensource.org/licenses/MIT
 using System.Reflection;
 using System.IO;
 using Syroot.Windows.IO;
+using System.Diagnostics;
 
 namespace ZoomCloser.Modules
 {
@@ -35,7 +36,7 @@ namespace ZoomCloser.Modules
             string applicationName = assembly.GetName().Name;
 
             string shortcutPath = StartUpFolderPath + @"\" + applicationName + ".lnk";
-            string applicationPath = assembly.Location;
+            string applicationPath = System.Environment.ProcessPath;//assembly.Location; returns dll path.
 
             var wsh = new IWshRuntimeLibrary.IWshShell_Class();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(shortcutPath);
