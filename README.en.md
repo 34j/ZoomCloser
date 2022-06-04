@@ -10,19 +10,19 @@ Windows software that prevents you from forgetting to leave the Zoom meeting.
 Download the latest release from Releases. Once you start the program, it will register itself in the startup and will start automatically the next time you start your computer.
 To stop this automatic launch, disable program startup from Task Manager.
 
-## Operating conditions
+## 動作条件
 
 -   .NET 6.0
 -   Windows10.0.17763.0 x86
 
 ## feature
 
--   Get the number of participants in the Zoom meeting. Simulates the keyboard input of the default "Leave Meeting" shortcut key "Alt + Q → Enter" when the number of participants falls below "Maximum number of participants \* a certain percentage".
+-   Zoomミーティングの参加者数を取得します。参加者数が"最大参加者数\*一定の割合"以下になったとき、デフォルトの「ミーティングを退出する」のショートカットキー "Alt+Q→Enter" のキーボード入力をシミュレートします。
 -   Mute the meeting audio with a Windows feature instead of a Zoom feature.
 -   Record the meeting.
 -   Record the time you joined the meeting and the time you left the meeting.
 -   Multilingual support (English, Chinese, Spanish, Hindi, French, Russian, Japanese, Korean, etc.)
 
-## License notes
+## ライセンスの注意事項
 
 Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
