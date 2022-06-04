@@ -51,7 +51,7 @@ namespace ZoomCloser.Services
             MaximumCount = 0;
         }
 
-        private static readonly Random random = new Random();
+        private static readonly Random random = new();
         private static double RandomRange(double min, double max)
         {
             double randDouble = random.NextDouble();

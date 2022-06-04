@@ -12,7 +12,7 @@ namespace ZoomCloser
 {
     public class InverseBooleanToVisibilityConverter : IValueConverter
     {
-        private readonly BooleanToVisibilityConverter _converter = new BooleanToVisibilityConverter();
+        private readonly BooleanToVisibilityConverter _converter = new();
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

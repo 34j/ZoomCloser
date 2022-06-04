@@ -135,7 +135,7 @@ namespace ZoomCloser.Services.ZoomHandling
             {
                 return true;
             }
-            IntPtr handle = new IntPtr(MainWindowElement.Current.NativeWindowHandle);
+            IntPtr handle = new(MainWindowElement.Current.NativeWindowHandle);
             User32.SetForegroundWindow(handle);
             User32.SetFocus(handle);
             await Simulate.Events().ClickChord(KeyCode.Menu, KeyCode.Q).Wait(200).ClickChord(KeyCode.Return).Invoke().ConfigureAwait(false);

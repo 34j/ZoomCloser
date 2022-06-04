@@ -22,9 +22,9 @@ namespace ZoomCloser.Utils
         /// <returns></returns>
         public static IEnumerable<CultureInfo> GetAllAvailableCultures()
         {
-            List<CultureInfo> result = new List<CultureInfo>();
+            List<CultureInfo> result = new();
 
-            ResourceManager rm = new ResourceManager(typeof(Resources));
+            ResourceManager rm = new(typeof(Resources));
 
             foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.AllCultures))
             {

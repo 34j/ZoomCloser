@@ -19,7 +19,7 @@ namespace ZoomCloser.Modules
 
             string shortcutPath = StartUpFolderPath + @"\" + applicationName + ".url";
             string applicationPath = assembly.Location;
-            using (StreamWriter sw = new StreamWriter(shortcutPath))
+            using (StreamWriter sw = new(shortcutPath))
             {
                 sw.WriteLine("[InternetShortcut]");
                 sw.WriteLine("URL=" + applicationPath);

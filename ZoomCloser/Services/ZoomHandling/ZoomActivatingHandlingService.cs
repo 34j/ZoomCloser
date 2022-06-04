@@ -47,6 +47,6 @@ namespace ZoomCloser.Services.ZoomHandling
             await Simulate.Events().ClickChord(keys).Invoke();
         }
 
-        private IntPtr Handle => new IntPtr(MainWindowElement.Current.NativeWindowHandle);
+        private IntPtr Handle => new(MainWindowElement.Current.NativeWindowHandle);
     }
 }

@@ -22,7 +22,7 @@ namespace ZoomCloser.Utils
 
         public static void DebugIEnumerable<T>(this IEnumerable<T> enumeration, Func<T, string> func)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             enumeration.ForEach(s =>
             {
                 sb.Append(func(s));
