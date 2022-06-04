@@ -1,4 +1,9 @@
-﻿namespace ZoomCloser.Services.Recording
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+namespace ZoomCloser.Services.Recording
 {
     /// <summary>
     /// The service for recording the window of Zoom Meeting.

@@ -1,4 +1,9 @@
-﻿using CoreAudio;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using CoreAudio;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

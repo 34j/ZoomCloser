@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Vanara.PInvoke;

@@ -1,3 +1,8 @@
+/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
 using System.Text.Json.Serialization;
 using System.ComponentModel;
 using System.Diagnostics;

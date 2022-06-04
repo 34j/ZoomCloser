@@ -1,4 +1,9 @@
-﻿using ScreenRecorderLib;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using ScreenRecorderLib;
 using System;
 using System.IO;
 using System.Reflection;

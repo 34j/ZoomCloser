@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using System.Threading.Tasks;
 
 namespace ZoomCloser.Services.ZoomHandling
 {

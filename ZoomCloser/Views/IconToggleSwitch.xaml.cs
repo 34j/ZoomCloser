@@ -1,4 +1,9 @@
-﻿using Bindables;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using Bindables;
 using MahApps.Metro.IconPacks;
 using System.Windows;
 using System.Windows.Controls;

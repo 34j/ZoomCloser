@@ -1,4 +1,9 @@
-﻿namespace ZoomCloser.Services
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+namespace ZoomCloser.Services
 {
     /// <summary>
     /// Represents a service that judges whether to exit a Zoom Meeting according to the following values;

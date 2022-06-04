@@ -1,4 +1,9 @@
-﻿using System.Windows.Automation;
+﻿/*
+MIT License
+Copyright (c) 2021 34j and contributors
+https://opensource.org/licenses/MIT
+*/
+using System.Windows.Automation;
 
 namespace ZoomCloser.Services
 {
