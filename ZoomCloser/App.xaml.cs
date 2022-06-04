@@ -7,11 +7,10 @@ using ZoomCloser.Views;
 using Prism.Ioc;
 using System.Windows;
 using MetroRadiance.UI;
-using MetroRadiance.UI.Controls;
-using System;
 using ZoomCloser.Utils;
-using Autofac;
 using System.Reflection;
+using Unity.RegistrationByConvention;
+using Unity;
 
 namespace ZoomCloser
 {
@@ -21,7 +20,7 @@ namespace ZoomCloser
     public partial class App
     {
         protected UIElement MainElement { get; private set; }
-        protected IContainer Container { get; private set; }
+        protected IUnityContainer Container { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             CultureUtils.InitTranslator();
@@ -42,11 +41,8 @@ namespace ZoomCloser
         private void CreateContainer()
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
-            var builder = new ContainerBuilder();
-            builder.RegisterAssemblyTypes(executingAssembly)
-                   .Where(t => t.Name.EndsWith("Repository"))
-                   .AsImplementedInterfaces();
-            this.Container = builder.Build();
+            Container = new UnityContainer();
+            Container.RegisterTypes(AllClasses.FromLoadedAssemblies(), WithMappings.FromMatchingInterface, WithName.Default);
         }
     }
 }
