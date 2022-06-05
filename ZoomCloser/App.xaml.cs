@@ -27,7 +27,7 @@ namespace ZoomCloser
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
 
-            Modules.StartUpHandler.AddThisToStartUp();
+            Modules.StartUpHandler.RegisterThisToStartUp();
             
             CreateContainer();
             this.MainElement = Container.Resolve<MainWindow>();

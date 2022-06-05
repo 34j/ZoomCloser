@@ -6,48 +6,71 @@ https://opensource.org/licenses/MIT
 using System.Reflection;
 using System.IO;
 using Syroot.Windows.IO;
-using System.Diagnostics;
+using System;
 
 namespace ZoomCloser.Modules
 {
     internal static class StartUpHandler
     {
-        public static string StartUpFolderPath => KnownFolders.RoamingAppData.Path + @"\Microsoft\Windows\Start Menu\Programs\Startup";
-        public static void AddThisToStartUpUrl()
+        private static string StartUpFolderPath => KnownFolders.RoamingAppData.Path + @"\Microsoft\Windows\Start Menu\Programs\Startup";
+        public static string ShortcutPath(bool isUrl = false) => isUrl 
+            ? Path.Combine(StartUpFolderPath, ApplicationName + ".url")
+            : Path.Combine(StartUpFolderPath, ApplicationName + ".lnk");
+        private static string ApplicationName => Assembly.GetExecutingAssembly().GetName().Name;
+        private static string ApplicationPath
         {
-            var assembly = Assembly.GetEntryAssembly();
-            string applicationName = assembly.GetName().Name;
-
-            string shortcutPath = StartUpFolderPath + @"\" + applicationName + ".url";
-            string applicationPath = assembly.Location;
-            using (StreamWriter sw = new(shortcutPath))
+            get
+            {
+                string path = Environment.ProcessPath;
+                if (Path.GetExtension(path) != ".exe")
+                {
+                    throw new Exception("Application path is not an exe");
+                }
+                return path;
+            }
+        }
+        /// <summary>
+        /// Registers this application to start up on windows startup.
+        /// </summary>
+        public static void RegisterThisToStartUpUrl()
+        {
+            using (StreamWriter sw = new(ShortcutPath(true)))
             {
                 sw.WriteLine("[InternetShortcut]");
-                sw.WriteLine("URL=" + applicationPath);
+                sw.WriteLine($"URL={ApplicationPath}");
             }
-
-
-
         }
-
-        public static void AddThisToStartUp()
+        /// <summary>
+        /// Unregisters this application from start up.
+        /// </summary>
+        public static void UnregisterThisFromStartUpUrl()
         {
-            var assembly = Assembly.GetEntryAssembly();
-            string applicationName = assembly.GetName().Name;
-
-            string shortcutPath = StartUpFolderPath + @"\" + applicationName + ".lnk";
-            string applicationPath = System.Environment.ProcessPath;//assembly.Location; returns dll path.
-
-            var wsh = new IWshRuntimeLibrary.IWshShell_Class();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(shortcutPath);
-            shortcut.TargetPath = applicationPath;
-            shortcut.IconLocation = applicationPath + ",0";
-            shortcut.Save();
-
-            var oldShortcutPath = StartUpFolderPath + @"\" + applicationName + ".url";
-            if (File.Exists(oldShortcutPath))
+            string path = ShortcutPath(true);
+            if (File.Exists(path))
             {
-                File.Delete(oldShortcutPath);
+                File.Delete(path);
+            }
+        }
+        /// <summary>
+        /// Registers this application to start up on windows startup.
+        /// </summary>
+        public static void RegisterThisToStartUp()
+        {
+            var wsh = new IWshRuntimeLibrary.IWshShell_Class();
+            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(ShortcutPath(false));
+            shortcut.TargetPath = ApplicationPath;
+            shortcut.IconLocation = ApplicationPath + ",0";
+            shortcut.Save();
+        }
+        /// <summary>
+        /// Unregisters this application from start up.
+        /// </summary>
+        public static void UnregisterThisFromStartUp()
+        {
+            string path = ShortcutPath(false);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
             }
         }
     }
