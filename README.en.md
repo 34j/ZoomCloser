@@ -17,7 +17,7 @@ To stop this automatic launch, disable program startup from Task Manager.
 
 ## feature
 
--   Zoomミーティングの参加者数を取得します。参加者数が"最大参加者数\*一定の割合"以下になったとき、デフォルトの「ミーティングを退出する」のショートカットキー "Alt+Q→Enter" のキーボード入力をシミュレートします。
+-   Get the number of participants in the Zoom meeting. Simulates the keyboard input of the default "Leave Meeting" shortcut key "Alt + Q → Enter" when the number of participants falls below "Maximum number of participants \* a certain percentage".
 -   Mute the meeting audio with a Windows feature instead of a Zoom feature.
 -   Record the meeting.
 -   Record the time you joined the meeting and the time you left the meeting.
@@ -25,9 +25,8 @@ To stop this automatic launch, disable program startup from Task Manager.
 
 ## License notes
 
-このリポジトリ内のコードはMITライセンスですが、一部の依存先はMITライセンスを採用していないことに注意してください。
+Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
 
 ## Contribution to the project
 
-貢献は大歓迎です。お気軽にどうぞ。
-[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
+Contributions are welcome. Feel free to help yourself.[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
