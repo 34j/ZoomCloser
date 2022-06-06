@@ -3,6 +3,8 @@ MIT License
 Copyright (c) 2021 34j and contributors
 https://opensource.org/licenses/MIT
 */
+
+#pragma warning disable CA1416
 using ZoomCloser.Views;
 using Prism.Ioc;
 using System.Windows;
@@ -11,6 +13,7 @@ using ZoomCloser.Utils;
 using System.Reflection;
 using Unity.RegistrationByConvention;
 using Unity;
+using System;
 
 namespace ZoomCloser
 {
@@ -19,30 +22,33 @@ namespace ZoomCloser
     /// </summary>
     public partial class App
     {
-        protected UIElement MainElement { get; private set; }
-        protected IUnityContainer Container { get; private set; }
+        protected override FrameworkElement CreateElement()
+        {
+            return Container.Resolve<MainTaskbarIcon>();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             CultureUtils.InitTranslator();
+            
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
 
             Modules.StartUpHandler.RegisterThisToStartUp();
             
-            CreateContainer();
-            this.MainElement = Container.Resolve<MainWindow>();
-
             base.OnStartup(e);
         }
 
-        /// <summary>
-        /// Create Container.
-        /// </summary>
-        private void CreateContainer()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            var executingAssembly = Assembly.GetExecutingAssembly();
-            Container = new UnityContainer();
-            Container.RegisterTypes(AllClasses.FromLoadedAssemblies(), WithMappings.FromMatchingInterface, WithName.Default);
+            foreach (var type in AllClasses.FromLoadedAssemblies())
+            {
+                foreach (Type interFace in WithMappings.FromAllInterfaces(type))
+                {
+                    containerRegistry.Register(interFace, type, WithName.Default(type));
+                }
+                containerRegistry.Register(type);
+            }
         }
     }
 }
