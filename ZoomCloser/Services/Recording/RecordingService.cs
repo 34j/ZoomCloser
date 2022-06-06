@@ -27,7 +27,7 @@ namespace ZoomCloser.Services.Recording
                 return;
             }
 
-            if(!ZoomWindowDetector.TryGetMainWindow(out IntPtr windowHandle, out bool isMinimized))
+            if (!ZoomWindowDetector.TryGetMainWindow(out IntPtr windowHandle, out _))
             {
                 return;
             }

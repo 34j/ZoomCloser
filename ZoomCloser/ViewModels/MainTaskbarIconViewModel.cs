@@ -22,7 +22,7 @@ using ZoomCloser.Services.Settings;
 namespace ZoomCloser.ViewModels
 {
     //[AddINotifyPropertyChangedInterface]
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainTaskbarIconViewModel : INotifyPropertyChanged
     {
 #pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,7 +43,7 @@ namespace ZoomCloser.ViewModels
         private readonly IRecordingService recordingService;
         private IJudgingWhetherToExitByRatioService JudgeService => zoomExitService.JudgingWhetherToExitService;
 
-        public MainWindowViewModel(IZoomMonitoringService<IJudgingWhetherToExitByRatioService> zoomExitService, IAudioService audioService, IRecordingService recordingService)
+        public MainTaskbarIconViewModel(IZoomMonitoringService<IJudgingWhetherToExitByRatioService> zoomExitService, IAudioService audioService, IRecordingService recordingService)
         {
             this.audioService = audioService;
             IsMuted = audioService.GetMute();

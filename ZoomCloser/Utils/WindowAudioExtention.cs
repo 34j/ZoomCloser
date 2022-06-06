@@ -18,6 +18,5 @@ namespace ZoomCloser.Utils
         {
             SendMessage(hWND, WindowMessage.WM_APPCOMMAND, hWND, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
-
     }
 }
