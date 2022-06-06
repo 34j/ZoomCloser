@@ -28,7 +28,8 @@ namespace ZoomCloser.Utils
         {
             int length = GetWindowTextLength(hWND) + 1;
             StringBuilder sb = new(length);
-            User32.GetWindowText(hWND, sb, length);
+            if (User32.GetWindowText(hWND, sb, length) == 0)
+                return null;
             return sb.ToString();
         }
 
