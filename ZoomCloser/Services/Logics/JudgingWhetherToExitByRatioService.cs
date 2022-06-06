@@ -25,13 +25,12 @@ namespace ZoomCloser.Services
         #endregion Threshold
         public int CurrentCount { get; private set; }
 
-        public JudgingWhetherToExitByRatioService(double maximumRatioOfCurrentCountToMaxCountToExitInit = 0.5f)
+        public JudgingWhetherToExitByRatioService()
         {
-            maximumRatioOfCurrentCountToMaxCountToExitInit = BasicSettings.Instance.Ratio;
             const double error = 0.1;
             const double min = 0.1;
             const double max = 0.9;
-            double ratio = maximumRatioOfCurrentCountToMaxCountToExitInit + RandomRange(-error, error);
+            double ratio = BasicSettings.Instance.Ratio + RandomRange(-error, error);
             ratio = Math.Max(ratio, min);
             ratio = Math.Min(ratio, max);
             MaximumRatioOfCurrentCountToMaxCountToExit = ratio;

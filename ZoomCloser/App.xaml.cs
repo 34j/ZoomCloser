@@ -3,8 +3,6 @@ MIT License
 Copyright (c) 2021 34j and contributors
 https://opensource.org/licenses/MIT
 */
-
-#pragma warning disable CA1416
 using ZoomCloser.Views;
 using Prism.Ioc;
 using System.Windows;

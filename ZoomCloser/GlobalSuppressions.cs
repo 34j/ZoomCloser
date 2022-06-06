@@ -11,4 +11,6 @@ https://opensource.org/licenses/MIT
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Interoperability", "CA1416:プラットフォームの互換性を検証", Justification = "<保留中>", Scope = "member", Target = "~M:ZoomCloser.App.OnStartup(System.Windows.StartupEventArgs)")]
+[assembly: SuppressMessage("Interoperability", "CA1416")]
+[assembly: SuppressMessage("Style", "IDE0063")]
+[assembly: SuppressMessage("Interoperability", "CA1824")]
