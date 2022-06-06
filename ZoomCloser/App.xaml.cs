@@ -34,8 +34,8 @@ namespace ZoomCloser
             ThemeService.Current.EnableUwpResoruces();
             ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
 
-            Modules.StartUpHandler.RegisterThisToStartUp();
-            
+            Modules.StartUpHandler.RegisterThisToStartUp();        
+
             base.OnStartup(e);
         }
 

@@ -1,10 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
-MIT License
-Copyright (c) 2021 34j and contributors
-https://opensource.org/licenses/MIT
--->
-<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
-	<PropertyChanged />
+﻿<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd" >
 	<Bindables />
+	<PropertyChanged />
 </Weavers>

@@ -61,6 +61,10 @@ namespace ZoomCloser.Utils
             MainElement = shell;
         }
 
+        /// <summary>
+        /// Do not override this method. Use <see cref="InitializeShell"/> instead.
+        /// </summary>
+        /// <param name="shell"></param>
         protected sealed override void InitializeShell(Window shell)
         {
             ;//Originally MainWindow = shell;
@@ -72,6 +76,12 @@ namespace ZoomCloser.Utils
         protected new virtual void OnInitialized()
         {
             ;//Originally MainWindow.Show();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;//Without this, the application will exit.
+            base.OnStartup(e);
         }
     }
 

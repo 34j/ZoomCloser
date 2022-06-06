@@ -19,7 +19,7 @@ https://opensource.org/licenses/MIT
                 xmlns:prism="http://prismlibrary.com/"
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 mc:Ignorable="d"
-                IconSource="icon_n.ico"
+                IconSource="pack://application:,,,/Resources/IconNormal.ico"
                 NoLeftClickDelay="True"
                 LeftClickCommand="{Binding ChangeVisiblityCommand}"
                 PopupActivation="LeftClick"
