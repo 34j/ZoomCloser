@@ -12,7 +12,6 @@ namespace ZoomCloser.Services.ZoomWindow
     {
         public static bool TryGetMainWindow(out IntPtr windowHandle, out bool isMinimized)
         {
-            windowHandle = IntPtr.Zero;
             isMinimized = false;
 
             if (TryGetNormalMainWindow(out windowHandle))
