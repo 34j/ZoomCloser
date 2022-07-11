@@ -21,7 +21,7 @@ To stop this automatic startup, disable program startup from Task Manager.
 -   Mute the meeting audio with a Windows feature instead of a Zoom feature.
 -   Record the meeting.
 -   Record the time you joined the meeting and the time you left the meeting.
--   多言語サポート（英語、中国語、スペイン語、ヒンディー語、フランス語、ロシア語、日本語、韓国語など）
+-   Multilingual support (English, Chinese, Spanish, Hindi, French, Russian, Japanese, Korean, etc.)
 
 ## License notes
 
