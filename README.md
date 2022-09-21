@@ -7,8 +7,8 @@ Windows software that prevents you from forgetting to leave the Zoom meeting.
 ## Installation method
 
 [Releases](https://github.com/34j/ZoomCloser/releases)  
-Releasesから最新のリリースをダウンロードしてください。 プログラムを一度起動するとスタートアップに自身を登録し、次回からコンピュータの起動時に自動的に起動します。
-この自動的な起動をやめるには、タスクマネージャからプログラムのスタートアップを無効化してください。
+Download the latest release from Releases. Once the program is started, it registers itself in the startup and automatically starts the next time the computer is started.
+To stop this automatic startup, disable the program's startup from the Task Manager.
 
 ## Operating conditions
 
@@ -26,7 +26,3 @@ Releasesから最新のリリースをダウンロードしてください。 �
 ## License notes
 
 Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
-
-## Contribution to the project
-
-Contributions are welcome. Feel free to help yourself.[CONTRIBUTING.md](https://github.com/34j/ZoomCloser/tree/main/.github/CONTRIBUTING.md)
