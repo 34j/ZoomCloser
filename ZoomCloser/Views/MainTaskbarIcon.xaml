@@ -62,10 +62,10 @@ https://opensource.org/licenses/MIT
                                    Text="{Binding NumberDisplayText}"
                                    VerticalAlignment="Top"
                                    MinHeight="60"
-                                   Style="{StaticResource text}" 
+                                   Style="{StaticResource text}"
                                    Grid.Column="0"
                                    Grid.ColumnSpan="2"
-                                   Grid.Row="0"/>
+                                   Grid.Row="0" />
                         <Button Command="{Binding ExitMeetingCommand}"
                                 HorizontalContentAlignment="Left"
                                 VerticalContentAlignment="Center"
@@ -144,7 +144,7 @@ https://opensource.org/licenses/MIT
         <ContextMenu>
             <l:LanguageSelector AutogenerateLanguages="True" />
             <MenuItem Header="{l:Static p:Resources.Exit}"
-                      Command="{Binding ApplicationExitCommand}" />
+                      Command="{Binding ApplicationExitCommand}"/>
         </ContextMenu>
     </tb:TaskbarIcon.ContextMenu>
 </tb:TaskbarIcon>

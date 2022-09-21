@@ -6,7 +6,6 @@ https://opensource.org/licenses/MIT
 using Prism.Commands;
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using ZoomCloser.Utils;
@@ -114,17 +113,13 @@ exitMeetingCommand ??= new DelegateCommand(ExecuteExitMeetingCommand);
             await zoomExitService.ExitManually().ConfigureAwait(false);
         }
 
-        private DelegateCommand<Window> applicationExitCommand;
-        public DelegateCommand<Window> ApplicationExitCommand =>
-applicationExitCommand ??= new DelegateCommand<Window>(ExecuteApplicationExitCommand);
+        private DelegateCommand applicationExitCommand;
+        public DelegateCommand ApplicationExitCommand =>
+applicationExitCommand ??= new DelegateCommand(ExecuteApplicationExitCommand);
 
-        private void ExecuteApplicationExitCommand(Window window)
+        private void ExecuteApplicationExitCommand()
         {
-            _ = Task.Run(() =>
-              {
-                  window?.Close();
-                  Environment.Exit(0);
-              });
+            Application.Current.Shutdown(0);
         }
 
         private DelegateCommand muteCommand;
