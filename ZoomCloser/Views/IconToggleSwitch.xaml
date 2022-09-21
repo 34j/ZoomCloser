@@ -21,16 +21,22 @@ AncestorType={x:Type local:IconToggleSwitch}}}">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <iconPacks:PackIconBoxIcons Kind="{Binding OnKind}" />
-                <Label Content="{Binding OnText}" />
+                <StackPanel Width="2" />
+                <iconPacks:PackIconBoxIcons Kind="{Binding OnKind}"
+                                            VerticalAlignment="Center" />
+                <Label Content="{Binding OnText}"
+                       VerticalAlignment="Center" />
             </StackPanel>
         </Controls:ToggleSwitch.OnContent>
         <Controls:ToggleSwitch.OffContent>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <iconPacks:PackIconBoxIcons Kind="{Binding OffKind}" />
-                <Label Content="{Binding OffText}" />
+                <StackPanel Width="2" />
+                <iconPacks:PackIconBoxIcons Kind="{Binding OffKind}"
+                                            VerticalAlignment="Center" />
+                <Label Content="{Binding OffText}"
+                       VerticalAlignment="Center" />
             </StackPanel>
         </Controls:ToggleSwitch.OffContent>
     </Controls:ToggleSwitch>

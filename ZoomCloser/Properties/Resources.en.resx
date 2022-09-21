@@ -166,7 +166,7 @@
     <value>Mute the speaker on the Windows side</value>
   </data>
   <data name="Record" xml:space="preserve">
-    <value>record</value>
+    <value>Record</value>
   </data>
   <data name="OpenMovieFolder" xml:space="preserve">
     <value>Open the video folder</value>
