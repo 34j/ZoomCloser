@@ -123,6 +123,9 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
 	</ItemGroup>
+	<ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x64' ">
+		<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Themes\" />
 	</ItemGroup>
