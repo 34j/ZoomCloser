@@ -2,18 +2,18 @@
 
 Windows software that prevents you from forgetting to leave the Zoom meeting.
 
-![Sample](Example.png)![Sample](Example.ja.png)
+![Sample](Example.png)
 
-## Installation method
+## Installation
 
 [Releases](https://github.com/34j/ZoomCloser/releases)  
 Download the latest release from Releases. Once the program is started, it registers itself in the startup and automatically starts the next time the computer is started.
 To stop this automatic startup, disable the program's startup from the Task Manager.
 
-## Operating conditions
+## Requirements
 
 -   .NET 6.0
--   Windows10.0.17763.0 x86
+-   Windows10.0.17763.0 x64
 
 ## Features
 
