@@ -15,10 +15,10 @@ To stop this automatic startup, disable the program's startup from the Task Mana
 -   .NET 6.0
 -   Windows10.0.17763.0 x86
 
-## feature
+## Features
 
 -   Get the number of participants in the Zoom meeting. Simulates the keyboard input of the default "Leave Meeting" shortcut key "Alt + Q → Enter" when the number of participants falls below "Maximum number of participants \* a certain percentage".
--   Mute the meeting audio with a Windows feature instead of a Zoom feature.
+-   Mute the meeting audio with a Windows feature (instead of a Zoom feature).
 -   Record the meeting.
 -   Record the time you joined the meeting and the time you left the meeting.
 -   Multilingual support (English, Chinese, Spanish, Hindi, French, Russian, Japanese, Korean, etc.)
@@ -26,3 +26,7 @@ To stop this automatic startup, disable the program's startup from the Task Mana
 ## License notes
 
 Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
+
+## Contributing
+
+Due to the reduced demand for online conferencing, this project will no longer be maintained.
