@@ -2,7 +2,7 @@
 
 Windows software that prevents you from forgetting to leave the Zoom meeting.
 
-![Sample](https://github.com/34j/ZoomCloser/blob/main/Example.png)![Sample](https://github.com/34j/ZoomCloser/blob/main/Example.ja.png)
+![Sample](Example.png)![Sample](Example.ja.png)
 
 ## Installation method
 
