@@ -18,7 +18,7 @@
 		<UpdatePeriodically>false</UpdatePeriodically>
 		<UpdateRequired>false</UpdateRequired>
 		<MapFileExtensions>true</MapFileExtensions>
-		<VersionPrefix>1.4.1.0</VersionPrefix>
+		<VersionPrefix>1.4.2.0</VersionPrefix>
 		<VersionPrefix></VersionPrefix>
 		<UseApplicationTrust>false</UseApplicationTrust>
 		<BootstrapperEnabled>true</BootstrapperEnabled>
