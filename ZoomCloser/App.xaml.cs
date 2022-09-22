@@ -6,7 +6,6 @@ https://opensource.org/licenses/MIT
 using ZoomCloser.Views;
 using Prism.Ioc;
 using System.Windows;
-using MetroRadiance.UI;
 using ZoomCloser.Utils;
 using System.Reflection;
 using Unity.RegistrationByConvention;
@@ -28,9 +27,6 @@ namespace ZoomCloser
         protected override void OnStartup(StartupEventArgs e)
         {
             CultureUtils.InitTranslator();
-            
-            ThemeService.Current.EnableUwpResoruces();
-            ThemeService.Current.Register(this, Theme.Windows, Accent.Windows);
 
             Modules.StartUpHandler.RegisterThisToStartUp();        
 
