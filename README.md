@@ -26,7 +26,3 @@ To stop this automatic startup, disable the program's startup from the Task Mana
 ## License notes
 
 Note that the code in this repository is MIT licensed, but some dependencies are not MIT licensed.
-
-## Contributing
-
-Due to the reduced demand for online conferencing, this project will no longer be maintained.
