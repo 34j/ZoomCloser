@@ -27,12 +27,12 @@ namespace ZoomCloser.Services.Audio
 
         private IEnumerable<AudioSessionControl2> GetSessions()
         {
-            var result = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia)
+            var result = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
                 .AudioSessionManager2.Sessions/*EnumerateAudioEndPoints(EDataFlow.eAll, DEVICE_STATE.DEVICE_STATEMASK_ALL)
      .SelectMany(s => s?.AudioSessionManager2?.Sessions)*/
      .Where(session =>
      {
-         string processName = Process.GetProcessById((int)session.GetProcessID).ProcessName;
+         string processName = Process.GetProcessById((int)session.ProcessID).ProcessName;
          return processName.Contains("Zoom");
      });
             result.DebugIEnumerable(s => s.DisplayName);
