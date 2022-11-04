@@ -1,22 +1,48 @@
-name: auto-merge
+name: "Publish"
 
-on: pull_request_target
-permissions:
-  pull-requests: write
-  contents: write
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  PROJECT_PATH: ZoomCloser/ZoomCloser.csproj
+  ZIP_PATH: ZoomCloser/bin/publish/ZoomCloser.zip
+  EXE_PATH: ZoomCloser/bin/publish/ZoomCloser.exe
+  LICENSES_PATH: ZoomCloser/bin/publish/LICENSES.md
+  
 
 jobs:
-  dependabot:
-    runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+  deploy:
+    runs-on: windows-latest
     steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.1.1
+      - name: Initialize Actions
+        uses: actions/checkout@v2
+      
+      - name: Restore Project
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Publish Project
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-restore
+
+      - name: Create Zip File
+        uses: papeloto/action-zip@v1
         with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "$PR_URL"
+          files: ${{ env.EXE_PATH }} 
+          dest: ${{ env.ZIP_PATH }} ${{ env.LICENSES_PATH }}
+          
+      - name: Initialize Release
+        uses: actions/create-release@v1
+        id: create_release
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+      
+      - name: Create Release    
+        uses: csexton/release-asset-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.ZIP_PATH }}
+          release-url: ${{ steps.create_release.outputs.upload_url }}

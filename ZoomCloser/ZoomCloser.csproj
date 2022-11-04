@@ -151,7 +151,7 @@
 		</Compile>
 	</ItemGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PublishProtocol)'!=''">
-		<Exec Command="del &quot;$(TargetDir)*.xml&quot;&#xD;&#xA;del &quot;$(TargetDir)*.pdb&quot;&#xD;&#xA;dotnet-project-licenses -i &quot;./&quot; -t -u -m --outfile &quot;$(TargetDir)LICENSES.md&quot;" />
+		<Exec Command="del &quot;$(PublishDir)/*.{pdb,dll,config,xml}&quot;&#xD;&#xA;dotnet-project-licenses -i &quot;./&quot; -t -u -m --outfile &quot;$(PublishDir)/LICENSES.md&quot;" />
 	</Target>
 </Project>
 
