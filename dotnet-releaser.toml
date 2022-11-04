@@ -1,6 +1,9 @@
 # configuration file for dotnet-releaser
 [msbuild]
 project = "ZoomCloser.sln"
+[msbuild.properties]
+nr = false
+t = clean,rebuild
 [github]
 user = "34j"
 repo = "ZoomCloser"
