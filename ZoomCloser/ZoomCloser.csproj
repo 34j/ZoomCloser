@@ -159,7 +159,7 @@
 			<DependentUpon>Settings.settings</DependentUpon>
 		</Compile>
 	</ItemGroup>
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PublishProtocol)'!=''">
 		<Exec Command="del &quot;$(TargetDir)*.xml&quot;&#xD;&#xA;del &quot;$(TargetDir)*.pdb&quot;&#xD;&#xA;dotnet-project-licenses -i &quot;./&quot; -t -u -m --outfile &quot;$(TargetDir)LICENSES.md&quot;" />
 	</Target>
 </Project>
