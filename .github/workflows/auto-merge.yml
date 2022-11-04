@@ -1,29 +1,22 @@
-name: release
+name: auto-merge
 
-on:
-  push:
-    paths-ignore:
-    - 'doc/**'
-    - 'img/**'
-    - 'changelog.md'
-    - 'license.txt'
-    - 'readme.md'
-  pull_request:
+on: pull_request_target
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  build:
-    runs-on: windows-latest
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-
-    - name: Build, Tests, Cover, Pack and Publish (on push tag)
-      shell: bash
-      run: |
-        dotnet tool install --global dotnet-releaser
-        dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" ./dotnet-releaser.toml
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
