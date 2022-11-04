@@ -7,13 +7,14 @@ using System.Reflection;
 using System.IO;
 using Syroot.Windows.IO;
 using System;
+using WindowsShortcutFactory;
 
 namespace ZoomCloser.Modules
 {
     internal static class StartUpHandler
     {
         private static string StartUpFolderPath => KnownFolders.RoamingAppData.Path + @"\Microsoft\Windows\Start Menu\Programs\Startup";
-        public static string ShortcutPath(bool isUrl = false) => isUrl 
+        public static string ShortcutPath(bool isUrl = false) => isUrl
             ? Path.Combine(StartUpFolderPath, ApplicationName + ".url")
             : Path.Combine(StartUpFolderPath, ApplicationName + ".lnk");
         private static string ApplicationName => Assembly.GetExecutingAssembly().GetName().Name;
@@ -56,11 +57,13 @@ namespace ZoomCloser.Modules
         /// </summary>
         public static void RegisterThisToStartUp()
         {
-            var wsh = new IWshRuntimeLibrary.IWshShell_Class();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(ShortcutPath(false));
-            shortcut.TargetPath = ApplicationPath;
-            shortcut.IconLocation = ApplicationPath + ",0";
-            shortcut.Save();
+            using var shortcut = new WindowsShortcut
+            {
+                Path = ApplicationPath,
+                Description = $"Shortcut to {nameof(ZoomCloser)}",
+                IconLocation = ApplicationPath + ",0",
+            };
+            shortcut.Save(ShortcutPath(false));
         }
         /// <summary>
         /// Unregisters this application from start up.
