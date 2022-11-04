@@ -1,0 +1,31 @@
+name: release
+
+on:
+  push:
+    paths-ignore:
+    - 'doc/**'
+    - 'img/**'
+    - 'changelog.md'
+    - 'license.txt'
+    - 'readme.md'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET 6.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Build, Tests, Cover, Pack and Publish (on push tag)
+      shell: bash
+      run: |
+        dotnet tool install --global dotnet-releaser
+        dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" ./dotnet-releaser.toml
