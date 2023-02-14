@@ -12,7 +12,7 @@ This application was featured in [an article on Softpedia](https://www.softpedia
 
 ## Installation
 
-Download the latest release from [Releases](https://github.com/34j/ZoomCloser/releases)  . Once the program is started, it registers itself in the startup and automatically starts the next time the computer is started.
+Download the latest release from [Releases](https://github.com/34j/ZoomCloser/releases). Once the program is started, it registers itself in the startup and automatically starts the next time the computer is started.
 To stop this automatic startup, disable the program's startup from the Task Manager.
 
 ## Requirements
