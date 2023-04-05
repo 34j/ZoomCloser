@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
@@ -120,7 +120,7 @@
 			<Version>3.4.13</Version>
 		</PackageReference>
 		<PackageReference Include="WindowsInput">
-			<Version>6.4.0</Version>
+			<Version>6.4.1</Version>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
 		<PackageReference Include="WindowsShortcutFactory" Version="1.1.0" />
