@@ -96,7 +96,7 @@
 			<Version>2.4.10</Version>
 		</PackageReference>
 		<PackageReference Include="MahApps.Metro.IconPacks">
-			<Version>4.11.0</Version>
+			<Version>6.2.1</Version>
 		</PackageReference>
 		<PackageReference Include="MetroRadiance.Fork">
 			<Version>3.2.1</Version>
